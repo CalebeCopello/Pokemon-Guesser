@@ -1,0 +1,9 @@
+.teste-container {
+  background-color: var(--bg0);
+  color: var(--fg0);
+  display: flex;
+  text-align: center;
+  height: 3rem;
+  width: 10rem;
+  margin: 0 auto;
+}

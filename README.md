@@ -1,2 +1,2 @@
 # pokemon-guesser
- A simple guesser using Pokemons
+ A simple guesser using Pokemon
