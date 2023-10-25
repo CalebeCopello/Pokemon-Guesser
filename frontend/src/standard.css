@@ -1,10 +1,10 @@
 :root {
-	/*
-  *Gruvbox Palette, from: https://github.com/morhetz/gruvbox*
+
+  /* *Gruvbox Palette, from: https://github.com/morhetz/gruvbox*
   
   **Common colors**
   
-  --red0: #cc241d
+  --red0: #cc241d;
   --green0: #98971a;
   --yellow0: #d79921;
   --blue0: #458588;
@@ -42,7 +42,7 @@
   --bg0_h: #f9f5d7;
   --bg0: #fbf1c7;
   --bg1: #ebdbb2;
-  --bg2: #d5c4a1
+  --bg2: #d5c4a1;
   --bg3: #bdae93;
   --bg4: #a89984;
   --bg0_s: #f2e5bc;
@@ -59,7 +59,7 @@
   --purple1: #8f3f71;
   --aqua1: #427b58;
   --orange1: #af3a03;
-  */
+ */
 
 	/**Common colors**/
 	--red0: #cc241d;
@@ -99,15 +99,15 @@
 
 @font-face {
 	font-family: JetBrainsMono;
-	src: url(./assets/fonts/JetBrainsMonoNL-Regular.ttf);
+	src: url(./assets/fonts/JetBrainsMono.ttf);
 }
 
 @font-face {
 	font-family: Onest;
-	src: url(./assets/fonts/Onest-VariableFont_wght.ttf);
+	src: url(./assets/fonts/OnestSanSerif.ttf);
 }
 
 @font-face {
 	font-family: YoungSerif;
-	src: url(./assets/fonts/YoungSerif-Regular.ttf);
+	src: url(./assets/fonts/YoungSerif.ttf);
 }

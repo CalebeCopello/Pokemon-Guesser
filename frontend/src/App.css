@@ -1,9 +1,21 @@
 .teste-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   background-color: var(--bg0);
   color: var(--fg0);
-  display: flex;
   text-align: center;
-  height: 3rem;
+  height: 8rem;
   width: 10rem;
-  margin: 0 auto;
+  padding: 0.5rem;
+}
+.mono {
+  font-family: JetBrainsMono;
+}
+.sanSerif {
+  font-family: OnestSansSerif;
+}
+.serif {
+  font-family: YoungSerif;
 }
