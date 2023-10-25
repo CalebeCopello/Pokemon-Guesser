@@ -6,9 +6,16 @@
   background-color: var(--bg0);
   color: var(--fg0);
   text-align: center;
-  height: 8rem;
-  width: 10rem;
+  height: 15rem;
+  width: 20rem;
   padding: 0.5rem;
+  padding: 2rem;
+  border-radius: 3rem;
+}
+.teste-container button {
+  height: 3rem;
+  width: 3rem;
+  margin: 0 3rem ;
 }
 .mono {
   font-family: JetBrainsMono;

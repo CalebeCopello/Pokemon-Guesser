@@ -32,9 +32,9 @@ function App() {
 		}
 		getPokemonByNr()
 	}, [pokemonNr])
-
+	
 	return (
-		<>
+		<> <div className="teste-container">
 			<div className='pokemon-buttons-container'>
 				{pokemonNr <= 1 ? (
 					<button disabled>-</button>
@@ -50,9 +50,12 @@ function App() {
 				)}
 			</div>
 			<div className="pokemon-data-container">
-				<h1>{pokemonData.name}</h1>
-				<img src={pokemonData.sprites.front_default} />
+				<h1>{pokemonData?.name}</h1>
+				<img src={pokemonData?.sprites?.front_default} />
+				<img src={pokemonData?.sprites?.back_default} />
+				<img src={pokemonData?.sprites?.other['official-artwork'].front_default} />
 			</div>
+		</div>
 		</>
 	)
 }
