@@ -3,12 +3,23 @@ import { useState, useEffect } from 'react'
 import './App.css'
 
 function App() {
+	// const [rNr, setRNr] = useState(() => {
+	// 	return
+	// })
+
 	const [pokemonNr, setPokemonNr] = useState(() => {
 		return 1
 	})
 	const [pokemonData, setPokemonData] = useState(() => {
 		return pokemonNr
 	})
+
+	const randomNumberGenerator = (min, max) => {
+		return Math.floor(Math.random() * (max - min + 1)) + min
+	}
+	const randomPokemon = () => {
+		setPokemonNr(randomNumberGenerator(1,151))
+	}
 
 	function incPokemonNr() {
 		setPokemonNr((prevPokemonNr) => prevPokemonNr + 1)
@@ -18,7 +29,6 @@ function App() {
 	}
 
 	useEffect(() => {
-		console.log(`'get pokemon' ${pokemonNr}`)
 		const getPokemonByNr = async () => {
 			try {
 				const response = await fetch(
@@ -49,6 +59,9 @@ function App() {
 					<button onClick={incPokemonNr}>+</button>
 				)}
 			</div>
+				<button onClick={randomPokemon}>
+					Random
+				</button>
 			<div className="pokemon-data-container">
 				<h1>{pokemonData?.name}</h1>
 				<img src={pokemonData?.sprites?.front_default} />
