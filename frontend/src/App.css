@@ -1,22 +1,57 @@
-.teste-container {
+.guesser-container {
   position: absolute;
+  display: flex;
+  flex-direction: column;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: var(--bg0);
   color: var(--fg0);
   text-align: center;
-  height: 15rem;
-  width: 20rem;
-  padding: 0.5rem;
-  padding: 2rem;
-  border-radius: 3rem;
+  height: 47rem;
+  width: 60rem;
+  border-radius: 1rem;
+  align-items: center;
 }
-.pokemon-buttons-container button {
-  height: 3rem;
-  width: 3rem;
-  margin: 0 3rem ;
+.guesser-container-bg-top {
+  position: absolute;
+  background-color: var(--red0);
+  height: 45%;
+  width: 94%;
+  top: 3%;
+  border-radius: 3rem 3rem 0 0;
 }
+.pokemon-question{
+  position: absolute;
+  right: 25%;
+  bottom: 5%;
+  font-family: PokemonSolid;
+  font-size: 5rem;
+  color: var(--yellow1);
+  text-shadow: 5px 9px 0 var(--blue0);
+  
+  user-select: none;
+}
+.guesser-container-bg-bottom {
+  position: absolute;
+  background-color: rgb(244, 242, 242);
+  height: 45%;
+  width: 94%;
+  bottom: 3%;
+  border-radius: 0 0 3rem 3rem;
+}
+.pokemon-text{
+  position: absolute;
+  right: 5%;
+  top: 5%;
+  font-family: PokemonSolid;
+  font-size: 5rem;
+  color: var(--yellow1);
+  text-shadow: 5px 9px 0 var(--blue0);
+  letter-spacing: 7px;
+  user-select: none;
+}
+
 .mono {
   font-family: JetBrainsMono;
 }

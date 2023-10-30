@@ -8,7 +8,7 @@ function App() {
 	// })
 
 	const [pokemonNr, setPokemonNr] = useState(() => {
-		return 1
+		return 
 	})
 	const [pokemonData, setPokemonData] = useState(() => {
 		return pokemonNr
@@ -44,13 +44,13 @@ function App() {
 	}, [pokemonNr])
 	
 	return (
-		<> <div className="teste-container">
+		<> 
+		{/* <div className="teste-container">
 			<div className='pokemon-buttons-container'>
 				{pokemonNr <= 1 ? (
 					<button disabled>-</button>
 				) : (
 					<button onClick={decPokemonNr}>-</button>
-					/* <button onClick={() => setPokemonNr((n) => n -1)}>-</button> */
 				)}
 				<span>{pokemonNr}</span>
 				{pokemonNr >= 151 ? (
@@ -68,6 +68,15 @@ function App() {
 				<img src={pokemonData?.sprites?.back_default} />
 				<img src={pokemonData?.sprites?.other['official-artwork'].front_default} />
 			</div>
+		</div> */}
+		<div className="guesser-container">
+			<div className="guesser-container-bg-top">
+				<span className="pokemon-question">?</span>
+			</div>
+			<div className="guesser-container-bg-bottom">
+			<span className="pokemon-text">Pokémon</span>
+			</div>
+			<div className="guesser-pokemon-card"></div>
 		</div>
 		</>
 	)

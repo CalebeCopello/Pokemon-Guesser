@@ -111,3 +111,11 @@
 	font-family: YoungSerif;
 	src: url(./assets/fonts/YoungSerif.ttf);
 }
+@font-face {
+	font-family: PokemonHollow;
+	src: url(./assets/fonts/PokemonHollow.ttf);
+}
+@font-face {
+	font-family: PokemonSolid;
+	src: url(./assets/fonts/PokemonSolid.ttf);
+}
