@@ -1,13 +1,14 @@
 'use strict'
 import { useState, useEffect } from 'react'
+import { CgPokemon} from "react-icons/cg";
 import './App.css'
 
 function App() {
 	const [pokemonNr, setPokemonNr] = useState(() => {
-		return 1
+		return 
 	})
 	const [pokemonData, setPokemonData] = useState(() => {
-		return pokemonNr
+		return
 	})
 
 	const randomNumberGenerator = (min, max) => {
@@ -15,13 +16,6 @@ function App() {
 	}
 	const randomPokemon = () => {
 		setPokemonNr(randomNumberGenerator(1,151))
-	}
-
-	function incPokemonNr() {
-		setPokemonNr((prevPokemonNr) => prevPokemonNr + 1)
-	}
-	function decPokemonNr() {
-		setPokemonNr((prevPokemonNr) => prevPokemonNr - 1)
 	}
 
 	useEffect(() => {
@@ -75,10 +69,16 @@ function App() {
 			<div className="guesser-pokemon-card">
 				<div className="guesser-pokemon-card-top">
 					<span className="guesser-pokemon-card-timer"><strong>Tempo restante: </strong></span>
-					<span className="guesser-pokemon-card-left"><strong>Total: </strong>1/5</span>
+					<div className="guesser-pokemon-card-left">
+						<div className="guesser-pokemon-card-left-score-1"><CgPokemon /></div>
+						<div className="guesser-pokemon-card-left-score-2"><CgPokemon /></div>
+						<div className="guesser-pokemon-card-left-score-3"><CgPokemon /></div>
+						<div className="guesser-pokemon-card-left-score-4"><CgPokemon /></div>
+						<div className="guesser-pokemon-card-left-score-5"><CgPokemon /></div>
+					</div>
 				</div>
 				<div className="guesser-pokemon-card-img">
-				<img src={pokemonData?.sprites?.other['official-artwork'].front_default} />
+				{pokemonData ? (<img src={pokemonData?.sprites?.other['official-artwork'].front_default} />) : (<CgPokemon />)}
 				</div>
 				<div className="guesser-pokemon-card-btn">
 					<button className='btn'>Pokemon 001</button>
