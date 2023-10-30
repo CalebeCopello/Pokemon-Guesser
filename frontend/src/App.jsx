@@ -3,10 +3,6 @@ import { useState, useEffect } from 'react'
 import './App.css'
 
 function App() {
-	// const [rNr, setRNr] = useState(() => {
-	// 	return
-	// })
-
 	const [pokemonNr, setPokemonNr] = useState(() => {
 		return 1
 	})
