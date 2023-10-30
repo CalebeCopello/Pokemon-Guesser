@@ -5,10 +5,13 @@ import './App.css'
 
 function App() {
 	const [pokemonNr, setPokemonNr] = useState(() => {
-		return 
+		return
 	})
 	const [pokemonData, setPokemonData] = useState(() => {
 		return
+	})
+	const [pokemonDataOptions, setPokemonDataOptions] = useState(() => {
+		return {}
 	})
 
 	const randomNumberGenerator = (min, max) => {
@@ -17,7 +20,11 @@ function App() {
 	const randomPokemon = () => {
 		setPokemonNr(randomNumberGenerator(1,151))
 	}
-
+	
+	useEffect(() => {
+		randomPokemon()
+	}, [])
+	
 	useEffect(() => {
 		const getPokemonByNr = async () => {
 			try {
@@ -78,13 +85,13 @@ function App() {
 					</div>
 				</div>
 				<div className="guesser-pokemon-card-img">
-				{pokemonData ? (<img src={pokemonData?.sprites?.other['official-artwork'].front_default} />) : (<CgPokemon />)}
+				{pokemonData ? (<img src={pokemonData?.sprites?.other['official-artwork'].front_default} />) : (<div className='guesser-pokemon-card-img-loader'><CgPokemon /></div>)}
 				</div>
 				<div className="guesser-pokemon-card-btn">
-					<button className='btn'>Pokemon 001</button>
-					<button className='btn'>Pokemon 001</button>
-					<button className='btn'>Pokemon 001</button>
-					<button className='btn'>Pokemon 001</button>
+					<button className='btn'>Pokemon</button>
+					<button className='btn'>Pokemon</button>
+					<button className='btn'>Pokemon</button>
+					<button className='btn'>Pokemon</button>
 				</div>
 			</div>
 		</div>

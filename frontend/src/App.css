@@ -86,8 +86,6 @@
 .guesser-pokemon-card-img {
   margin: 2rem auto 0.5rem;
   display: flex;
-  justify-content: center;
-  align-items: center;
   height: 23rem;
   width: 21rem;
   background-color: rgb(244, 242, 242);
@@ -96,6 +94,22 @@
   box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
   color: var(--bg0);
   font-size: 15rem;
+}
+.guesser-pokemon-card-img-loader{
+  animation: rotate-center 1s linear infinite both;
+  display: flex;
+  height: 23rem;
+  width: 21rem;
+  justify-content: center;
+  align-items: center;
+}
+@keyframes rotate-center {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 .guesser-pokemon-card-img img {
   height: 23rem;
