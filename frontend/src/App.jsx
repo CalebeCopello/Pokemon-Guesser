@@ -85,10 +85,10 @@ function App() {
 				<img src={pokemonData?.sprites?.other['official-artwork'].front_default} />
 				</div>
 				<div className="guesser-pokemon-card-btn">
-					<button>Pokemon 001</button>
-					<button>Pokemon 001</button>
-					<button>Pokemon 001</button>
-					<button>Pokemon 001</button>
+					<button className='btn'>Pokemon 001</button>
+					<button className='btn'>Pokemon 001</button>
+					<button className='btn'>Pokemon 001</button>
+					<button className='btn'>Pokemon 001</button>
 				</div>
 			</div>
 		</div>

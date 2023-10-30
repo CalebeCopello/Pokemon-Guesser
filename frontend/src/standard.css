@@ -119,3 +119,25 @@
 	font-family: PokemonSolid;
 	src: url(./assets/fonts/PokemonSolid.ttf);
 }
+.btn {
+  color: var(--fg0);
+  display: block;
+  float: right;
+  margin: 3px;
+  margin-right: 7px;
+  border: 1px solid black;
+  border-radius: 3px;
+  box-shadow: 3px 3px rgba(0, 0, 0, 0.4);
+  background-color: var(--gray3);
+}
+.btn:hover {
+  transition: transform 0.05s;
+	background-color:var(--bg1);
+  transition: 0.3s;
+}
+.btn:active {
+  transition: transform 0.05s;
+  transform: scale(0.95,0.95);
+  background-color: var(--gray0);
+  box-shadow: 1px 1px rgba(0, 0, 0, 0.4);
+}

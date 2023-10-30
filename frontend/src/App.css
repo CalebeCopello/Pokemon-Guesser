@@ -66,13 +66,13 @@
 .guesser-pokemon-card-top {
   text-align: right;
   color: var(--bg0);
-  margin: 1rem;
+  margin: 0.5rem 1rem 1rem 1rem;
 }
 .guesser-pokemon-card-top span{
   display: block;
 }
 .guesser-pokemon-card-img {
-  margin: 0 auto;
+  margin: 0 auto 0.5rem;
   height: 23rem;
   width: 21rem;
   background-color: rgb(244, 242, 242);
