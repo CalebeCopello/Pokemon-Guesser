@@ -8,7 +8,7 @@ function App() {
 	// })
 
 	const [pokemonNr, setPokemonNr] = useState(() => {
-		return 
+		return 1
 	})
 	const [pokemonData, setPokemonData] = useState(() => {
 		return pokemonNr
@@ -76,7 +76,21 @@ function App() {
 			<div className="guesser-container-bg-bottom">
 			<span className="pokemon-text">Pokémon</span>
 			</div>
-			<div className="guesser-pokemon-card"></div>
+			<div className="guesser-pokemon-card">
+				<div className="guesser-pokemon-card-top">
+					<span className="guesser-pokemon-card-timer"><strong>Tempo restante: </strong></span>
+					<span className="guesser-pokemon-card-left"><strong>Total: </strong>1/5</span>
+				</div>
+				<div className="guesser-pokemon-card-img">
+				<img src={pokemonData?.sprites?.other['official-artwork'].front_default} />
+				</div>
+				<div className="guesser-pokemon-card-btn">
+					<button>Pokemon 001</button>
+					<button>Pokemon 001</button>
+					<button>Pokemon 001</button>
+					<button>Pokemon 001</button>
+				</div>
+			</div>
 		</div>
 		</>
 	)

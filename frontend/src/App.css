@@ -23,10 +23,10 @@
 }
 .pokemon-question{
   position: absolute;
-  right: 25%;
+  right: 20%;
   bottom: 5%;
   font-family: PokemonSolid;
-  font-size: 5rem;
+  font-size: 12rem;
   color: var(--yellow1);
   text-shadow: 5px 9px 0 var(--blue0);
   
@@ -51,7 +51,48 @@
   letter-spacing: 7px;
   user-select: none;
 }
-
+.guesser-pokemon-card {
+  position: absolute;
+  height: 37rem;
+  width: 25rem;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  left: 7%;
+  background-color: var(--fg0);
+  border: 3px solid var(--bg0);
+  border-radius: 0.5rem;
+}
+.guesser-pokemon-card-top {
+  text-align: right;
+  color: var(--bg0);
+  margin: 1rem;
+}
+.guesser-pokemon-card-top span{
+  display: block;
+}
+.guesser-pokemon-card-img {
+  margin: 0 auto;
+  height: 23rem;
+  width: 21rem;
+  background-color: rgb(244, 242, 242);
+  border: 3px solid var(--bg0);
+  border-radius: 0.5rem;
+}
+.guesser-pokemon-card-img img {
+  height: 23rem;
+  width: 21rem;
+}
+.guesser-pokemon-card-btn {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  height: 3rem;
+  width: 21rem;
+}
+.guesser-pokemon-card-btn button{
+  margin-top: 0.5rem;
+}
 .mono {
   font-family: JetBrainsMono;
 }
