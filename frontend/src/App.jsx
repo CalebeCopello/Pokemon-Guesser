@@ -1,100 +1,125 @@
 'use strict'
 import { useState, useEffect } from 'react'
-import { CgPokemon} from "react-icons/cg";
+import { CgPokemon } from 'react-icons/cg'
 import './App.css'
 
 function App() {
-	const [pokemonNr, setPokemonNr] = useState(() => {
+	const [attempts, setAttempts] = useState(() => {
+		return 1
+	})
+	const [correctPokemon, setCorrectPokemon] = useState(() => {
 		return
 	})
-	const [pokemonData, setPokemonData] = useState(() => {
-		return
+	const [pokemonsNr, setPokemonsNr] = useState(() => {
+		return []
 	})
-	const [pokemonDataOptions, setPokemonDataOptions] = useState(() => {
+	const [pokemonsData, setPokemonsData] = useState(() => {
 		return {}
+	})
+	const [pokemonGen, setPokemonGen] = useState(() => {
+		return 151
 	})
 
 	const randomNumberGenerator = (min, max) => {
 		return Math.floor(Math.random() * (max - min + 1)) + min
 	}
-	const randomPokemon = () => {
-		setPokemonNr(randomNumberGenerator(1,151))
-	}
-	
+
 	useEffect(() => {
-		randomPokemon()
-	}, [])
-	
+		const genRandomPokemons = () => {
+			const randomPokemonsArray = []
+			while (randomPokemonsArray.length < 4) {
+				const rn = randomNumberGenerator(1, pokemonGen)
+				if (!randomPokemonsArray.includes(rn)) {
+					randomPokemonsArray.push(rn)
+				}
+			}
+			setPokemonsNr(randomPokemonsArray)
+		}
+		genRandomPokemons()
+	}, [attempts, pokemonGen])
+
 	useEffect(() => {
 		const getPokemonByNr = async () => {
-			try {
+			let i = 0
+			const randomPokemonsObject = {}
+			while (i < 4) {
 				const response = await fetch(
-					`https://pokeapi.co/api/v2/pokemon/${pokemonNr}`
+					`https://pokeapi.co/api/v2/pokemon/${pokemonsNr[i]}`
 				)
 				const responseJson = await response.json()
-				setPokemonData(responseJson)
-			} catch (error) {
-				console.log(`Erro: ${error}`)
+				randomPokemonsObject[i] = responseJson
+				i++
 			}
+			setPokemonsData(randomPokemonsObject)
 		}
 		getPokemonByNr()
-	}, [pokemonNr])
-	
+	}, [attempts, pokemonGen, pokemonsNr])
+
+	useEffect(() => {
+		setCorrectPokemon(randomNumberGenerator(0, 3))
+	}, [])
+
 	return (
-		<> 
-		{/* <div className="teste-container">
-			<div className='pokemon-buttons-container'>
-				{pokemonNr <= 1 ? (
-					<button disabled>-</button>
-				) : (
-					<button onClick={decPokemonNr}>-</button>
-				)}
-				<span>{pokemonNr}</span>
-				{pokemonNr >= 151 ? (
-					<button disabled>+</button>
-				) : (
-					<button onClick={incPokemonNr}>+</button>
-				)}
-			</div>
-				<button onClick={randomPokemon}>
-					Random
-				</button>
-			<div className="pokemon-data-container">
-				<h1>{pokemonData?.name}</h1>
-				<img src={pokemonData?.sprites?.front_default} />
-				<img src={pokemonData?.sprites?.back_default} />
-				<img src={pokemonData?.sprites?.other['official-artwork'].front_default} />
-			</div>
-		</div> */}
-		<div className="guesser-container">
-			<div className="guesser-container-bg-top">
-				<span className="pokemon-question">?</span>
-			</div>
-			<div className="guesser-container-bg-bottom">
-			<span className="pokemon-text">Pokémon</span>
-			</div>
-			<div className="guesser-pokemon-card">
-				<div className="guesser-pokemon-card-top">
-					<span className="guesser-pokemon-card-timer"><strong>Tempo restante: </strong></span>
-					<div className="guesser-pokemon-card-left">
-						<div className="guesser-pokemon-card-left-score-1"><CgPokemon /></div>
-						<div className="guesser-pokemon-card-left-score-2"><CgPokemon /></div>
-						<div className="guesser-pokemon-card-left-score-3"><CgPokemon /></div>
-						<div className="guesser-pokemon-card-left-score-4"><CgPokemon /></div>
-						<div className="guesser-pokemon-card-left-score-5"><CgPokemon /></div>
+		<>
+			{' '}
+			<div className='guesser-container'>
+				<div className='guesser-container-bg-top'>
+					<span className='pokemon-question'>?</span>
+				</div>
+				<div className='guesser-container-bg-bottom'>
+					<span className='pokemon-text'>Pokémon</span>
+				</div>
+				<div className='guesser-pokemon-card'>
+					<div className='guesser-pokemon-card-top'>
+						<span className='guesser-pokemon-card-timer'>
+							<strong>Tempo restante: </strong>
+						</span>
+						<div className='guesser-pokemon-card-left'>
+							<div className='guesser-pokemon-card-left-score-1'>
+								<CgPokemon />
+							</div>
+							<div className='guesser-pokemon-card-left-score-2'>
+								<CgPokemon />
+							</div>
+							<div className='guesser-pokemon-card-left-score-3'>
+								<CgPokemon />
+							</div>
+							<div className='guesser-pokemon-card-left-score-4'>
+								<CgPokemon />
+							</div>
+							<div className='guesser-pokemon-card-left-score-5'>
+								<CgPokemon />
+							</div>
+						</div>
+					</div>
+					<div className='guesser-pokemon-card-img'>
+						{pokemonsData[correctPokemon] ? (
+							<img
+								src={
+									pokemonsData[correctPokemon].sprites?.other[
+										'official-artwork'
+									].front_default
+								}
+								alt='Quém é esse Pokémon'
+							/>
+						) : (
+							<div className='guesser-pokemon-card-img-loader'>
+								<CgPokemon />
+							</div>
+						)}
+						<img
+							src='pokemonsData[correctPokemon]?.name}'
+							alt=''
+						/>
+					</div>
+					<div className='guesser-pokemon-card-btn'>
+						<button className='btn'>{pokemonsData[0]?.name}</button>
+						<button className='btn'>{pokemonsData[1]?.name}</button>
+						<button className='btn'>{pokemonsData[2]?.name}</button>
+						<button className='btn'>{pokemonsData[3]?.name}</button>
 					</div>
 				</div>
-				<div className="guesser-pokemon-card-img">
-				{pokemonData ? (<img src={pokemonData?.sprites?.other['official-artwork'].front_default} />) : (<div className='guesser-pokemon-card-img-loader'><CgPokemon /></div>)}
-				</div>
-				<div className="guesser-pokemon-card-btn">
-					<button className='btn'>Pokemon</button>
-					<button className='btn'>Pokemon</button>
-					<button className='btn'>Pokemon</button>
-					<button className='btn'>Pokemon</button>
-				</div>
 			</div>
-		</div>
 		</>
 	)
 }
