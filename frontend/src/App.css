@@ -1,10 +1,40 @@
-.guesser-container {
+main {
   position: absolute;
-  display: flex;
-  flex-direction: column;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  display: flex;
+}
+nav {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid red;
+  height: 40rem;
+  width: 10rem;
+  margin-top: 3rem;
+  background-color: var(--fg0);
+  border-color: var(--bg0);
+  border-style: solid;
+  border-width: 3px 0 3px 3px;
+  border-radius: 1rem 0 0 1rem;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
+}
+.guesser-menu-start-container {
+  margin: 1rem;
+  align-self: center;
+}
+.guesser-menu-pokedex-container {
+  margin-top: 1rem;
+}
+.guesser-menu-pokedex-container img {
+  height: 10rem;
+}
+
+.guesser-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
   background-color: var(--bg0);
   color: var(--fg0);
   text-align: center;

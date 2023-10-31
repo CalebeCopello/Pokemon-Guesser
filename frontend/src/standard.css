@@ -122,9 +122,6 @@
 .btn {
   color: var(--fg0);
   display: block;
-  float: right;
-  margin: 3px;
-  margin-right: 7px;
   border: 1px solid black;
   border-radius: 3px;
   box-shadow: 3px 3px rgba(0, 0, 0, 0.4);

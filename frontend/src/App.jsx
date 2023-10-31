@@ -1,6 +1,7 @@
 'use strict'
 import { useState, useEffect } from 'react'
 import { CgPokemon } from 'react-icons/cg'
+import pokedex from '../public/pokedex-300x300.png'
 import './App.css'
 
 function App() {
@@ -68,6 +69,17 @@ function App() {
 	return (
 		<>
 			{' '}
+			<main>
+			<nav>
+				<div className="guesser-menu-container">
+					<div className="guesser-menu-start-container">
+						<button className='btn'>Começar o Jogo</button>
+					</div>
+					<div className="guesser-menu-pokedex-container">
+						<img src={pokedex} alt="pokedex" title="Consultar Pokedex"/>
+					</div>
+				</div>
+			</nav>
 			<div className='guesser-container'>
 				<div className='guesser-container-bg-top'>
 					<span className='pokemon-question'>?</span>
@@ -128,6 +140,7 @@ function App() {
 					</div>
 				</div>
 			</div>
+			</main>
 		</>
 	)
 }
