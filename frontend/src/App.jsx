@@ -1,7 +1,7 @@
 'use strict'
 import { useState, useEffect } from 'react'
 import { CgPokemon } from 'react-icons/cg'
-import pokedex from '../public/pokedex-300x300.png'
+import pokedex from '/pokedex-300x300.png'
 import './App.css'
 
 function App() {
@@ -41,9 +41,11 @@ function App() {
 	const tryAttempt = (i) => {
 		if(i == pokemonsData[correctPokemon].id) {
 			console.log('correto')
+			setScore((prevScore) => prevScore + 1)
 		} else {
 			console.log('incorreto')
 		}
+		setAttempts((prevAttemps) => prevAttemps + 1)
 	}
 
 
@@ -83,6 +85,15 @@ function App() {
 	useEffect(() => {
 		setCorrectPokemon(randomNumberGenerator(0, 3))
 	}, [])
+
+	useEffect(() => {
+		console.log('tentativas: ', attempts)
+		if(attempts > 5) {
+			console.log('Seu score: ',score)
+			setAttempts(0)
+			setScore(0)
+		}
+	},[attempts, score])
 
 
 
