@@ -38,6 +38,13 @@ function App() {
 	const startGame = () => {
 		setAttempts(() => attempts + 1)
 	}
+	const tryAttempt = (i) => {
+		if(i == pokemonsData[correctPokemon].id) {
+			console.log('correto')
+		} else {
+			console.log('incorreto')
+		}
+	}
 
 
 	useEffect(() => {
@@ -75,7 +82,6 @@ function App() {
 
 	useEffect(() => {
 		setCorrectPokemon(randomNumberGenerator(0, 3))
-		console.log(attempts)
 	}, [])
 
 
@@ -147,6 +153,8 @@ function App() {
 							<button
 								key={i}
 								className='btn'
+								onClick={() => tryAttempt(pokemonsData[i].id)}
+								disabled={attempts === 0}
 							>
 								{pokemonsData[i]
 									? capitalize(pokemonsData[i]?.name)
