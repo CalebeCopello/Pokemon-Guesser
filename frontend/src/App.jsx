@@ -37,6 +37,7 @@ function App() {
 	}
 	const startGame = () => {
 		setAttempts(() => attempts + 1)
+		setScore(0)
 	}
 	const tryAttempt = (i) => {
 		if(i == pokemonsData[correctPokemon].id) {
@@ -87,13 +88,10 @@ function App() {
 	}, [])
 
 	useEffect(() => {
-		console.log('tentativas: ', attempts)
 		if(attempts > 5) {
-			console.log('Seu score: ',score)
 			setAttempts(0)
-			setScore(0)
 		}
-	},[attempts, score])
+	},[attempts])
 
 
 
@@ -126,19 +124,23 @@ function App() {
 							<strong>Tempo restante: </strong>
 						</span>
 						<div className='guesser-pokemon-card-left'>
-							<div className='guesser-pokemon-card-left-score-1'>
+						<div className='guesser-pokemon-card-left-score' style={{ color: score >= 1 ? 'var(--blue0)' : 'var(--red0)' }}>
 								<CgPokemon />
 							</div>
-							<div className='guesser-pokemon-card-left-score-2'>
+							<div className='guesser-pokemon-card-left-score' style={{ color: score >= 2 ? 'var(--blue0)' : 'var(--red0)' }}>
+
 								<CgPokemon />
 							</div>
-							<div className='guesser-pokemon-card-left-score-3'>
+							<div className='guesser-pokemon-card-left-score' style={{ color: score >= 3 ? 'var(--blue0)' : 'var(--red0)'}}>
+
 								<CgPokemon />
 							</div>
-							<div className='guesser-pokemon-card-left-score-4'>
+							<div className='guesser-pokemon-card-left-score' style={{ color: score >= 4 ? 'var(--blue0)' : 'var(--red0)' }}>
+
 								<CgPokemon />
 							</div>
-							<div className='guesser-pokemon-card-left-score-5'>
+							<div className='guesser-pokemon-card-left-score' style={{ color: score >= 5 ? 'var(--blue0)' : 'var(--red0)' }}>
+
 								<CgPokemon />
 							</div>
 						</div>
