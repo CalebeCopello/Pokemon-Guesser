@@ -20,15 +20,34 @@ nav {
   border-radius: 1rem 0 0 1rem;
   box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
 }
+.guesser-menu-container {
+  display: flex;
+  flex-direction: column;
+}
 .guesser-menu-start-container {
-  margin: 1rem;
   align-self: center;
+  margin: 1rem;
 }
 .guesser-menu-pokedex-container {
+  align-self: center;
   margin-top: 1rem;
 }
+.guesser-menu-pokedex-container button {
+  border: none;
+  background: none;
+  cursor: pointer;
+}
 .guesser-menu-pokedex-container img {
-  height: 10rem;
+  height: 7rem;
+}
+.guesser-menu-pokedex-container img:hover {
+  height: 7rem;
+  transition: transform 0.05s;
+  transform: scale(1.05,1.05);
+}
+.guesser-menu-pokedex-container img:active {
+  transition: transform 0.05s;
+  transform: scale(0.95,0.95);
 }
 
 .guesser-container {

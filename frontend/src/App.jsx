@@ -6,7 +6,10 @@ import './App.css'
 
 function App() {
 	const [attempts, setAttempts] = useState(() => {
-		return 1
+		return 0
+	})
+	const [score, setScore] = useState(() => {
+		return 0
 	})
 	const [correctPokemon, setCorrectPokemon] = useState(() => {
 		return
@@ -18,8 +21,9 @@ function App() {
 		return {}
 	})
 	const [pokemonGen, setPokemonGen] = useState(() => {
-		return 251
+		return 151
 	})
+
 
 	const randomNumberGenerator = (min, max) => {
 		return Math.floor(Math.random() * (max - min + 1)) + min
@@ -31,6 +35,11 @@ function App() {
 			return string.toUpperCase()
 		}
 	}
+	const startGame = () => {
+		setAttempts(() => attempts + 1)
+	}
+
+
 	useEffect(() => {
 		const genRandomPokemons = () => {
 			const randomPokemonsArray = []
@@ -46,25 +55,30 @@ function App() {
 	}, [attempts, pokemonGen])
 
 	useEffect(() => {
-		const getPokemonByNr = async () => {
-			let i = 0
-			const randomPokemonsObject = {}
-			while (i < 4) {
-				const response = await fetch(
-					`https://pokeapi.co/api/v2/pokemon/${pokemonsNr[i]}`
-				)
-				const responseJson = await response.json()
-				randomPokemonsObject[i] = responseJson
-				i++
+		if (attempts > 0) {
+			const getPokemonByNr = async () => {
+				let i = 0
+				const randomPokemonsObject = {}
+				while (i < 4) {
+					const response = await fetch(
+						`https://pokeapi.co/api/v2/pokemon/${pokemonsNr[i]}`
+					)
+					const responseJson = await response.json()
+					randomPokemonsObject[i] = responseJson
+					i++
+				}
+				setPokemonsData(randomPokemonsObject)
 			}
-			setPokemonsData(randomPokemonsObject)
+			getPokemonByNr()
 		}
-		getPokemonByNr()
 	}, [attempts, pokemonGen, pokemonsNr])
 
 	useEffect(() => {
 		setCorrectPokemon(randomNumberGenerator(0, 3))
+		console.log(attempts)
 	}, [])
+
+
 
 	return (
 		<>
@@ -73,10 +87,12 @@ function App() {
 			<nav>
 				<div className="guesser-menu-container">
 					<div className="guesser-menu-start-container">
-						<button className='btn'>Começar o Jogo</button>
+						<button className='btn' disabled={attempts > 0} onClick={startGame}>Começar o Jogo</button>
 					</div>
 					<div className="guesser-menu-pokedex-container">
-						<img src={pokedex} alt="pokedex" title="Consultar Pokedex"/>
+						<button>
+							<img src={pokedex} alt="pokedex" title="Consultar Pokedex"/>
+						</button>
 					</div>
 				</div>
 			</nav>
