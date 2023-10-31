@@ -17,13 +17,19 @@ function App() {
 		return {}
 	})
 	const [pokemonGen, setPokemonGen] = useState(() => {
-		return 151
+		return 251
 	})
 
 	const randomNumberGenerator = (min, max) => {
 		return Math.floor(Math.random() * (max - min + 1)) + min
 	}
-
+	const capitalize = (string) => {
+		if (string.length > 1) {
+			return string.charAt(0).toUpperCase() + string.slice(1)
+		} else {
+			return string.toUpperCase()
+		}
+	}
 	useEffect(() => {
 		const genRandomPokemons = () => {
 			const randomPokemonsArray = []
@@ -100,23 +106,25 @@ function App() {
 										'official-artwork'
 									].front_default
 								}
-								alt='Quém é esse Pokémon'
+								alt=''
 							/>
 						) : (
 							<div className='guesser-pokemon-card-img-loader'>
 								<CgPokemon />
 							</div>
 						)}
-						<img
-							src='pokemonsData[correctPokemon]?.name}'
-							alt=''
-						/>
 					</div>
 					<div className='guesser-pokemon-card-btn'>
-						<button className='btn'>{pokemonsData[0]?.name}</button>
-						<button className='btn'>{pokemonsData[1]?.name}</button>
-						<button className='btn'>{pokemonsData[2]?.name}</button>
-						<button className='btn'>{pokemonsData[3]?.name}</button>
+						{pokemonsNr.map((_, i) => (
+							<button
+								key={i}
+								className='btn'
+							>
+								{pokemonsData[i]
+									? capitalize(pokemonsData[i]?.name)
+									: `Opção ${i}`}
+							</button>
+						))}
 					</div>
 				</div>
 			</div>
