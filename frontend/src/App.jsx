@@ -11,6 +11,11 @@ function App() {
 	const [score, setScore] = useState(() => {
 		return 0
 	})
+	const [counter, setCounter] = useState(() => {
+		return 10
+	})
+
+
 	const [correctPokemon, setCorrectPokemon] = useState(() => {
 		return
 	})
@@ -46,6 +51,7 @@ function App() {
 			console.log('incorreto')
 		}
 		setAttempts((prevAttemps) => prevAttemps + 1)
+		setCounter(10)
 	}
 
 	useEffect(() => {
@@ -103,6 +109,19 @@ function App() {
 		}
 	}, [attempts])
 
+	useEffect(() => {
+		if (attempts > 0 && attempts < 6) {
+			const timer = counter > 0 && setInterval(() => setCounter(counter - 1), 1000)
+			return () => clearInterval(timer)
+		}
+	}, [counter, attempts])
+
+	useEffect(() => {
+		if (attempts > 0 && attempts < 6 && counter === 0) {
+			tryAttempt(0)
+		}
+	}, [counter])
+
 	return (
 		<>
 			{' '}
@@ -139,7 +158,7 @@ function App() {
 					<div className='guesser-pokemon-card'>
 						<div className='guesser-pokemon-card-top'>
 							<span className='guesser-pokemon-card-timer'>
-								<strong>Tempo restante: </strong>
+								<strong>Tempo restante: {counter}</strong>
 							</span>
 							<div className='guesser-pokemon-card-left'>
 								<div
