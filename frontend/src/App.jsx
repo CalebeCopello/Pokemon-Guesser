@@ -24,7 +24,6 @@ function App() {
 		return 151
 	})
 
-
 	const randomNumberGenerator = (min, max) => {
 		return Math.floor(Math.random() * (max - min + 1)) + min
 	}
@@ -40,7 +39,7 @@ function App() {
 		setScore(0)
 	}
 	const tryAttempt = (i) => {
-		if(i == pokemonsData[correctPokemon].id) {
+		if (i == pokemonsData[correctPokemon].id) {
 			console.log('correto')
 			setScore((prevScore) => prevScore + 1)
 		} else {
@@ -49,9 +48,9 @@ function App() {
 		setAttempts((prevAttemps) => prevAttemps + 1)
 	}
 
-
 	useEffect(() => {
 		const genRandomPokemons = () => {
+			setPokemonsNr([])
 			const randomPokemonsArray = []
 			while (randomPokemonsArray.length < 4) {
 				const rn = randomNumberGenerator(1, pokemonGen)
@@ -65,118 +64,148 @@ function App() {
 	}, [attempts, pokemonGen])
 
 	useEffect(() => {
-		if (attempts > 0) {
+		if (attempts > 0 && attempts < 6) {
 			const getPokemonByNr = async () => {
 				let i = 0
 				const randomPokemonsObject = {}
+				setPokemonsData({})
 				while (i < 4) {
-					const response = await fetch(
-						`https://pokeapi.co/api/v2/pokemon/${pokemonsNr[i]}`
-					)
-					const responseJson = await response.json()
-					randomPokemonsObject[i] = responseJson
-					i++
+					try {
+						const response = await fetch(
+							`https://pokeapi.co/api/v2/pokemon/${pokemonsNr[i]}`
+						)
+						if (response.ok) {
+							const responseJson = await response.json()
+							randomPokemonsObject[i] = responseJson
+							i++
+						}
+					} catch (error) {
+						console.log(error)
+					}
 				}
 				setPokemonsData(randomPokemonsObject)
 			}
 			getPokemonByNr()
+			console.log('effect', attempts)
+		} else {
+			setPokemonsData({})
 		}
-	}, [attempts, pokemonGen, pokemonsNr])
+	}, [attempts])
 
 	useEffect(() => {
-		setCorrectPokemon(randomNumberGenerator(0, 3))
-	}, [])
-
-	useEffect(() => {
-		if(attempts > 5) {
+		let option = randomNumberGenerator(0, 3)
+		while(option === correctPokemon) {
+			option = randomNumberGenerator(0, 3)
+		}
+		setCorrectPokemon(option)
+		if (attempts > 5) {
 			setAttempts(0)
 		}
-	},[attempts])
-
-
+	}, [attempts])
 
 	return (
 		<>
 			{' '}
 			<main>
-			<nav>
-				<div className="guesser-menu-container">
-					<div className="guesser-menu-start-container">
-						<button className='btn' disabled={attempts > 0} onClick={startGame}>Começar o Jogo</button>
-					</div>
-					<div className="guesser-menu-pokedex-container">
-						<button>
-							<img src={pokedex} alt="pokedex" title="Consultar Pokedex"/>
-						</button>
-					</div>
-				</div>
-			</nav>
-			<div className='guesser-container'>
-				<div className='guesser-container-bg-top'>
-					<span className='pokemon-question'>?</span>
-				</div>
-				<div className='guesser-container-bg-bottom'>
-					<span className='pokemon-text'>Pokémon</span>
-				</div>
-				<div className='guesser-pokemon-card'>
-					<div className='guesser-pokemon-card-top'>
-						<span className='guesser-pokemon-card-timer'>
-							<strong>Tempo restante: </strong>
-						</span>
-						<div className='guesser-pokemon-card-left'>
-						<div className='guesser-pokemon-card-left-score' style={{ color: score >= 1 ? 'var(--blue0)' : 'var(--red0)' }}>
-								<CgPokemon />
-							</div>
-							<div className='guesser-pokemon-card-left-score' style={{ color: score >= 2 ? 'var(--blue0)' : 'var(--red0)' }}>
-
-								<CgPokemon />
-							</div>
-							<div className='guesser-pokemon-card-left-score' style={{ color: score >= 3 ? 'var(--blue0)' : 'var(--red0)'}}>
-
-								<CgPokemon />
-							</div>
-							<div className='guesser-pokemon-card-left-score' style={{ color: score >= 4 ? 'var(--blue0)' : 'var(--red0)' }}>
-
-								<CgPokemon />
-							</div>
-							<div className='guesser-pokemon-card-left-score' style={{ color: score >= 5 ? 'var(--blue0)' : 'var(--red0)' }}>
-
-								<CgPokemon />
-							</div>
+				<nav>
+					<div className='guesser-menu-container'>
+						<div className='guesser-menu-start-container'>
+							<button
+								className='btn'
+								disabled={attempts > 0}
+								onClick={startGame}
+							>
+								Começar o Jogo
+							</button>
+						</div>
+						<div className='guesser-menu-pokedex-container'>
+							<button>
+								<img
+									src={pokedex}
+									alt='pokedex'
+									title='Consultar Pokedex'
+								/>
+							</button>
 						</div>
 					</div>
-					<div className='guesser-pokemon-card-img'>
-						{pokemonsData[correctPokemon] ? (
-							<img
-								src={
-									pokemonsData[correctPokemon].sprites?.other[
-										'official-artwork'
-									].front_default
-								}
-								alt=''
-							/>
-						) : (
-							<div className='guesser-pokemon-card-img-loader'>
-								<CgPokemon />
-							</div>
-						)}
+				</nav>
+				<div className='guesser-container'>
+					<div className='guesser-container-bg-top'>
+						<span className='pokemon-question'>?</span>
 					</div>
-					<div className='guesser-pokemon-card-btn'>
-						{pokemonsNr.map((_, i) => (
-							<button
-								key={i}
-								className='btn'
-								onClick={() => tryAttempt(pokemonsData[i].id)}
-								disabled={attempts === 0}
-							>
-								{pokemonsData[i]
-									? capitalize(pokemonsData[i]?.name)
-									: `Opção ${i}`}
-							</button>
-						))}
+					<div className='guesser-container-bg-bottom'>
+						<span className='pokemon-text'>Pokémon</span>
+					</div>
+					<div className='guesser-pokemon-card'>
+						<div className='guesser-pokemon-card-top'>
+							<span className='guesser-pokemon-card-timer'>
+								<strong>Tempo restante: </strong>
+							</span>
+							<div className='guesser-pokemon-card-left'>
+								<div
+									className='guesser-pokemon-card-left-score'
+									style={{ color: score >= 1 ? 'var(--blue0)' : 'var(--red0)' }}
+								>
+									<CgPokemon />
+								</div>
+								<div
+									className='guesser-pokemon-card-left-score'
+									style={{ color: score >= 2 ? 'var(--blue0)' : 'var(--red0)' }}
+								>
+									<CgPokemon />
+								</div>
+								<div
+									className='guesser-pokemon-card-left-score'
+									style={{ color: score >= 3 ? 'var(--blue0)' : 'var(--red0)' }}
+								>
+									<CgPokemon />
+								</div>
+								<div
+									className='guesser-pokemon-card-left-score'
+									style={{ color: score >= 4 ? 'var(--blue0)' : 'var(--red0)' }}
+								>
+									<CgPokemon />
+								</div>
+								<div
+									className='guesser-pokemon-card-left-score'
+									style={{ color: score >= 5 ? 'var(--blue0)' : 'var(--red0)' }}
+								>
+									<CgPokemon />
+								</div>
+							</div>
+						</div>
+						<div className='guesser-pokemon-card-img'>
+							{pokemonsData[correctPokemon] ? (
+								<img
+									src={
+										pokemonsData[correctPokemon].sprites?.other[
+											'official-artwork'
+										].front_default
+									}
+									alt=''
+								/>
+							) : (
+								<div className='guesser-pokemon-card-img-loader'>
+									<CgPokemon />
+								</div>
+							)}
+						</div>
+						<div className='guesser-pokemon-card-btn'>
+							{pokemonsNr.map((_, i) => (
+								<button
+									key={i}
+									className='btn'
+									onClick={() => tryAttempt(pokemonsData[i].id)}
+									disabled={attempts === 0}
+								>
+									{pokemonsData[i]
+										? capitalize(pokemonsData[i]?.name)
+										: `Opção ${i}`}
+								</button>
+							))}
+						</div>
 					</div>
 				</div>
-			</div>
 			</main>
 		</>
 	)
