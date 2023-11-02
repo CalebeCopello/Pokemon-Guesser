@@ -31,6 +31,9 @@ function App() {
 	const [pokemonAnswers, setPokemonAnswers] = useState(() => {
 		return {}
 	})
+	const [showPokemonAnswers, setShowPokemonAnswers] = useState(() => {
+		return [false]
+	})
 
 	//Constants
 	const TIMERTOTAL = 7
@@ -42,7 +45,6 @@ function App() {
 		}
 	}
 	fulfilDivs(TOTALATTEMPTS)
-
 
 	//Utils functions
 	const randomNumberGenerator = (min, max) => {
@@ -59,6 +61,7 @@ function App() {
 		setAttempts(() => attempts + 1)
 		setScore(0)
 		setPokemonAnswers({})
+		setShowPokemonAnswers([false])
 	}
 	const tryAttempt = (i) => {
 		if (i == pokemonsData[correctPokemon].id) {
@@ -66,6 +69,11 @@ function App() {
 		}
 		setAttempts((prevAttemps) => prevAttemps + 1)
 		setCounter(TIMERTOTAL)
+		setShowPokemonAnswers((prevShowPokemonAnswers) => {
+			const updated = [...prevShowPokemonAnswers]
+			updated.unshift(true)
+			return updated
+		})
 	}
 
 	//Effect to get an array with pokemons to set pokemons options
@@ -87,8 +95,8 @@ function App() {
 	//Effect to get an object with all pokemons answers
 	useEffect(() => {
 		if (pokemonsData[correctPokemon]) {
-			setPokemonAnswers((prevpokemonAnswers) => ({
-				...prevpokemonAnswers,
+			setPokemonAnswers((prevPokemonAnswers) => ({
+				...prevPokemonAnswers,
 				[attempts - 1]: pokemonsData[correctPokemon],
 			}))
 		}
@@ -150,6 +158,7 @@ function App() {
 		if (attempts > TOTALATTEMPTS) {
 			setAttempts(0)
 		}
+		console.log('attemps', attempts, 'showPokemonsAnswers', showPokemonAnswers)
 	}, [attempts])
 
 	return (
@@ -176,15 +185,34 @@ function App() {
 								/>
 							</button>
 						</div>
-						<div className="guesser-menu-pokemons-answer-container">
-							{
-								DIVS.map((i) =>(
-									<div key={i} className="guesser-menu-pokemons-answer">
-										<div className='guesser-menu-pokemons-answer-front'>?</div>
-										<div className='guesser-menu-pokemons-answer-back'>?</div>
+						<div className='guesser-menu-pokemons-answer-container'>
+							{DIVS.map((i) => (
+								<div
+									key={i}
+									className='guesser-menu-pokemons-answer'
+								>
+									<div className='guesser-menu-pokemons-answer-front'>
+										{showPokemonAnswers[i] ? (
+											<img
+												src={pokemonAnswers[i].sprites.front_default}
+												alt={pokemonAnswers[i].name}
+											/>
+										) : (
+											'?'
+										)}
 									</div>
-								))
-							}
+									<div className='guesser-menu-pokemons-answer-back'>
+										{showPokemonAnswers[i] ? (
+											<img
+												src={pokemonAnswers[i].sprites.back_default}
+												alt={pokemonAnswers[i].name}
+											/>
+										) : (
+											'?'
+										)}
+									</div>
+								</div>
+							))}
 						</div>
 					</div>
 				</nav>
@@ -201,13 +229,17 @@ function App() {
 								<strong>Tempo restante: {counter}</strong>
 							</span>
 							<div className='guesser-pokemon-card-left'>
-								{
-									DIVS.map((i) =>(
-										<div key={i} className='guesser-pokemon-card-left-score' style={{color: score >= i + 1 ? 'var(--blue0)' : 'var(--red0)',}}>
+								{DIVS.map((i) => (
+									<div
+										key={i}
+										className='guesser-pokemon-card-left-score'
+										style={{
+											color: score >= i + 1 ? 'var(--blue0)' : 'var(--red0)',
+										}}
+									>
 										<CgPokemon />
-										</div>
-									))
-								}
+									</div>
+								))}
 							</div>
 						</div>
 						<div className='guesser-pokemon-card-img'>
