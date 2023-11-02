@@ -132,9 +132,6 @@ nav {
   /* display: none; */
   font-size: 1.5rem;
 }
-.guesser-pokemon-card-left-score {
-  color: black;
-}
 .guesser-pokemon-card-img {
   margin: 2rem auto 0.5rem;
   display: flex;

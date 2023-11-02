@@ -5,6 +5,7 @@ import pokedex from '/pokedex-300x300.png'
 import './App.css'
 
 function App() {
+	//React Variables
 	const [attempts, setAttempts] = useState(() => {
 		return 0
 	})
@@ -12,9 +13,8 @@ function App() {
 		return 0
 	})
 	const [counter, setCounter] = useState(() => {
-		return 10
+		return 0
 	})
-
 
 	const [correctPokemon, setCorrectPokemon] = useState(() => {
 		return
@@ -28,7 +28,15 @@ function App() {
 	const [pokemonGen, setPokemonGen] = useState(() => {
 		return 151
 	})
+	const [pokemonAnswers, setPokemonAnswers] = useState(() => {
+		return {}
+	})
 
+	//Constants
+	const TIMERTOTAL = 7
+	const TOTALATTEMPTS = 6
+
+	//Utils functions
 	const randomNumberGenerator = (min, max) => {
 		return Math.floor(Math.random() * (max - min + 1)) + min
 	}
@@ -42,18 +50,17 @@ function App() {
 	const startGame = () => {
 		setAttempts(() => attempts + 1)
 		setScore(0)
+		setPokemonAnswers({})
 	}
 	const tryAttempt = (i) => {
 		if (i == pokemonsData[correctPokemon].id) {
-			console.log('correto')
 			setScore((prevScore) => prevScore + 1)
-		} else {
-			console.log('incorreto')
 		}
 		setAttempts((prevAttemps) => prevAttemps + 1)
-		setCounter(10)
+		setCounter(TIMERTOTAL)
 	}
 
+	//Effect to get an array with pokemons to set pokemons options
 	useEffect(() => {
 		const genRandomPokemons = () => {
 			setPokemonsNr([])
@@ -69,10 +76,46 @@ function App() {
 		genRandomPokemons()
 	}, [attempts, pokemonGen])
 
+	//Effect to get an object with all pokemons answers
 	useEffect(() => {
-		if (attempts > 0 && attempts < 6) {
+		if (pokemonsData[correctPokemon]) {
+			setPokemonAnswers((prevpokemonAnswers) => ({
+				...prevpokemonAnswers,
+				[attempts - 1]: pokemonsData[correctPokemon],
+			}))
+		}
+	}, [pokemonsData])
+
+	//Effect to set the attempt timer
+	useEffect(() => {
+		if (attempts > 0 && attempts < TOTALATTEMPTS + 1) {
+			const timer =
+				counter > 0 && setInterval(() => setCounter(counter - 1), 1000)
+			return () => clearInterval(timer)
+		}
+	}, [counter, attempts])
+
+	//Effect to set a wrong answer if timer is == 0
+	useEffect(() => {
+		if (attempts > 0 && attempts < TOTALATTEMPTS + 1 && counter === 0) {
+			tryAttempt(0)
+		}
+	}, [counter])
+
+	// Main Effect triggers on wich attempt
+
+	useEffect(() => {
+		//set the correct answer
+		let option = randomNumberGenerator(0, 3)
+		while (option === correctPokemon) {
+			option = randomNumberGenerator(0, 3)
+		}
+		setCorrectPokemon(option)
+		//fetch data to the four options and fills the pokemonData object and resets the object
+		if (attempts > 0 && attempts < TOTALATTEMPTS + 1) {
 			const getPokemonByNr = async () => {
 				let i = 0
+				setCounter(TIMERTOTAL)
 				const randomPokemonsObject = {}
 				setPokemonsData({})
 				while (i < 4) {
@@ -92,35 +135,14 @@ function App() {
 				setPokemonsData(randomPokemonsObject)
 			}
 			getPokemonByNr()
-			console.log('effect', attempts)
 		} else {
 			setPokemonsData({})
 		}
-	}, [attempts])
-
-	useEffect(() => {
-		let option = randomNumberGenerator(0, 3)
-		while(option === correctPokemon) {
-			option = randomNumberGenerator(0, 3)
-		}
-		setCorrectPokemon(option)
-		if (attempts > 5) {
+		//if clause that resets the game
+		if (attempts > TOTALATTEMPTS) {
 			setAttempts(0)
 		}
 	}, [attempts])
-
-	useEffect(() => {
-		if (attempts > 0 && attempts < 6) {
-			const timer = counter > 0 && setInterval(() => setCounter(counter - 1), 1000)
-			return () => clearInterval(timer)
-		}
-	}, [counter, attempts])
-
-	useEffect(() => {
-		if (attempts > 0 && attempts < 6 && counter === 0) {
-			tryAttempt(0)
-		}
-	}, [counter])
 
 	return (
 		<>
@@ -161,37 +183,18 @@ function App() {
 								<strong>Tempo restante: {counter}</strong>
 							</span>
 							<div className='guesser-pokemon-card-left'>
-								<div
+								{Array.from({ length: TOTALATTEMPTS }, (_, index) => (
+									<div
+									key={index}
 									className='guesser-pokemon-card-left-score'
-									style={{ color: score >= 1 ? 'var(--blue0)' : 'var(--red0)' }}
-								>
+									style={{
+										color: score >= index + 1 ? 'var(--blue0)' : 'var(--red0)',
+									}}
+									>
 									<CgPokemon />
+									</div>
+								))}
 								</div>
-								<div
-									className='guesser-pokemon-card-left-score'
-									style={{ color: score >= 2 ? 'var(--blue0)' : 'var(--red0)' }}
-								>
-									<CgPokemon />
-								</div>
-								<div
-									className='guesser-pokemon-card-left-score'
-									style={{ color: score >= 3 ? 'var(--blue0)' : 'var(--red0)' }}
-								>
-									<CgPokemon />
-								</div>
-								<div
-									className='guesser-pokemon-card-left-score'
-									style={{ color: score >= 4 ? 'var(--blue0)' : 'var(--red0)' }}
-								>
-									<CgPokemon />
-								</div>
-								<div
-									className='guesser-pokemon-card-left-score'
-									style={{ color: score >= 5 ? 'var(--blue0)' : 'var(--red0)' }}
-								>
-									<CgPokemon />
-								</div>
-							</div>
 						</div>
 						<div className='guesser-pokemon-card-img'>
 							{pokemonsData[correctPokemon] ? (
