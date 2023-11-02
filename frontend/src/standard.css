@@ -95,6 +95,9 @@
 	--purple1: #d3869b;
 	--aqua1: #8ec07c;
 	--orange1: #fe8019;
+
+  /* Other configs */
+  --shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
 }
 
 @font-face {

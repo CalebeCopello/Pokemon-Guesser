@@ -35,6 +35,14 @@ function App() {
 	//Constants
 	const TIMERTOTAL = 7
 	const TOTALATTEMPTS = 6
+	const DIVS = []
+	const fulfilDivs = (n) => {
+		for (let i = 0; i < n; i++) {
+			DIVS.push(i)
+		}
+	}
+	fulfilDivs(TOTALATTEMPTS)
+
 
 	//Utils functions
 	const randomNumberGenerator = (min, max) => {
@@ -168,6 +176,16 @@ function App() {
 								/>
 							</button>
 						</div>
+						<div className="guesser-menu-pokemons-answer-container">
+							{
+								DIVS.map((i) =>(
+									<div key={i} className="guesser-menu-pokemons-answer">
+										<div className='guesser-menu-pokemons-answer-front'>?</div>
+										<div className='guesser-menu-pokemons-answer-back'>?</div>
+									</div>
+								))
+							}
+						</div>
 					</div>
 				</nav>
 				<div className='guesser-container'>
@@ -183,18 +201,14 @@ function App() {
 								<strong>Tempo restante: {counter}</strong>
 							</span>
 							<div className='guesser-pokemon-card-left'>
-								{Array.from({ length: TOTALATTEMPTS }, (_, index) => (
-									<div
-									key={index}
-									className='guesser-pokemon-card-left-score'
-									style={{
-										color: score >= index + 1 ? 'var(--blue0)' : 'var(--red0)',
-									}}
-									>
-									<CgPokemon />
-									</div>
-								))}
-								</div>
+								{
+									DIVS.map((i) =>(
+										<div key={i} className='guesser-pokemon-card-left-score' style={{color: score >= i + 1 ? 'var(--blue0)' : 'var(--red0)',}}>
+										<CgPokemon />
+										</div>
+									))
+								}
+							</div>
 						</div>
 						<div className='guesser-pokemon-card-img'>
 							{pokemonsData[correctPokemon] ? (

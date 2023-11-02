@@ -5,6 +5,7 @@ main {
   transform: translate(-50%, -50%);
   display: flex;
 }
+
 nav {
   position: relative;
   display: flex;
@@ -18,7 +19,7 @@ nav {
   border-style: solid;
   border-width: 3px 0 3px 3px;
   border-radius: 1rem 0 0 1rem;
-  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--shadow);
 }
 .guesser-menu-container {
   display: flex;
@@ -26,11 +27,11 @@ nav {
 }
 .guesser-menu-start-container {
   align-self: center;
-  margin: 1rem;
+  margin: 1rem 1rem 0 1rem;
 }
 .guesser-menu-pokedex-container {
   align-self: center;
-  margin-top: 1rem;
+  margin: 0.5rem 1rem 0 1rem;
 }
 .guesser-menu-pokedex-container button {
   border: none;
@@ -50,6 +51,29 @@ nav {
   transform: scale(0.95,0.95);
 }
 
+.guesser-menu-pokemons-answer {
+  align-self: center;
+  margin: 0 1rem 0.3rem 1rem;
+  height: 4.3rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  border: 2px solid var(--bg0);
+  border-radius: 3px;
+  box-shadow: var(--shadow);
+}
+
+.guesser-menu-pokemons-answer-front {
+  width: 3.5rem;
+  font-family: PokemonSolid;
+  text-align: center;
+}
+.guesser-menu-pokemons-answer-back {
+  width: 3.5rem;
+  font-family: PokemonSolid;
+  text-align: center;
+}
+
 .guesser-container {
   position: relative;
   display: flex;
@@ -61,7 +85,7 @@ nav {
   width: 60rem;
   border-radius: 1rem;
   align-items: center;
-  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--shadow);
 }
 .guesser-container-bg-top {
   position: absolute;
@@ -112,7 +136,7 @@ nav {
   background-color: var(--fg0);
   border: 3px solid var(--bg0);
   border-radius: 0.5rem;
-  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--shadow);
 }
 .guesser-pokemon-card-top {
   text-align: right;
@@ -140,7 +164,7 @@ nav {
   background-color: rgb(244, 242, 242);
   border: 3px solid var(--bg0);
   border-radius: 0.5rem;
-  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--shadow);
   color: var(--bg0);
   font-size: 15rem;
 }
