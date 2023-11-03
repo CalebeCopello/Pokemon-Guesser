@@ -190,6 +190,7 @@ function App() {
 								<div
 									key={i}
 									className='guesser-menu-pokemons-answer'
+									style={{cursor: showPokemonAnswers[i] ? 'pointer' : 'wait',}}
 								>
 									<div className='guesser-menu-pokemons-answer-front'>
 										{showPokemonAnswers[i] ? (
