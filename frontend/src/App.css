@@ -73,7 +73,6 @@ nav {
 }
 .guesser-menu-pokemons-answer:hover {
   transition: transform 0.05s;
-  background-color: var(--bg2);
   transform: scale(1.03,1.03);
 }
 .guesser-menu-pokemons-answer-front, .guesser-menu-pokemons-answer-back {

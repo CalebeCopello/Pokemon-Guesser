@@ -34,6 +34,9 @@ function App() {
 	const [showPokemonAnswers, setShowPokemonAnswers] = useState(() => {
 		return [false]
 	})
+	const [pokemonsColor, setPokemonsColor] = useState(() => {
+		return []
+	})
 
 	//Constants
 	const TIMERTOTAL = 7
@@ -99,7 +102,28 @@ function App() {
 				...prevPokemonAnswers,
 				[attempts - 1]: pokemonsData[correctPokemon],
 			}))
+			console.log(pokemonsData[correctPokemon]?.species.url)
+			const getPokemonsColorData = async () => {
+				let randomPokemonsObjectColor = {}
+				try {
+					const response = await fetch(
+						pokemonsData[correctPokemon]?.species.url
+					)
+					if (response.ok) {
+						const responseJson = await response.json()
+						randomPokemonsObjectColor = responseJson
+					}
+				} catch (error) {
+					console.log(error)
+				}
+				setPokemonsColor((prevPokemonsColor) => ({
+					...prevPokemonsColor,
+					[attempts - 1]: randomPokemonsObjectColor,
+				}))
+			}
+			getPokemonsColorData()
 		}
+		console.log(pokemonsColor)
 	}, [pokemonsData])
 
 	//Effect to set the attempt timer
@@ -158,7 +182,6 @@ function App() {
 		if (attempts > TOTALATTEMPTS) {
 			setAttempts(0)
 		}
-		console.log('attemps', attempts, 'showPokemonsAnswers', showPokemonAnswers)
 	}, [attempts])
 
 	return (
@@ -190,7 +213,7 @@ function App() {
 								<div
 									key={i}
 									className='guesser-menu-pokemons-answer'
-									style={{cursor: showPokemonAnswers[i] ? 'pointer' : 'wait',}}
+									style={{ cursor: showPokemonAnswers[i] ? 'pointer' : 'wait', backgroundColor: showPokemonAnswers[i] ? pokemonsColor[i]?.color.name : ''}}
 								>
 									<div className='guesser-menu-pokemons-answer-front'>
 										{showPokemonAnswers[i] ? (
