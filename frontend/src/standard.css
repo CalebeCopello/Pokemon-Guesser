@@ -1,6 +1,5 @@
 :root {
-
-  /* *Gruvbox Palette, from: https://github.com/morhetz/gruvbox*
+	/* *Gruvbox Palette, from: https://github.com/morhetz/gruvbox*
   
   **Common colors**
   
@@ -96,8 +95,21 @@
 	--aqua1: #8ec07c;
 	--orange1: #fe8019;
 
-  /* Other configs */
-  --shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
+	/* Other configs */
+	--shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
+
+	/* Pokemon colors */
+	--pokeTransparency: 0.8;
+	--pokeRed: rgba(204, 36, 29, var(--pokeTransparency));
+	--pokePink: rgba(221, 133, 157, var(--pokeTransparency));
+	--pokeBlue: rgba(69, 133, 136, var(--pokeTransparency));
+	--pokeYellow: rgba(215, 153, 33, var(--pokeTransparency));
+	--pokeGreen: rgba(152, 151, 26, var(--pokeTransparency));
+	--pokeBlack: rgba(60, 56, 54, var(--pokeTransparency));
+	--pokeBrown: rgba(205, 127, 50, var(--pokeTransparency));
+	--pokePurple: rgba(177, 98, 134, var(--pokeTransparency));
+	--pokeGray: rgba(168, 153, 132, var(--pokeTransparency));
+	--pokeWhite: rgba(250, 249, 246, var(--pokeTransparency));
 }
 
 @font-face {
@@ -123,31 +135,32 @@
 	src: url(./assets/fonts/PokemonSolid.ttf);
 }
 .btn {
-  color: var(--fg0);
-  display: block;
-  border: 1px solid black;
-  border-radius: 3px;
-  box-shadow: 3px 3px rgba(0, 0, 0, 0.4);
-  background-color: var(--gray3);
-  cursor: pointer;
+	color: var(--fg0);
+	display: block;
+	border: 1px solid black;
+	border-radius: 3px;
+	box-shadow: 3px 3px rgba(0, 0, 0, 0.4);
+	background-color: var(--gray3);
+	cursor: pointer;
 }
 .btn:hover {
-  transition: transform 0.05s;
-	background-color:var(--bg1);
-  transition: 0.3s;
+	transition: transform 0.05s;
+	background-color: var(--bg1);
+	transition: 0.3s;
 }
 .btn:active:not([disabled]) {
-  transition: transform 0.05s;
-  transform: scale(0.95,0.95);
-  background-color: var(--gray0);
-  box-shadow: 1px 1px rgba(0, 0, 0, 0.4);
+	transition: transform 0.05s;
+	transform: scale(0.95, 0.95);
+	background-color: var(--gray0);
+	box-shadow: 1px 1px rgba(0, 0, 0, 0.4);
 }
 .btn:disabled,
-.btn[disabled]{
-  background-color: var(--fg1);
-  color: var(--bg0);
+.btn[disabled] {
+	background-color: var(--fg1);
+	color: var(--bg0);
 }
-.btn:disabled:hover, .btn[disabled] {
-  background-color: var(--fg1);
-  color: var(--bg0);
+.btn:disabled:hover,
+.btn[disabled] {
+	background-color: var(--fg1);
+	color: var(--bg0);
 }

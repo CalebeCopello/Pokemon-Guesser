@@ -34,7 +34,7 @@ function App() {
 	const [showPokemonAnswers, setShowPokemonAnswers] = useState(() => {
 		return [false]
 	})
-	const [pokemonsColor, setPokemonsColor] = useState(() => {
+	const [pokemonSpecies, setPokemonSpecies] = useState(() => {
 		return []
 	})
 
@@ -78,6 +78,32 @@ function App() {
 			return updated
 		})
 	}
+	const switchPokemonColors = (color) => {
+		switch (color) {
+			case 'red':
+				return 'var(--pokeRed)'
+			case 'blue':
+				return 'var(--pokeBlue)'
+			case 'yellow':
+				return 'var(--pokeYellow)'
+			case 'green':
+				return 'var(--pokeGreen)'
+			case 'black':
+				return 'var(--pokeBlack)'
+			case 'brown':
+				return 'var(--pokeBrown)'
+			case 'purple':
+				return 'var(--pokePurple)'
+			case 'gray':
+				return 'var(--pokeGray)'
+			case 'white':
+				return 'var(--pokeWhite)'
+			case 'pink':
+				return 'var(--pokePink)'
+			default:
+				return 'var(--pokeBlack)'
+		}
+	}
 
 	//Effect to get an array with pokemons to set pokemons options
 	useEffect(() => {
@@ -116,14 +142,14 @@ function App() {
 				} catch (error) {
 					console.log(error)
 				}
-				setPokemonsColor((prevPokemonsColor) => ({
-					...prevPokemonsColor,
+				setPokemonSpecies((prevPokemonSpecies) => ({
+					...prevPokemonSpecies,
 					[attempts - 1]: randomPokemonsObjectColor,
 				}))
 			}
 			getPokemonsColorData()
 		}
-		console.log(pokemonsColor)
+		console.log(pokemonSpecies)
 	}, [pokemonsData])
 
 	//Effect to set the attempt timer
@@ -213,7 +239,12 @@ function App() {
 								<div
 									key={i}
 									className='guesser-menu-pokemons-answer'
-									style={{ cursor: showPokemonAnswers[i] ? 'pointer' : 'wait', backgroundColor: showPokemonAnswers[i] ? pokemonsColor[i]?.color.name : ''}}
+									style={{
+										cursor: showPokemonAnswers[i] ? 'pointer' : 'wait',
+										backgroundColor: showPokemonAnswers[i]
+											? switchPokemonColors(pokemonSpecies[i]?.color.name)
+											: '',
+									}}
 								>
 									<div className='guesser-menu-pokemons-answer-front'>
 										{showPokemonAnswers[i] ? (
