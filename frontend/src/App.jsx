@@ -10,7 +10,7 @@ function App() {
 		return 0
 	})
 	const [score, setScore] = useState(() => {
-		return 0
+		return []
 	})
 	const [counter, setCounter] = useState(() => {
 		return 0
@@ -62,13 +62,23 @@ function App() {
 	}
 	const startGame = () => {
 		setAttempts(() => attempts + 1)
-		setScore(0)
+		setScore([])
 		setPokemonAnswers({})
 		setShowPokemonAnswers([false])
 	}
 	const tryAttempt = (i) => {
 		if (i == pokemonsData[correctPokemon].id) {
-			setScore((prevScore) => prevScore + 1)
+			setScore((prevScore) => {
+				const updated = [...prevScore]
+				updated.push(true)
+				return updated
+			})
+		} else {
+			setScore((prevScore) => {
+				const updated = [...prevScore]
+				updated.push(false)
+				return updated
+			})
 		}
 		setAttempts((prevAttemps) => prevAttemps + 1)
 		setCounter(TIMERTOTAL)
@@ -77,6 +87,8 @@ function App() {
 			updated.unshift(true)
 			return updated
 		})
+		console.log(score)
+		console.log(score.length)
 	}
 	const switchPokemonColors = (color) => {
 		switch (color) {
@@ -149,7 +161,6 @@ function App() {
 			}
 			getPokemonsColorData()
 		}
-		console.log(pokemonSpecies)
 	}, [pokemonsData])
 
 	//Effect to set the attempt timer
@@ -246,6 +257,16 @@ function App() {
 											: '',
 									}}
 								>
+									<div
+										className='guesser-menu-pokemons-answer-score'
+										style={{
+											
+											color: score[i] ? 'var(--blue0)' : 'var(--red0)',
+											visibility: showPokemonAnswers[i] ? 'visible' : 'hidden'
+										}}
+									>
+										<CgPokemon />
+									</div>
 									<div className='guesser-menu-pokemons-answer-front'>
 										{showPokemonAnswers[i] ? (
 											<img
@@ -289,7 +310,7 @@ function App() {
 										key={i}
 										className='guesser-pokemon-card-left-score'
 										style={{
-											color: score >= i + 1 ? 'var(--blue0)' : 'var(--red0)',
+											color: score[i] ? 'var(--blue0)' : 'var(--red0)',
 										}}
 									>
 										<CgPokemon />
