@@ -117,7 +117,9 @@ main {
   display: flex;
   align-items: center;
 }
-
+.guesser-menu-gen-i-starters {
+  color: black;
+}
 .guesser-container {
   position: relative;
   display: flex;

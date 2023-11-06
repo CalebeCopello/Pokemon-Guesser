@@ -41,9 +41,13 @@ function App() {
 		return [
 			[1, 4, 7],
 			[152, 155, 158],
-			[252,255,258],
-			[387,390,393],
-			
+			[252, 255, 258],
+			[387, 390, 393],
+			[495, 498, 501],
+			[650, 653, 656],
+			[722, 725, 728],
+			[810, 813, 816],
+			[906, 909, 912],
 		]
 	})
 	const [pokemonsGenExData, setPokemonsGenExData] = useState(() => {
@@ -99,8 +103,6 @@ function App() {
 			updated.unshift(true)
 			return updated
 		})
-		console.log(score)
-		console.log(score.length)
 	}
 	const switchPokemonColors = (color) => {
 		switch (color) {
@@ -191,8 +193,35 @@ function App() {
 		}
 	}, [counter])
 
-	// Main Effect triggers on wich attempt
+	//Effect to set the each starter trio on the examples, only triggers on page first load
+	useEffect(() => {
+		for (let i = 0; i < pokemonsGenEx.length; i++) {
+			for (let j = 0; j < pokemonsGenEx[i].length; j++) {
+				const getExPokemonByNr = async () => {
+					try {
+						const responseEx = await fetch(
+							`https://pokeapi.co/api/v2/pokemon/${pokemonsGenEx[i][j]}`
+						)
+						if (responseEx.ok) {
+							const responseExJson = await responseEx.json()
+							setPokemonsGenExData((prevPokemonsGenExData) => ({
+								...prevPokemonsGenExData,
+								[i]: {
+									[j]: responseExJson 
+								}
+							}))
+						}
+					} catch (error) {
+						console.log(error)
+					}
+				}
+				getExPokemonByNr()
+			}
+		}
+		console.log('Ex data fetch')
+	}, [])
 
+	// Main Effect triggers on wich attempt
 	useEffect(() => {
 		//set the correct answer
 		let option = randomNumberGenerator(0, 3)
@@ -361,12 +390,15 @@ function App() {
 						</div>
 					</div>
 				</div>
-				<aside className='guesser-menu-left'>
+				{/* FIXME: separete all in componentes, because it's re-render and losing its information  */}
+					<aside className='guesser-menu-left'>
 					<div className='guesser-menu-gen-container'>
 						<div className='guesser-menu-gen-title'>Geração</div>
 						<div className='guesser-menu-gen-i'>
 							<div className='guesser-menu-gen-i-text'>I</div>
-							<div className='guesser-menu-gen-i-starters'>I</div>
+							<div className='guesser-menu-gen-i-starters'>
+								{pokemonsGenExData[0]?.[0]?.name}
+							</div>
 						</div>
 					</div>
 				</aside>
