@@ -104,6 +104,20 @@ main {
   border-radius: 0 1rem 1rem 0;
   box-shadow: var(--shadow);
 }
+.guesser-menu-gen-title{
+  text-align: center;
+  font-family: PokemonSolid;
+  font-size: 1rem;
+  letter-spacing: 3px;
+  color: var(--yellow1);
+  text-shadow: 1px 2px 0 var(--blue0);
+  margin-top: 1rem;
+}
+.guesser-menu-gen-i {
+  display: flex;
+  align-items: center;
+}
+
 .guesser-container {
   position: relative;
   display: flex;

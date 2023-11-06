@@ -37,17 +37,29 @@ function App() {
 	const [pokemonSpecies, setPokemonSpecies] = useState(() => {
 		return []
 	})
+	const [pokemonsGenEx, setPokemonsGenEx] = useState(() => {
+		return [
+			[1, 4, 7],
+			[152, 155, 158],
+			[252,255,258],
+			[387,390,393],
+			
+		]
+	})
+	const [pokemonsGenExData, setPokemonsGenExData] = useState(() => {
+		return {}
+	})
 
 	//Constants
 	const TIMERTOTAL = 7
 	const TOTALATTEMPTS = 6
-	const DIVS = []
-	const fulfilDivs = (n) => {
+	const DIVSATTEMPTS = []
+	const fulfilDivsAttempts = (n) => {
 		for (let i = 0; i < n; i++) {
-			DIVS.push(i)
+			DIVSATTEMPTS.push(i)
 		}
 	}
-	fulfilDivs(TOTALATTEMPTS)
+	fulfilDivsAttempts(TOTALATTEMPTS)
 
 	//Utils functions
 	const randomNumberGenerator = (min, max) => {
@@ -246,7 +258,7 @@ function App() {
 							</button>
 						</div>
 						<div className='guesser-menu-pokemons-answer-container'>
-							{DIVS.map((i) => (
+							{DIVSATTEMPTS.map((i) => (
 								<div
 									key={i}
 									className='guesser-menu-pokemons-answer'
@@ -260,9 +272,8 @@ function App() {
 									<div
 										className='guesser-menu-pokemons-answer-score'
 										style={{
-											
 											color: score[i] ? 'var(--blue0)' : 'var(--red0)',
-											visibility: showPokemonAnswers[i] ? 'visible' : 'hidden'
+											visibility: showPokemonAnswers[i] ? 'visible' : 'hidden',
 										}}
 									>
 										<CgPokemon />
@@ -305,7 +316,7 @@ function App() {
 								<strong>Tempo restante: {counter}</strong>
 							</span>
 							<div className='guesser-pokemon-card-left'>
-								{DIVS.map((i) => (
+								{DIVSATTEMPTS.map((i) => (
 									<div
 										key={i}
 										className='guesser-pokemon-card-left-score'
@@ -351,9 +362,11 @@ function App() {
 					</div>
 				</div>
 				<aside className='guesser-menu-left'>
-					<div className="guesser-menu-gen-container">
-						<div className="guesser-menu-gen-title">
-							
+					<div className='guesser-menu-gen-container'>
+						<div className='guesser-menu-gen-title'>Geração</div>
+						<div className='guesser-menu-gen-i'>
+							<div className='guesser-menu-gen-i-text'>I</div>
+							<div className='guesser-menu-gen-i-starters'>I</div>
 						</div>
 					</div>
 				</aside>
