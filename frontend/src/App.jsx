@@ -225,7 +225,7 @@ function App() {
 		<>
 			{' '}
 			<main>
-				<nav>
+				<aside className='guesser-menu-right'>
 					<div className='guesser-menu-container'>
 						<div className='guesser-menu-start-container'>
 							<button
@@ -291,7 +291,7 @@ function App() {
 							))}
 						</div>
 					</div>
-				</nav>
+				</aside>
 				<div className='guesser-container'>
 					<div className='guesser-container-bg-top'>
 						<span className='pokemon-question'>?</span>
@@ -350,6 +350,13 @@ function App() {
 						</div>
 					</div>
 				</div>
+				<aside className='guesser-menu-left'>
+					<div className="guesser-menu-gen-container">
+						<div className="guesser-menu-gen-title">
+							
+						</div>
+					</div>
+				</aside>
 			</main>
 		</>
 	)
