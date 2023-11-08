@@ -65,7 +65,7 @@ const MenuGeneration = ({ replaceUrl }) => {
 					<div className='guesser-menu-gen-title'>Geração</div>
 					{DIVSGENEX.map((i) => (
 						<div key={i} className='guesser-menu-gen'>
-							<div className='guesser-menu-gen-text' onClick={() => handleGen(i)}>{i+1}</div>
+							<div className='btn guesser-menu-gen-text' onClick={() => handleGen(i)} style={{color: 'var(--yellow1)'}}>{i+1}</div>
 							<div className='guesser-menu-gen-starters'>
 								<img
 									src={pokemonsGenExData[i]?.[0]?.sprites.front_default}

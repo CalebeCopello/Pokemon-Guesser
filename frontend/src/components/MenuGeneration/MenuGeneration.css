@@ -19,35 +19,44 @@
 	letter-spacing: 3px;
 	color: var(--yellow1);
 	text-shadow: 1px 2px 0 var(--blue0);
-	margin-top: 1rem;
+	margin: 1rem 0;
 }
 .guesser-menu-gen {
-	margin: 0 1.5rem 0.3rem ;
+	margin: 0 1.5rem 0.2rem 0.5rem;
 	display: flex;
 	align-items: center;
 	flex-direction: row;
-	overflow: hidden;
-	transition: width 0.5s;
-	width: 2.5rem;
+	width: 16rem;
+	height: 3.7rem;
 	font-family: PokemonSolid;
+	color: var(--yellow1);
+	text-shadow: 1px 2px 0 var(--blue0);
 	font-size: 1rem;
-	background-color: var(--bg0);
-	color: var(--fg0);
 }
-.guesser-menu-gen-text{
-	margin-left: 1rem;
+.guesser-menu-gen-text {
+	margin: 0.5rem;
+	text-align: center;
 	cursor: pointer;
+	padding: 0.3rem 0;
+	width: 3rem;
+	border: 3px solid var(--bg0);
+	user-select: none;
 }
 .guesser-menu-gen-starters {
-	margin-left: 1rem;
+	transition: width 0.5s;
 	display: flex;
 	flex-direction: row;
-	height: 3.8rem;
+	width: 0.5rem;
+	height: 3rem;
+	overflow: hidden;
+	background-color: var(--fg3);
+	border: 1px solid var(--bg0);
+	border-radius: 0 1rem 1rem 0;
+	box-shadow: -3px 0px 1px 1px rgba(0,0,0,0.2) inset;
 }
-.guesser-menu-gen:hover {
-	width: 14rem;
+.guesser-menu-gen-text:hover + .guesser-menu-gen-starters {
+	width: 10rem;
 }
-
 .guesser-menu-gen-starters img {
 	display: inline;
 }
