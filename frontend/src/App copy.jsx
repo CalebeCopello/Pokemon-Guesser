@@ -390,7 +390,7 @@ function App() {
 						</div>
 					</div>
 				</div>
-				{/* FIXME: separete all in componentes, because it's re-render and losing its information  */}
+				{/* FIXME: separete all in componentes, because it's re-render and losing its information  
 					<aside className='guesser-menu-left'>
 					<div className='guesser-menu-gen-container'>
 						<div className='guesser-menu-gen-title'>Geração</div>
@@ -402,6 +402,7 @@ function App() {
 						</div>
 					</div>
 				</aside>
+				*/}
 			</main>
 		</>
 	)

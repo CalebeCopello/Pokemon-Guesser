@@ -138,7 +138,6 @@ function App() {
 				counter > 0 && setInterval(() => setCounter(counter - 1), 1000)
 			return () => clearInterval(timer)
 		}
-		console.log('counter effect')
 	}, [counter, attempts])
 
 	/*** Effect to set a wrong answer if timer is == 0 ***/
@@ -146,7 +145,6 @@ function App() {
 		if (attempts > 0 && attempts < TOTALATTEMPTS + 1 && counter === 0) {
 			tryAttempt(0)
 		}
-		console.log('counter attempt')
 	}, [counter])
 
 	/** Effect to get an array with pokemons to set pokemons options **/
@@ -163,8 +161,7 @@ function App() {
 			setPokemonsNr(randomPokemonsArray)
 		}
 		genRandomPokemons()
-		console.log('get random pokemons effect')
-	}, [attempts, pokemonGen])
+	}, [attempts])
 
 	/** Effect to get an object with all pokemons answers **/
 	useEffect(() => {
@@ -193,7 +190,6 @@ function App() {
 			}
 			getPokemonsColorData()
 		}
-		console.log('pokemon answers effect')
 	}, [pokemonsData])
 
 	/** Main Effect triggers on each attempt **/
@@ -235,7 +231,6 @@ function App() {
 		if (attempts > TOTALATTEMPTS) {
 			setAttempts(0)
 		}
-		console.log('Main effect')
 	}, [attempts])
 
 	return (
