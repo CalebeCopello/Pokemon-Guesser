@@ -54,6 +54,10 @@ const MenuGeneration = ({ replaceUrl }) => {
 		getPokemonsGen()
 	}, [])
 
+	const handleGen = (n) => {
+		console.log(n)
+	}
+
 	return (
 		<>
 			<div className='guesser-menu-right'>
@@ -61,8 +65,8 @@ const MenuGeneration = ({ replaceUrl }) => {
 					<div className='guesser-menu-gen-title'>Geração</div>
 					{DIVSGENEX.map((i) => (
 						<div key={i} className='guesser-menu-gen'>
-							<div className='guesser-menu-gen-i-text'>{i+1}</div>
-							<div className='guesser-menu-gen-i-starters'>
+							<div className='guesser-menu-gen-text' onClick={() => handleGen(i)}>{i+1}</div>
+							<div className='guesser-menu-gen-starters'>
 								<img
 									src={pokemonsGenExData[i]?.[0]?.sprites.front_default}
 									alt={pokemonsGenExData[i]?.[0]?.name}
