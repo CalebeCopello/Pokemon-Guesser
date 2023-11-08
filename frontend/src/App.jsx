@@ -251,38 +251,38 @@ function App() {
 
 	return (
 		<>
-		<div className="app-container">
-			<nav>
-				<MenuPokedex
-					startGame={startGame}
-					attempts={attempts}
-					DIVSATTEMPTS={DIVSATTEMPTS}
-					showPokemonAnswers={showPokemonAnswers}
-					switchPokemonColors={switchPokemonColors}
-					pokemonSpecies={pokemonSpecies}
-					score={score}
-					pokemonAnswers={pokemonAnswers}
-					replaceUrl={replaceUrl}
-				/>
-			</nav>
-			<main>
-				<section>
-					<Guesser
-						counter={counter}
-						DIVSATTEMPTS={DIVSATTEMPTS}
-						score={score}
-						pokemonsData={pokemonsData}
-						correctPokemonNr={correctPokemonNr}
-						pokemonsNr={pokemonsNr}
+			<div className='app-container'>
+				<nav>
+					<MenuPokedex
+						startGame={startGame}
 						attempts={attempts}
-						tryAttempt={tryAttempt}
-						capitalize={capitalize}
+						DIVSATTEMPTS={DIVSATTEMPTS}
+						showPokemonAnswers={showPokemonAnswers}
+						switchPokemonColors={switchPokemonColors}
+						pokemonSpecies={pokemonSpecies}
+						score={score}
+						pokemonAnswers={pokemonAnswers}
 						replaceUrl={replaceUrl}
 					/>
-				</section>
-			</main>
-			<aside>
-				{/* {showMenuGen ? (
+				</nav>
+				<main>
+					<section>
+						<Guesser
+							counter={counter}
+							DIVSATTEMPTS={DIVSATTEMPTS}
+							score={score}
+							pokemonsData={pokemonsData}
+							correctPokemonNr={correctPokemonNr}
+							pokemonsNr={pokemonsNr}
+							attempts={attempts}
+							tryAttempt={tryAttempt}
+							capitalize={capitalize}
+							replaceUrl={replaceUrl}
+						/>
+					</section>
+				</main>
+				<aside>
+					{/* {showMenuGen ? (
 					<div>
 						<button onClick={() => setShowMenuGen(false)}>Hide</button>
 						<MenuGeneration pokemonsGenExData={pokemonsGenExData} />
@@ -290,9 +290,12 @@ function App() {
 				) : (
 					<button onClick={() => setShowMenuGen(true)}>Show</button>
 				)} */}
-				<MenuGeneration replaceUrl={replaceUrl} />
-			</aside>
-		</div>
+					<MenuGeneration
+						replaceUrl={replaceUrl}
+						setPokemonGen={setPokemonGen}
+					/>
+				</aside>
+			</div>
 		</>
 	)
 }

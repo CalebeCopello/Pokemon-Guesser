@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react'
 import './MenuGeneration.css'
 
-const MenuGeneration = ({ replaceUrl }) => {
+const MenuGeneration = ({ replaceUrl, setPokemonGen }) => {
 	const [pokemonsGenEx] = useState(() => {
 		return [
 			[1, 4, 7],
@@ -55,7 +55,39 @@ const MenuGeneration = ({ replaceUrl }) => {
 	}, [])
 
 	const handleGen = (n) => {
-		console.log(n)
+		let gen = ''
+		switch (n) {
+			case 0:
+				gen = 151
+				break;
+			case 1:
+				gen = 251
+				break;
+			case 2:
+				gen = 386
+				break;
+			case 3:
+				gen = 493
+				break;
+			case 4:
+				gen = 649
+				break;
+			case 5:
+				gen = 721
+				break;
+			case 6:
+				gen = 809
+				break;
+			case 7:
+				gen = 905
+				break;
+			case 8:
+				gen = 1021
+				break;
+			default:
+				break;
+		}
+		setPokemonGen(() => gen)
 	}
 
 	return (
