@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import pokedex from '/pokedex-300x300.png'
 import { CgPokemon } from 'react-icons/cg'
 
-const MenuPokedex = ({startGame, attempts, DIVSATTEMPTS, showPokemonAnswers, switchPokemonColors, pokemonSpecies, score, pokemonAnswers}) => {
+const MenuPokedex = ({startGame, attempts, DIVSATTEMPTS, showPokemonAnswers, switchPokemonColors, pokemonSpecies, score, pokemonAnswers, replaceUrl}) => {
 	return (
 		<>
 			<div className='guesser-menu-right'>
@@ -50,7 +50,7 @@ const MenuPokedex = ({startGame, attempts, DIVSATTEMPTS, showPokemonAnswers, swi
 								<div className='guesser-menu-pokemons-answer-front'>
 									{showPokemonAnswers[i] ? (
 										<img
-											src={pokemonAnswers[i]?.sprites.front_default}
+											src={replaceUrl(pokemonAnswers[i]?.sprites.front_default)}
 											alt={pokemonAnswers[i]?.name}
 										/>
 									) : (
@@ -60,7 +60,7 @@ const MenuPokedex = ({startGame, attempts, DIVSATTEMPTS, showPokemonAnswers, swi
 								<div className='guesser-menu-pokemons-answer-back'>
 									{showPokemonAnswers[i] ? (
 										<img
-											src={pokemonAnswers[i]?.sprites.back_default}
+											src={replaceUrl(pokemonAnswers[i]?.sprites.back_default)}
 											alt={pokemonAnswers[i]?.name}
 										/>
 									) : (

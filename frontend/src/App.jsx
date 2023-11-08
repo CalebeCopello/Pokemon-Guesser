@@ -47,7 +47,6 @@ function App() {
 		return 151
 	})
 
-
 	/* CONSTANTS */
 	const TIMERTOTAL = 7
 	const TOTALATTEMPTS = 6
@@ -127,6 +126,11 @@ function App() {
 			default:
 				return 'var(--pokeBlack)'
 		}
+	}
+
+	const replaceUrl = (url) => {
+		const modifiedUrl = url.replace(/(https:\/\/raw\.githubusercontent\.com\/PokeAPI\/sprites\/master\/)(https:\/\/raw\.githubusercontent\.com\/PokeAPI\/sprites\/master\/)/, '$1')
+		return modifiedUrl
 	}
 
 	/* React Effects */
@@ -214,6 +218,10 @@ function App() {
 						)
 						if (response.ok) {
 							const responseJson = await response.json()
+							//BUG: checking the issue with double url from API
+							console.log(
+								responseJson.sprites?.other['official-artwork'].front_default
+							)
 							randomPokemonsObject[i] = responseJson
 							i++
 						}
@@ -236,16 +244,35 @@ function App() {
 	return (
 		<>
 			<nav>
-				<MenuPokedex startGame={startGame} attempts={attempts} DIVSATTEMPTS={DIVSATTEMPTS} showPokemonAnswers={showPokemonAnswers} switchPokemonColors={switchPokemonColors} pokemonSpecies={pokemonSpecies} score={score} pokemonAnswers={pokemonAnswers}/>
+				<MenuPokedex
+					startGame={startGame}
+					attempts={attempts}
+					DIVSATTEMPTS={DIVSATTEMPTS}
+					showPokemonAnswers={showPokemonAnswers}
+					switchPokemonColors={switchPokemonColors}
+					pokemonSpecies={pokemonSpecies}
+					score={score}
+					pokemonAnswers={pokemonAnswers}
+					replaceUrl={replaceUrl}
+				/>
 			</nav>
 			<main>
 				<section>
-					<Guesser counter={counter} DIVSATTEMPTS={DIVSATTEMPTS} score={score} pokemonsData={pokemonsData} correctPokemonNr={correctPokemonNr} pokemonsNr={pokemonsNr} attempts={attempts} tryAttempt={tryAttempt} capitalize={capitalize}/>
+					<Guesser
+						counter={counter}
+						DIVSATTEMPTS={DIVSATTEMPTS}
+						score={score}
+						pokemonsData={pokemonsData}
+						correctPokemonNr={correctPokemonNr}
+						pokemonsNr={pokemonsNr}
+						attempts={attempts}
+						tryAttempt={tryAttempt}
+						capitalize={capitalize}
+						replaceUrl={replaceUrl}
+					/>
 				</section>
 			</main>
-			<aside>
-				{/* <MenuGeneration/> */}
-			</aside>
+			<aside>{/* <MenuGeneration/> */}</aside>
 		</>
 	)
 }

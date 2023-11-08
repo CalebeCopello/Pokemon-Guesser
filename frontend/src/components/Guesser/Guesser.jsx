@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import { CgPokemon } from 'react-icons/cg'
 
 
-const Guesser = ({counter, DIVSATTEMPTS, score, pokemonsData, correctPokemonNr, pokemonsNr, attempts, tryAttempt, capitalize}) => {
+const Guesser = ({counter, DIVSATTEMPTS, score, pokemonsData, correctPokemonNr, pokemonsNr, attempts, tryAttempt, capitalize, replaceUrl}) => {
 
 	return (
 		<>
@@ -36,11 +36,7 @@ const Guesser = ({counter, DIVSATTEMPTS, score, pokemonsData, correctPokemonNr, 
 						<div className='guesser-pokemon-card-img'>
 							{pokemonsData[correctPokemonNr] ? (
 								<img
-									src={
-										pokemonsData[correctPokemonNr].sprites?.other[
-											'official-artwork'
-										].front_default
-									}
+									src={replaceUrl(pokemonsData[correctPokemonNr].sprites?.other['official-artwork'].front_default)}
 									alt=''
 								/>
 							) : (
