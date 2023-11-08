@@ -47,42 +47,7 @@ function App() {
 		return 151
 	})
 
-	const [pokemonsGenEx, setPokemonsGenEx] = useState(() => {
-		return [
-			[1, 4, 7],
-			[152, 155, 158],
-			[252, 255, 258],
-			[387, 390, 393],
-			[495, 498, 501],
-			[650, 653, 656],
-			[722, 725, 728],
-			[810, 813, 816],
-			[906, 909, 912],
-		]
-	})
-	const [pokemonsGenExData, setPokemonsGenExData] = useState(() => {
-		const buffer = {}
-		for (let i = 0; i < pokemonsGenEx.length; i++) {
-			buffer[i] = { ...buffer[i] }
-			for (let j = 0; j < pokemonsGenEx[i].length; j++) {
-				const getExPokemonByNr = async () => {
-					try {
-						const responseEx = await fetch(
-							`https://pokeapi.co/api/v2/pokemon/${pokemonsGenEx[i][j]}`
-						)
-						if (responseEx.ok) {
-							const responseExJson = await responseEx.json()
-							buffer[i][j] = responseExJson
-						}
-					} catch (error) {
-						console.log(error)
-					}
-				}
-				getExPokemonByNr()
-			}
-		}
-		return buffer
-	})
+
 	/*** Showing Components ***/
 	const [showMenuGen, setShowMenuGen] = useState(() => {
 		return false
@@ -317,14 +282,15 @@ function App() {
 				</section>
 			</main>
 			<aside>
-				{showMenuGen ? (
+				{/* {showMenuGen ? (
 					<div>
 						<button onClick={() => setShowMenuGen(false)}>Hide</button>
 						<MenuGeneration pokemonsGenExData={pokemonsGenExData} />
 					</div>
 				) : (
 					<button onClick={() => setShowMenuGen(true)}>Show</button>
-				)}
+				)} */}
+				<MenuGeneration />
 			</aside>
 		</>
 	)

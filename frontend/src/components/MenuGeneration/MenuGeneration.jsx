@@ -1,8 +1,48 @@
 'use strict'
 import { useState, useEffect } from 'react'
 
-const MenuGeneration = ({pokemonsGenExData}) => {
+const MenuGeneration = () => {
+	const [pokemonsGenEx] = useState(() => {
+		return [
+			[1, 4, 7],
+			[152, 155, 158],
+			[252, 255, 258],
+			[387, 390, 393],
+			[495, 498, 501],
+			[650, 653, 656],
+			[722, 725, 728],
+			[810, 813, 816],
+			[906, 909, 912],
+		]
+	})
+	const [pokemonsGenExData, setPokemonsGenExData] = useState(() => {
+	return	{}
+	})
 
+	useEffect(() => {
+		const getPokemonsGen = async () => {
+			const buffer = {}
+			for (let i = 0; i < pokemonsGenEx.length; i++) {
+				buffer[i] = { ...buffer[i] }
+				for (let j = 0; j < pokemonsGenEx[i].length; j++) {
+					try {
+						const responseEx = await fetch(
+							`https://pokeapi.co/api/v2/pokemon/${pokemonsGenEx[i][j]}`
+						)
+						if (responseEx.ok) {
+							const responseExJson = await responseEx.json()
+							buffer[i][j] = responseExJson
+						}
+					} catch (error) {
+						console.log(error)
+					}
+				}
+			}
+			setPokemonsGenExData(buffer)
+		}
+
+		getPokemonsGen()
+	}, [])
 
 	return (
 		<>
