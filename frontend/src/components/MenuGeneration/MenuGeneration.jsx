@@ -1,7 +1,8 @@
 'use strict'
 import { useState, useEffect } from 'react'
+import './MenuGeneration.css'
 
-const MenuGeneration = () => {
+const MenuGeneration = ({ replaceUrl }) => {
 	const [pokemonsGenEx] = useState(() => {
 		return [
 			[1, 4, 7],
@@ -16,8 +17,17 @@ const MenuGeneration = () => {
 		]
 	})
 	const [pokemonsGenExData, setPokemonsGenExData] = useState(() => {
-	return	{}
+		return {}
 	})
+
+	const TOTALAGEN = pokemonsGenEx.length
+	const DIVSGENEX = []
+	const fulfilDivsGen = (n) => {
+		for (let i = 0; i < n; i++) {
+			DIVSGENEX.push(i)
+		}
+	}
+	fulfilDivsGen(TOTALAGEN)
 
 	useEffect(() => {
 		const getPokemonsGen = async () => {
@@ -46,17 +56,28 @@ const MenuGeneration = () => {
 
 	return (
 		<>
-			<div className='guesser-menu-left'>
+			<div className='guesser-menu-right'>
 				<div className='guesser-menu-gen-container'>
 					<div className='guesser-menu-gen-title'>Geração</div>
-					<div className='guesser-menu-gen-i'>
-						<div className='guesser-menu-gen-i-text'>I</div>
-					</div>
-					<div className='guesser-menu-gen-i-starters'>
-						{pokemonsGenExData[0]?.[0]?.name}
-						{pokemonsGenExData[0]?.[1]?.name}
-						{pokemonsGenExData[0]?.[2]?.name}
-					</div>
+					{DIVSGENEX.map((i) => (
+						<div key={i} className='guesser-menu-gen'>
+							<div className='guesser-menu-gen-i-text'>{i+1}</div>
+							<div className='guesser-menu-gen-i-starters'>
+								<img
+									src={pokemonsGenExData[i]?.[0]?.sprites.front_default}
+									alt={pokemonsGenExData[i]?.[0]?.name}
+								/>
+								<img
+									src={pokemonsGenExData[i]?.[1]?.sprites.front_default}
+									alt={pokemonsGenExData[i]?.[1]?.name}
+								/>
+								<img
+									src={pokemonsGenExData[i]?.[2]?.sprites.front_default}
+									alt={pokemonsGenExData[i]?.[2]?.name}
+								/>
+							</div>
+						</div>
+					))}
 				</div>
 			</div>
 		</>

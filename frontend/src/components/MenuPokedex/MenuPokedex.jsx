@@ -2,11 +2,12 @@
 import { useState, useEffect } from 'react'
 import pokedex from '/pokedex-300x300.png'
 import { CgPokemon } from 'react-icons/cg'
+import './MenuPokedex.css'
 
 const MenuPokedex = ({startGame, attempts, DIVSATTEMPTS, showPokemonAnswers, switchPokemonColors, pokemonSpecies, score, pokemonAnswers, replaceUrl}) => {
 	return (
 		<>
-			<div className='guesser-menu-right'>
+			<div className='guesser-menu-left'>
 				<div className='guesser-menu-container'>
 					<div className='guesser-menu-start-container'>
 						<button

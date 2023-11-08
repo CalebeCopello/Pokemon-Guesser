@@ -1,0 +1,30 @@
+.guesser-menu-right {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	height: 40rem;
+	width: 7rem;
+	margin-top: 3rem;
+	background-color: var(--fg0);
+	border-color: var(--bg0);
+	border-style: solid;
+	border-width: 3px 3px 3px 0px;
+	border-radius: 0 1rem 1rem 0;
+	box-shadow: var(--shadow);
+}
+.guesser-menu-gen-title {
+	text-align: center;
+	font-family: PokemonSolid;
+	font-size: 1rem;
+	letter-spacing: 3px;
+	color: var(--yellow1);
+	text-shadow: 1px 2px 0 var(--blue0);
+	margin-top: 1rem;
+}
+.guesser-menu-gen-i {
+	display: flex;
+	align-items: center;
+}
+.guesser-menu-gen-i-starters {
+	color: black;
+}

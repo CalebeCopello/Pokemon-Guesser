@@ -47,7 +47,6 @@ function App() {
 		return 151
 	})
 
-
 	/*** Showing Components ***/
 	const [showMenuGen, setShowMenuGen] = useState(() => {
 		return false
@@ -252,6 +251,7 @@ function App() {
 
 	return (
 		<>
+		<div className="app-container">
 			<nav>
 				<MenuPokedex
 					startGame={startGame}
@@ -290,8 +290,9 @@ function App() {
 				) : (
 					<button onClick={() => setShowMenuGen(true)}>Show</button>
 				)} */}
-				<MenuGeneration />
+				<MenuGeneration replaceUrl={replaceUrl} />
 			</aside>
+		</div>
 		</>
 	)
 }

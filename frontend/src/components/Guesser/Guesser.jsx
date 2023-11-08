@@ -1,6 +1,7 @@
 'use strict'
 import { useState, useEffect } from 'react'
 import { CgPokemon } from 'react-icons/cg'
+import './Guesser.css'
 
 
 const Guesser = ({counter, DIVSATTEMPTS, score, pokemonsData, correctPokemonNr, pokemonsNr, attempts, tryAttempt, capitalize, replaceUrl}) => {

@@ -1,0 +1,125 @@
+.guesser-container {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	background-color: var(--bg0);
+	color: var(--fg0);
+	text-align: center;
+	height: 47rem;
+	width: 50rem;
+	border-radius: 1rem;
+	align-items: center;
+	box-shadow: var(--shadow);
+}
+.guesser-container-bg-top {
+	position: absolute;
+	background-color: var(--red0);
+	height: 45%;
+	width: 94%;
+	top: 3%;
+	border-radius: 3rem 3rem 0 0;
+}
+.pokemon-question {
+	position: absolute;
+	right: 20%;
+	bottom: 5%;
+	font-family: PokemonSolid;
+	font-size: 7rem;
+	color: var(--yellow1);
+	text-shadow: 5px 9px 0 var(--blue0);
+
+	user-select: none;
+}
+.guesser-container-bg-bottom {
+	position: absolute;
+	background-color: rgb(244, 242, 242);
+	height: 45%;
+	width: 94%;
+	bottom: 3%;
+	border-radius: 0 0 3rem 3rem;
+}
+.pokemon-text {
+	position: absolute;
+	right: 5%;
+	top: 5%;
+	font-family: PokemonSolid;
+	font-size: 3rem;
+	color: var(--yellow1);
+	text-shadow: 5px 9px 0 var(--blue0);
+	letter-spacing: 7px;
+	user-select: none;
+}
+.guesser-pokemon-card {
+	position: absolute;
+	height: 37rem;
+	width: 25rem;
+	top: 50%;
+	-ms-transform: translateY(-50%);
+	transform: translateY(-50%);
+	left: 7%;
+	background-color: var(--fg0);
+	border: 3px solid var(--bg0);
+	border-radius: 0.5rem;
+	box-shadow: var(--shadow);
+}
+.guesser-pokemon-card-top {
+	text-align: right;
+	color: var(--bg0);
+	margin: 0.5rem 1rem 1rem 1rem;
+}
+.guesser-pokemon-card-top span {
+	display: block;
+}
+.guesser-pokemon-card-left {
+	display: flex;
+	flex-direction: row;
+	position: absolute;
+	right: 1rem;
+}
+.guesser-pokemon-card-left div {
+	/* display: none; */
+	font-size: 1.5rem;
+}
+.guesser-pokemon-card-img {
+	margin: 2rem auto 0.5rem;
+	display: flex;
+	height: 23rem;
+	width: 21rem;
+	background-color: rgb(244, 242, 242);
+	border: 3px solid var(--bg0);
+	border-radius: 0.5rem;
+	box-shadow: var(--shadow);
+	color: var(--bg0);
+	font-size: 15rem;
+}
+.guesser-pokemon-card-img-loader {
+	animation: rotate-center 1s linear infinite both;
+	display: flex;
+	height: 23rem;
+	width: 21rem;
+	justify-content: center;
+	align-items: center;
+}
+@keyframes rotate-center {
+	0% {
+		transform: rotate(0);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+.guesser-pokemon-card-img img {
+	height: 23rem;
+	width: 21rem;
+	filter: brightness(0);
+}
+.guesser-pokemon-card-btn {
+	display: flex;
+	flex-direction: column;
+	margin: 0 auto;
+	height: 3rem;
+	width: 21rem;
+}
+.guesser-pokemon-card-btn button {
+	margin-top: 0.5rem;
+}
