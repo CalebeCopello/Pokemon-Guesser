@@ -52,7 +52,7 @@ const Guesser = ({counter, DIVSATTEMPTS, score, pokemonsData, correctPokemonNr, 
 									key={i}
 									className='btn'
 									onClick={() => tryAttempt(pokemonsData[i].id)}
-									disabled={attempts === 0}
+									disabled={!pokemonsData[i] || attempts === 0}
 								>
 									{pokemonsData[i]
 										? capitalize(pokemonsData[i]?.species.name)
