@@ -39,7 +39,7 @@ const MenuPokedex = ({startGame, attempts, DIVSATTEMPTS, showPokemonAnswers, swi
 										? switchPokemonColors(pokemonSpecies[i]?.color.name)
 										: '',
 								}}
-								title={showPokemonAnswers[i] ? (capitalize(pokemonAnswers[i]?.name)) : 'Não definido'}
+								title={showPokemonAnswers[i] ? (capitalize(pokemonAnswers[i]?.species.name)) : 'Não definido'}
 							>
 								<div
 									className='guesser-menu-pokemons-answer-score'
@@ -54,7 +54,7 @@ const MenuPokedex = ({startGame, attempts, DIVSATTEMPTS, showPokemonAnswers, swi
 									{showPokemonAnswers[i] ? (
 										<img
 											src={replaceUrl(pokemonAnswers[i]?.sprites.front_default)}
-											alt={pokemonAnswers[i]?.name}
+											alt={pokemonAnswers[i]?.species.name}
 										/>
 									) : (
 										'?'
@@ -64,7 +64,7 @@ const MenuPokedex = ({startGame, attempts, DIVSATTEMPTS, showPokemonAnswers, swi
 									{showPokemonAnswers[i] ? (
 										<img
 											src={replaceUrl(pokemonAnswers[i]?.sprites.back_default)}
-											alt={pokemonAnswers[i]?.name}
+											alt={pokemonAnswers[i]?.species.name}
 										/>
 									) : (
 										'?'

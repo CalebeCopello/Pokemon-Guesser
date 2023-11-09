@@ -53,7 +53,7 @@ function App() {
 	})
 
 	/* CONSTANTS */
-	const TIMERTOTAL = 7
+	const TIMERTOTAL = 10
 	const TOTALATTEMPTS = 6
 	const DIVSATTEMPTS = []
 	const fulfilDivsAttempts = (n) => {
@@ -70,6 +70,9 @@ function App() {
 	}
 	const capitalize = (string) => {
 		if (string.length > 1) {
+			string = string.replace(/-/g, ' ')
+			string = string.replace(/\bf\b/g, 'Fêmea')
+			string = string.replace(/\bm\b/g, 'Macho')
 			return string.charAt(0).toUpperCase() + string.slice(1)
 		} else {
 			return string.toUpperCase()
@@ -231,9 +234,9 @@ function App() {
 						if (response.ok) {
 							const responseJson = await response.json()
 							//BUG: checking the issue with double url from API
-							console.log(
-								responseJson.sprites?.other['official-artwork'].front_default
-							)
+							// console.log(
+							// 	responseJson.sprites?.other['official-artwork'].front_default
+							// )
 							randomPokemonsObject[i] = responseJson
 							i++
 						}

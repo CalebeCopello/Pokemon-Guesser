@@ -55,7 +55,7 @@ const Guesser = ({counter, DIVSATTEMPTS, score, pokemonsData, correctPokemonNr, 
 									disabled={attempts === 0}
 								>
 									{pokemonsData[i]
-										? capitalize(pokemonsData[i]?.name)
+										? capitalize(pokemonsData[i]?.species.name)
 										: `Opção ${i}`}
 								</button>
 							))}
