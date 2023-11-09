@@ -146,6 +146,7 @@ function App() {
 
 	const replaceUrl = (url) => {
 		if (url) {
+			console.log('url problem')
 		const modifiedUrl = url.replace(
 			/(https:\/\/raw\.githubusercontent\.com\/PokeAPI\/sprites\/master\/)(https:\/\/raw\.githubusercontent\.com\/PokeAPI\/sprites\/master\/)/,
 			'$1'

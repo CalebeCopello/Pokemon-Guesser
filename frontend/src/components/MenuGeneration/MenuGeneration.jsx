@@ -79,7 +79,7 @@ const MenuGeneration = ({ replaceUrl, setPokemonGen }) => {
 				gen = 386
 				break
 			case 3:
-				gen = 493
+				gen = 494
 				break
 			case 4:
 				gen = 649
@@ -94,7 +94,7 @@ const MenuGeneration = ({ replaceUrl, setPokemonGen }) => {
 				gen = 905
 				break
 			case 8:
-				gen = 1021
+				gen = 1017
 				break
 			default:
 				break
