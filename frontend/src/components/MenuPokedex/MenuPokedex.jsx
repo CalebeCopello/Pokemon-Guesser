@@ -4,7 +4,7 @@ import pokedex from '/pokedex-300x300.png'
 import { CgPokemon } from 'react-icons/cg'
 import './MenuPokedex.css'
 
-const MenuPokedex = ({startGame, attempts, DIVSATTEMPTS, showPokemonAnswers, switchPokemonColors, pokemonSpecies, score, pokemonAnswers, replaceUrl}) => {
+const MenuPokedex = ({startGame, attempts, DIVSATTEMPTS, showPokemonAnswers, switchPokemonColors, pokemonSpecies, score, pokemonAnswers, replaceUrl, capitalize}) => {
 	return (
 		<>
 			<div className='guesser-menu-left'>
@@ -14,6 +14,7 @@ const MenuPokedex = ({startGame, attempts, DIVSATTEMPTS, showPokemonAnswers, swi
 							className='btn'
 							disabled={attempts > 0}
 							onClick={startGame}
+							title='Começar Jogo'
 						>
 							Começar o Jogo
 						</button>
@@ -38,6 +39,7 @@ const MenuPokedex = ({startGame, attempts, DIVSATTEMPTS, showPokemonAnswers, swi
 										? switchPokemonColors(pokemonSpecies[i]?.color.name)
 										: '',
 								}}
+								title={showPokemonAnswers[i] ? (capitalize(pokemonAnswers[i]?.name)) : 'Não definido'}
 							>
 								<div
 									className='guesser-menu-pokemons-answer-score'

@@ -34,11 +34,12 @@
 	font-size: 1rem;
 }
 .guesser-menu-gen-text {
-	margin: -0.2rem 0.7rem 0 0.3rem;
+	font-size: 0.8rem;
+	margin: -0.2rem 0.5rem 0 0.2rem;
 	text-align: center;
 	cursor: pointer;
 	padding: 0.3rem 0;
-	width: 2rem;
+	width: 2.3rem;
 	border: 3px solid var(--bg0);
 	user-select: none;
 }

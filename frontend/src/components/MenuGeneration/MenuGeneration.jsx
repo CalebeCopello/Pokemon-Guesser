@@ -3,6 +3,8 @@ import { useState, useEffect } from 'react'
 import './MenuGeneration.css'
 
 const MenuGeneration = ({ replaceUrl, setPokemonGen }) => {
+	const [pokeGen, setPokeGen] = useState(0)
+
 	const [pokemonsGenEx] = useState(() => {
 		return [
 			[1, 4, 7],
@@ -56,38 +58,59 @@ const MenuGeneration = ({ replaceUrl, setPokemonGen }) => {
 
 	const handleGen = (n) => {
 		let gen = ''
+		setPokeGen(() => n)
 		switch (n) {
 			case 0:
 				gen = 151
-				break;
+				break
 			case 1:
 				gen = 251
-				break;
+				break
 			case 2:
 				gen = 386
-				break;
+				break
 			case 3:
 				gen = 493
-				break;
+				break
 			case 4:
 				gen = 649
-				break;
+				break
 			case 5:
 				gen = 721
-				break;
+				break
 			case 6:
 				gen = 809
-				break;
+				break
 			case 7:
 				gen = 905
-				break;
+				break
 			case 8:
 				gen = 1021
-				break;
+				break
 			default:
-				break;
+				break
 		}
 		setPokemonGen(() => gen)
+	}
+
+	const toRoman = (n) => {
+		let roman = {
+			L: 50,
+			XL: 40,
+			X: 10,
+			IX: 9,
+			V: 5,
+			IV: 4,
+			I: 1,
+		}
+		let res = ''
+		for (let p in roman) {
+			while (n >= roman[p]) {
+				res += p
+				n -= roman[p]
+			}
+		}
+		return res
 	}
 
 	return (
@@ -96,8 +119,21 @@ const MenuGeneration = ({ replaceUrl, setPokemonGen }) => {
 				<div className='guesser-menu-gen-container'>
 					<div className='guesser-menu-gen-title'>GeN</div>
 					{DIVSGENEX.map((i) => (
-						<div key={i} className='guesser-menu-gen'>
-							<div className='btn guesser-menu-gen-text' onClick={() => handleGen(i)} style={{color: 'var(--yellow1)'}}>{i+1}</div>
+						<div
+							key={i}
+							className='guesser-menu-gen'
+						>
+							<div
+								className='btn guesser-menu-gen-text'
+								onClick={() => handleGen(i)}
+								style={{
+									color: 'var(--yellow1)',
+									backgroundColor: pokeGen >= i ? 'var(--bg0)' : '',
+								}}
+								title={`Escolher pokemons da ${i+1}º Geração`}
+							>
+								{toRoman(i + 1)}
+							</div>
 							<div className='guesser-menu-gen-starters'>
 								<img
 									src={pokemonsGenExData[i]?.[0]?.sprites.front_default}

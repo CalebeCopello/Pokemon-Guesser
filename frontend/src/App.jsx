@@ -134,11 +134,15 @@ function App() {
 	}
 
 	const replaceUrl = (url) => {
+		if (url) {
 		const modifiedUrl = url.replace(
 			/(https:\/\/raw\.githubusercontent\.com\/PokeAPI\/sprites\/master\/)(https:\/\/raw\.githubusercontent\.com\/PokeAPI\/sprites\/master\/)/,
 			'$1'
 		)
 		return modifiedUrl
+		} else {
+			return url
+		}
 	}
 
 	/* React Effects */
@@ -173,7 +177,7 @@ function App() {
 			setPokemonsNr(randomPokemonsArray)
 		}
 		genRandomPokemons()
-	}, [attempts])
+	}, [attempts, pokemonGen])
 
 	/** Effect to get an object with all pokemons answers **/
 	useEffect(() => {
@@ -263,6 +267,7 @@ function App() {
 						score={score}
 						pokemonAnswers={pokemonAnswers}
 						replaceUrl={replaceUrl}
+						capitalize={capitalize}
 					/>
 				</nav>
 				<main>
