@@ -46,9 +46,8 @@ function App() {
 	const [pokemonGen, setPokemonGen] = useState(() => {
 		const GEN = localStorage.getItem('pokemonGen')
 		if (GEN !== null) {
-		return parseInt(GEN,10)
-		}
-		else {
+			return parseInt(GEN, 10)
+		} else {
 			localStorage.setItem('pokemonGen', 151)
 			localStorage.setItem('genSet', 0)
 			return 151
@@ -56,6 +55,9 @@ function App() {
 	})
 
 	/*** Showing Components ***/
+	const [showMenuPokedex, setShowMenuPokedex] = useState(() => {
+		return true
+	})
 	const [showMenuGen, setShowMenuGen] = useState(() => {
 		return false
 	})
@@ -146,12 +148,14 @@ function App() {
 
 	const replaceUrl = (url) => {
 		if (url) {
-			console.log('url problem')
-		const modifiedUrl = url.replace(
-			/(https:\/\/raw\.githubusercontent\.com\/PokeAPI\/sprites\/master\/)(https:\/\/raw\.githubusercontent\.com\/PokeAPI\/sprites\/master\/)/,
-			'$1'
-		)
-		return modifiedUrl
+			const modifiedUrl = url.replace(
+				/(https:\/\/raw\.githubusercontent\.com\/PokeAPI\/sprites\/master\/)(https:\/\/raw\.githubusercontent\.com\/PokeAPI\/sprites\/master\/)/,
+				'$1'
+			)
+			if (url != modifiedUrl) {
+				console.log('url problem', url)
+			}
+			return modifiedUrl
 		} else {
 			return url
 		}
@@ -263,24 +267,30 @@ function App() {
 		if (attempts > TOTALATTEMPTS) {
 			setAttempts(0)
 		}
+		console.log('pokemonsData', pokemonsData)
+		console.log('correctPokemonNr', correctPokemonNr)
 	}, [attempts])
 
 	return (
 		<>
 			<div className='app-container'>
 				<nav>
-					<MenuPokedex
-						startGame={startGame}
-						attempts={attempts}
-						DIVSATTEMPTS={DIVSATTEMPTS}
-						showPokemonAnswers={showPokemonAnswers}
-						switchPokemonColors={switchPokemonColors}
-						pokemonSpecies={pokemonSpecies}
-						score={score}
-						pokemonAnswers={pokemonAnswers}
-						replaceUrl={replaceUrl}
-						capitalize={capitalize}
-					/>
+					{showMenuPokedex ? (
+						<MenuPokedex
+							startGame={startGame}
+							attempts={attempts}
+							DIVSATTEMPTS={DIVSATTEMPTS}
+							showPokemonAnswers={showPokemonAnswers}
+							switchPokemonColors={switchPokemonColors}
+							pokemonSpecies={pokemonSpecies}
+							score={score}
+							pokemonAnswers={pokemonAnswers}
+							replaceUrl={replaceUrl}
+							capitalize={capitalize}
+						/>
+					) : (
+						('')
+					)}
 				</nav>
 				<main>
 					<section>
@@ -295,22 +305,22 @@ function App() {
 							tryAttempt={tryAttempt}
 							capitalize={capitalize}
 							replaceUrl={replaceUrl}
+							showMenuPokedex={showMenuPokedex}
+							setShowMenuPokedex={setShowMenuPokedex}
+							showMenuGen={showMenuGen}
+							setShowMenuGen={setShowMenuGen}
 						/>
 					</section>
 				</main>
 				<aside>
-					{/* {showMenuGen ? (
-					<div>
-						<button onClick={() => setShowMenuGen(false)}>Hide</button>
-						<MenuGeneration pokemonsGenExData={pokemonsGenExData} />
-					</div>
-				) : (
-					<button onClick={() => setShowMenuGen(true)}>Show</button>
-				)} */}
+					{showMenuGen ? (
 					<MenuGeneration
 						replaceUrl={replaceUrl}
 						setPokemonGen={setPokemonGen}
 					/>
+				) : (
+					('')
+				)}
 				</aside>
 			</div>
 		</>

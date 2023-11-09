@@ -1,6 +1,7 @@
 'use strict'
 import { useState, useEffect } from 'react'
 import { CgPokemon } from 'react-icons/cg'
+import { RiArrowRightDoubleFill, RiArrowLeftDoubleFill } from 'react-icons/ri'
 import './Guesser.css'
 
 const Guesser = ({
@@ -14,10 +15,20 @@ const Guesser = ({
 	tryAttempt,
 	capitalize,
 	replaceUrl,
+	showMenuPokedex,
+	setShowMenuPokedex,
+	showMenuGen,
+	setShowMenuGen,
 }) => {
 	return (
 		<>
 			<div className='guesser-container'>
+				<div className='hide-button-menu-pokedex' onClick={() => setShowMenuPokedex(!showMenuPokedex)}>
+				{showMenuPokedex ? <RiArrowRightDoubleFill /> : <RiArrowLeftDoubleFill />}
+				</div>
+				<div className='hide-button-menu-gen' onClick={() => setShowMenuGen(!showMenuGen)}>
+				{showMenuGen ? <RiArrowLeftDoubleFill /> : <RiArrowRightDoubleFill />}
+				</div>
 				<div className='guesser-container-bg-top'>
 					<span className='pokemon-question'>?</span>
 				</div>
