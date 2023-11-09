@@ -160,12 +160,12 @@ function App() {
 
 	/** Effect to set the attempt timer **/
 	useEffect(() => {
-		if (attempts > 0 && attempts < TOTALATTEMPTS + 1) {
+		if (attempts > 0 && attempts < TOTALATTEMPTS + 1 && pokemonsData) {
 			const timer =
 				counter > 0 && setInterval(() => setCounter(counter - 1), 1000)
 			return () => clearInterval(timer)
 		}
-	}, [counter, attempts])
+	}, [counter, attempts, pokemonsData])
 
 	/*** Effect to set a wrong answer if timer is == 0 ***/
 	useEffect(() => {
