@@ -3,7 +3,16 @@ import { useState, useEffect } from 'react'
 import './MenuGeneration.css'
 
 const MenuGeneration = ({ replaceUrl, setPokemonGen }) => {
-	const [pokeGen, setPokeGen] = useState(0)
+	const [pokeGen, setPokeGen] = useState(() => {
+		const GEN = localStorage.getItem('genSet')
+		if (GEN !== null) {
+		return parseInt(GEN,10)
+		}
+		else {
+			localStorage.setItem('genSet', 0)
+			return 0
+		}
+	})
 
 	const [pokemonsGenEx] = useState(() => {
 		return [
@@ -90,6 +99,8 @@ const MenuGeneration = ({ replaceUrl, setPokemonGen }) => {
 			default:
 				break
 		}
+		localStorage.setItem('genSet', n)
+		localStorage.setItem('pokemonGen', gen)
 		setPokemonGen(() => gen)
 	}
 

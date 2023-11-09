@@ -44,7 +44,15 @@ function App() {
 	})
 	/*** Pokemons' generation data ***/
 	const [pokemonGen, setPokemonGen] = useState(() => {
-		return 151
+		const GEN = localStorage.getItem('pokemonGen')
+		if (GEN !== null) {
+		return parseInt(GEN,10)
+		}
+		else {
+			localStorage.setItem('pokemonGen', 151)
+			localStorage.setItem('genSet', 0)
+			return 151
+		}
 	})
 
 	/*** Showing Components ***/
