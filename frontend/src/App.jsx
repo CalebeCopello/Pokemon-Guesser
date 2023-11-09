@@ -1,6 +1,5 @@
 'use strict'
 import { useState, useEffect } from 'react'
-import { CgPokemon } from 'react-icons/cg'
 import Guesser from './components/Guesser/Guesser'
 import Pokedex from './components/Pokedex/Pokedex'
 import MenuPokedex from './components/MenuPokedex/MenuPokedex.jsx'
@@ -8,6 +7,7 @@ import MenuGeneration from './components/MenuGeneration/MenuGeneration.jsx'
 import './App.css'
 
 function App() {
+	//TODO: only set the timer when the data if fetched
 	/* React States */
 
 	/** Game manipulation State s**/
@@ -61,7 +61,7 @@ function App() {
 	})
 
 	/* CONSTANTS */
-	const TIMERTOTAL = 10
+	const TIMERTOTAL = 1
 	const TOTALATTEMPTS = 6
 	const DIVSATTEMPTS = []
 	const fulfilDivsAttempts = (n) => {
