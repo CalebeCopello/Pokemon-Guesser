@@ -111,7 +111,6 @@
 	--pokeGray: rgba(168, 153, 132, var(--pokeTransparency));
 	--pokeWhite: rgba(250, 249, 246, var(--pokeTransparency));
 }
-
 @font-face {
 	font-family: JetBrainsMono;
 	src: url(./assets/fonts/JetBrainsMono.ttf);
