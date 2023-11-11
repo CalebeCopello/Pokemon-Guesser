@@ -60,14 +60,14 @@ function App() {
 		return true
 	})
 	const [showMenuGen, setShowMenuGen] = useState(() => {
-		return false
+		return true
 	})
 	const [showPokedex, setShowPokedex] = useState(() => {
 		return false
 	})
 
 	/* CONSTANTS */
-	const TIMERTOTAL = 1
+	const TIMERTOTAL = 5
 	const TOTALATTEMPTS = 6
 	const DIVSATTEMPTS = []
 	const fulfilDivsAttempts = (n) => {
@@ -174,6 +174,7 @@ function App() {
 				counter > 0 && setInterval(() => setCounter(counter - 1), 1000)
 			return () => clearInterval(timer)
 		}
+		console.log(pokemonsData)
 	}, [counter, attempts, pokemonsData])
 
 	/*** Effect to set a wrong answer if timer is == 0 ***/
@@ -271,8 +272,6 @@ function App() {
 		if (attempts > TOTALATTEMPTS) {
 			setAttempts(0)
 		}
-		console.log('pokemonsData', pokemonsData)
-		console.log('correctPokemonNr', correctPokemonNr)
 	}, [attempts])
 
 	return (
