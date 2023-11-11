@@ -4,7 +4,20 @@ import pokedex from '/pokedex-300x300.png'
 import { CgPokemon } from 'react-icons/cg'
 import './MenuPokedex.css'
 
-const MenuPokedex = ({startGame, attempts, DIVSATTEMPTS, showPokemonAnswers, switchPokemonColors, pokemonSpecies, score, pokemonAnswers, replaceUrl, capitalize}) => {
+const MenuPokedex = ({
+	startGame,
+	attempts,
+	DIVSATTEMPTS,
+	showPokemonAnswers,
+	switchPokemonColors,
+	pokemonSpecies,
+	score,
+	pokemonAnswers,
+	replaceUrl,
+	capitalize,
+	showPokedex,
+	setShowPokedex,
+}) => {
 	return (
 		<>
 			<div className='guesser-menu-left'>
@@ -25,6 +38,7 @@ const MenuPokedex = ({startGame, attempts, DIVSATTEMPTS, showPokemonAnswers, swi
 								src={pokedex}
 								alt='pokedex'
 								title='Consultar Pokedex'
+								onClick={() => setShowPokedex(!showPokedex)}
 							/>
 						</button>
 					</div>
@@ -39,7 +53,11 @@ const MenuPokedex = ({startGame, attempts, DIVSATTEMPTS, showPokemonAnswers, swi
 										? switchPokemonColors(pokemonSpecies[i]?.color.name)
 										: '',
 								}}
-								title={showPokemonAnswers[i] ? (capitalize(pokemonAnswers[i]?.species.name)) : 'Não definido'}
+								title={
+									showPokemonAnswers[i]
+										? capitalize(pokemonAnswers[i]?.species.name)
+										: 'Não definido'
+								}
 							>
 								<div
 									className='guesser-menu-pokemons-answer-score'

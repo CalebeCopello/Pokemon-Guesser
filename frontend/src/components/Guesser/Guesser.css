@@ -11,30 +11,6 @@
 	align-items: center;
 	box-shadow: var(--shadow);
 }
-.hide-button-menu-pokedex,
-.hide-button-menu-gen {
-	position: absolute;
-	background-color: var(--bg0);
-	width: 1.6rem;
-	height: 1.5rem;
-	font-size: 1.5rem;
-	top: 1rem;
-	box-shadow: var(--shadow);
-}
-.hide-button-menu-pokedex {
-	left: 0.2rem;
-	border-radius: 1rem;
-}
-.hide-button-menu-gen {
-	right: 0.2rem;
-	border-radius: 1rem;
-}
-.hide-button-menu-pokedex:hover,
-.hide-button-menu-gen:hover {
-	transition: transform 0.05s;
-	transition: 0.3s;
-	color: var(--red0);
-}
 .guesser-container-bg-top {
 	position: absolute;
 	background-color: var(--red0);

@@ -5,7 +5,32 @@
   transform: translate(-50%, -50%);
   display: flex;
 }
-
+.hide-button-menu-pokedex,
+.hide-button-menu-gen {
+	position: absolute;
+	background-color: var(--bg0);
+  color: aliceblue;
+	width: 1.6rem;
+	height: 1.5rem;
+	font-size: 1.5rem;
+	top: 4rem;
+	box-shadow: var(--shadow);
+  z-index: 1;
+}
+.hide-button-menu-pokedex {
+  border-radius: 0.5rem 0 0 0.5rem;
+	left: -1.6rem;
+}
+.hide-button-menu-gen {
+  border-radius: 0 0.5rem 0.5rem 0;
+	right: -1.6rem;
+}
+.hide-button-menu-pokedex:hover,
+.hide-button-menu-gen:hover {
+	transition: transform 0.05s;
+	transition: 0.3s;
+	color: var(--red0);
+}
 .mono {
   font-family: JetBrainsMono;
 }

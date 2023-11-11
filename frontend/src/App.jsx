@@ -4,6 +4,7 @@ import Guesser from './components/Guesser/Guesser'
 import Pokedex from './components/Pokedex/Pokedex'
 import MenuPokedex from './components/MenuPokedex/MenuPokedex.jsx'
 import MenuGeneration from './components/MenuGeneration/MenuGeneration.jsx'
+import { RiArrowRightDoubleFill, RiArrowLeftDoubleFill } from 'react-icons/ri'
 import './App.css'
 
 function App() {
@@ -59,6 +60,9 @@ function App() {
 		return true
 	})
 	const [showMenuGen, setShowMenuGen] = useState(() => {
+		return false
+	})
+	const [showPokedex, setShowPokedex] = useState(() => {
 		return false
 	})
 
@@ -274,7 +278,17 @@ function App() {
 	return (
 		<>
 			<div className='app-container'>
-				<nav>
+				<section>
+					<div
+						className='hide-button-menu-pokedex'
+						onClick={() => setShowMenuPokedex(!showMenuPokedex)}
+					>
+						{showMenuPokedex ? (
+							<RiArrowRightDoubleFill />
+						) : (
+							<RiArrowLeftDoubleFill />
+						)}
+					</div>
 					{showMenuPokedex ? (
 						<MenuPokedex
 							startGame={startGame}
@@ -287,13 +301,17 @@ function App() {
 							pokemonAnswers={pokemonAnswers}
 							replaceUrl={replaceUrl}
 							capitalize={capitalize}
+							showPokedex={showPokedex}
+							setShowPokedex={setShowPokedex}
 						/>
 					) : (
-						('')
+						''
 					)}
-				</nav>
+				</section>
 				<main>
+					<div className='show-menu-container'></div>
 					<section>
+					{showPokedex ? (<Pokedex />) : (
 						<Guesser
 							counter={counter}
 							DIVSATTEMPTS={DIVSATTEMPTS}
@@ -310,17 +328,28 @@ function App() {
 							showMenuGen={showMenuGen}
 							setShowMenuGen={setShowMenuGen}
 						/>
+					) }
 					</section>
 				</main>
 				<aside>
+					<div
+						className='hide-button-menu-gen'
+						onClick={() => setShowMenuGen(!showMenuGen)}
+					>
+						{showMenuGen ? (
+							<RiArrowLeftDoubleFill />
+						) : (
+							<RiArrowRightDoubleFill />
+						)}
+					</div>
 					{showMenuGen ? (
-					<MenuGeneration
-						replaceUrl={replaceUrl}
-						setPokemonGen={setPokemonGen}
-					/>
-				) : (
-					('')
-				)}
+						<MenuGeneration
+							replaceUrl={replaceUrl}
+							setPokemonGen={setPokemonGen}
+						/>
+					) : (
+						''
+					)}
 				</aside>
 			</div>
 		</>
