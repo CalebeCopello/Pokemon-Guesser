@@ -6,9 +6,7 @@
 	width: 10rem;
 	margin-top: 3rem;
 	background-color: var(--fg0);
-	border-color: var(--bg0);
-	border-style: solid;
-	border-width: 3px 0 3px 3px;
+	border: 3px solid var(--bg0);
 	border-radius: 1rem 0 0 1rem;
 	box-shadow: var(--shadow);
 }

@@ -10,12 +10,12 @@ const Pokedex = () => {
 					<div className='pokedex-left-side-top'>
 						<div className='pokedex-left-side-top-svg-container'>
 							<svg
-								height='200'
-								width='378'
+								height='152'
+								width='381'
 								className='pokedex-left-side-top-svg'
 							>
 								<polyline
-									points='0,150 115,150 140,80 378,80'
+									points='0,150 115,150 140,80 381,80'
 									style={{ fill: 'none', stroke: 'black', strokeWidth: '3' }}
 								/>
 							</svg>
@@ -50,7 +50,24 @@ const Pokedex = () => {
 					</div>
 				</div>
 				<div className='pokedex-right-side'>
-					<div className='pokedex-right-side-top'></div>
+					<div className='pokedex-right-side-top'>
+						<div className='pokedex-right-side-top-svg-container'>
+							<svg
+								height='152'
+								width='370'
+								className='pokedex-right-side-top-svg'
+							>
+								<polyline
+									points='115,152 142,81 380,80 380,152'
+									style={{ fill: 'var(--red0)', stroke: 'black'}}
+								/>
+								<polyline
+									points='0,150 115,150 140,80 378,80'
+									style={{ fill: 'none', stroke: 'black', strokeWidth: '3' }}
+								/>
+							</svg>
+						</div>
+					</div>
 					<div className='pokedex-right-side-mid'></div>
 					<div className='pokedex-right-side-bottom'></div>
 				</div>
