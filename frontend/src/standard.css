@@ -97,6 +97,7 @@
 
 	/* Other configs */
 	--shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
+	--smallShadow: 	 3px 2px 1px rgba(0, 0, 0, 0.2);
 
 	/* Pokemon colors */
 	--pokeTransparency: 0.8;

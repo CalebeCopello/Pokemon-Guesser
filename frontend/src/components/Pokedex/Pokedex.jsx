@@ -1,6 +1,6 @@
 'use strict'
 import { useState, useEffect } from 'react'
-import { HiBars4 } from "react-icons/hi2";
+import { HiBars4 } from 'react-icons/hi2'
 import './Pokedex.css'
 
 const Pokedex = () => {
@@ -50,16 +50,37 @@ const Pokedex = () => {
 								<div className='pokedex-left-side-mid-screen-display'></div>
 							</div>
 							<div className='pokedex-left-side-mid-screen-bottom'>
-								<div className="pokedex-left-side-mid-screen-bottom-container">
-									<div className="pokedex-left-side-mid-screen-bottom-button"></div>
-									<div className="pokedex-left-side-mid-screen-bottom-speaker">
+								<div className='pokedex-left-side-mid-screen-bottom-container'>
+									<div className='pokedex-left-side-mid-screen-bottom-button'></div>
+									<div className='pokedex-left-side-mid-screen-bottom-speaker'>
 										<HiBars4 />
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-					<div className='pokedex-left-side-bottom'></div>
+					<div className='pokedex-left-side-bottom'>
+						<div className='pokedex-left-side-bottom-confirm-button-container'>
+							<div className='pokedex-left-side-bottom-confirm-button'></div>
+						</div>
+						<div className='pokedex-left-side-bottom-mid-buttons-container'>
+							<div className='pokedex-left-side-bottom-mid-buttons-top'>
+								<div className='pokedex-left-side-bottom-mid-buttons-top-leftbtn'></div>
+								<div className='pokedex-left-side-bottom-mid-buttons-top-rightbtn'></div>
+							</div>
+							<div className='pokedex-left-side-bottom-mid-buttons-bottom'>
+								<div className='pokedex-left-side-bottom-mid-buttons-bottom-btn'></div>
+							</div>
+						</div>
+						<div className='pokedex-left-side-bottom-dpad-container'>
+							<div className='pokedex-left-side-bottom-dpad-mid'></div>
+							<div className='pokedex-left-side-bottom-dpad-xaxis-left'></div>
+							<div className='pokedex-left-side-bottom-dpad-xaxis-right'></div>
+							<div className='pokedex-left-side-bottom-dpad-yaxis-top'></div>
+							<div className='pokedex-left-side-bottom-dpad-yaxis-bot'></div>
+							<div className='pokedex-left-side-bottom-dpad-mid-circle'></div>
+						</div>
+					</div>
 				</div>
 				<div className='pokedex-mid-section'>
 					<div className='pokedex-mid-section-top'>
