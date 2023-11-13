@@ -4,6 +4,14 @@ import { HiBars4 } from 'react-icons/hi2'
 import './Pokedex.css'
 
 const Pokedex = () => {
+	const TOTALBUTTONS = 10
+	const DIVSBUTTONS = []
+	const fulfillButtons = (n) => {
+		for (let i = 0; i < n; i++) {
+			DIVSBUTTONS.push(i)
+		}
+	}
+	fulfillButtons(TOTALBUTTONS)
 	return (
 		<>
 			<div className='pokedex-container'>
@@ -110,8 +118,31 @@ const Pokedex = () => {
 							</svg>
 						</div>
 					</div>
-					<div className='pokedex-right-side-mid'></div>
-					<div className='pokedex-right-side-bottom'></div>
+					<div className='pokedex-right-side-mid'>
+						<div className='pokedex-right-side-mid-container'>
+							<div className='pokedex-right-side-mid-display'></div>
+							<div className='pokedex-right-side-mid-buttons-container'>
+								{DIVSBUTTONS.map((i) => (
+									<div
+										key={i}
+										className='pokedex-right-side-mid-buttons'
+										title={`Botão ${i}`}
+									>
+										<div className='pokedex-right-side-mid-buttons-text'>
+											{i}
+										</div>
+									</div>
+								))}
+							</div>
+							<div className="pokedex-right-side-mid-bottom-container">
+								<div className="pokedex-right-side-mid-bottom-button-left"></div>
+								<div className="pokedex-right-side-mid-bottom-button-right"></div>
+							</div>
+						</div>
+					</div>
+					<div className='pokedex-right-side-bottom'>
+						<div className='pokedex-right-side-bottom-container'></div>
+					</div>
 				</div>
 			</div>
 		</>

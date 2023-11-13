@@ -348,7 +348,12 @@
 	margin: 5.46rem 3.45rem;
 	border-radius: 50%;
 }
-
+.pokedex-left-side-bottom-dpad-xaxis-left:hover,
+.pokedex-left-side-bottom-dpad-xaxis-right:hover,
+.pokedex-left-side-bottom-dpad-yaxis-top:hover,
+.pokedex-left-side-bottom-dpad-yaxis-bot:hover {
+	background-color: var(--bg3);
+}
 
 /* Style right panel */
 .pokedex-right-side {
@@ -371,6 +376,10 @@
 }
 
 /* Right panel top */
+.pokedex-right-side-top {
+	display: flex;
+	flex-direction: row;
+}
 .pokedex-right-side-top-svg-container {
 	position: absolute;
 	height: 20%;
@@ -381,8 +390,71 @@
 	transform: scaleX(-1);
 }
 
-/* Left panel top side */
-.pokedex-right-side-top {
+/* Right panel mid  and bottom */
+.pokedex-right-side-mid-container,
+.pokedex-right-side-bottom-container {
+	border: 1px dashed orange;
+	height: 98%;
+	display: flex;
+	flex-direction: column;
+}
+/* Right panel mid */
+.pokedex-right-side-mid-display {
+	margin: 3rem 1rem 1rem 1rem;
+	height: 7rem;
+	width: 90%;
+	border-radius: 0.5rem;
+	border: 2px solid var(--bg0);
+	background-color: var(--bg1);
+	box-shadow: var(--smallShadow);
+}
+.pokedex-right-side-mid-buttons-container {
+	height: 30%;
+	width: 80%;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: center;
+	margin: 0.5rem auto;
+}
+.pokedex-right-side-mid-buttons {
+	height: 3rem;
+	width: 3rem;
+	flex: 1 0 3rem;
+	border-radius: 0.5rem;
+	margin: 0.1rem 0.1rem;
+	display: flex;
+	border: 2px solid var(--bg0);
+	background-color: var(--blue0);
+	box-shadow: var(--smallShadow);
+}
+.pokedex-right-side-mid-buttons:hover {
+	background-color: var(--blue1);
+	cursor: pointer;
+}
+.pokedex-right-side-mid-buttons-text {
+	margin: auto;
+	font-family: PokemonSolid;
+	font-size: 1.2rem;
+}
+.pokedex-right-side-mid-bottom-container {
 	display: flex;
 	flex-direction: row;
+	height: 10%;
+	width: 80%;
+	margin: 0 auto 0;
 }
+.pokedex-right-side-mid-bottom-button-left,
+.pokedex-right-side-mid-bottom-button-right {
+	height: 0.3rem;
+	width: 2.5em;
+	margin: 0 0.5rem;
+	border: 2px solid var(--bg0);
+	background-color: var(--bg1);
+	border-radius: 0.3rem;
+}
+.pokedex-right-side-mid-bottom-button-left {
+	margin-left: 63%;
+}
+
+/* Right panel bottom */

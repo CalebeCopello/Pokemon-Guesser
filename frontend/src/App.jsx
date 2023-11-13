@@ -70,12 +70,12 @@ function App() {
 	const TIMERTOTAL = 5
 	const TOTALATTEMPTS = 6
 	const DIVSATTEMPTS = []
-	const fulfilDivsAttempts = (n) => {
+	const fulfillDivsAttempts = (n) => {
 		for (let i = 0; i < n; i++) {
 			DIVSATTEMPTS.push(i)
 		}
 	}
-	fulfilDivsAttempts(TOTALATTEMPTS)
+	fulfillDivsAttempts(TOTALATTEMPTS)
 
 	/* Functions */
 
