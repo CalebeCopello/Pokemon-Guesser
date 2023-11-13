@@ -134,14 +134,26 @@ const Pokedex = () => {
 									</div>
 								))}
 							</div>
-							<div className="pokedex-right-side-mid-bottom-container">
-								<div className="pokedex-right-side-mid-bottom-button-left"></div>
-								<div className="pokedex-right-side-mid-bottom-button-right"></div>
+							<div className='pokedex-right-side-mid-bottom-container'>
+								<div className='pokedex-right-side-mid-bottom-button-left'></div>
+								<div className='pokedex-right-side-mid-bottom-button-right'></div>
 							</div>
 						</div>
 					</div>
 					<div className='pokedex-right-side-bottom'>
-						<div className='pokedex-right-side-bottom-container'></div>
+						<div className='pokedex-right-side-bottom-container'>
+							<div className='pokedex-right-side-bottom-top-container'>
+								<div className='pokedex-right-side-bottom-top-button-left'></div>
+								<div className='pokedex-right-side-bottom-top-button-right'></div>
+								<div className='pokedex-right-side-bottom-top-yellow-light'>
+									<div className='pokedex-right-side-bottom-top-yellow-light-reflection'></div>
+								</div>
+							</div>
+							<div className='pokedex-right-side-bottom-bot-displays-container'>
+								<div className="pokedex-right-side-bottom-bot-display-left"></div>
+								<div className="pokedex-right-side-bottom-bot-display-right"></div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
