@@ -335,7 +335,7 @@
 	border-radius: 0.5rem;
 	box-shadow: var(--smallShadow);
 	background-color: var(--green0);
-	overflow: scroll;
+	/* overflow: scroll; */
 }
 .pokedex-left-side-bottom-mid-buttons-bottom-screen-stats-container {
 	width: 90%;
@@ -476,10 +476,10 @@
 	width: 96%;
 	height: 70%;
 	margin: 0.5rem;
-	overflow: scroll;
+	overflow: auto;
 	font-family: JoystixMonospace;
 	color: var(--green1);
-	font-size: 0.75rem;
+	font-size: 0.6rem;
 	text-align: justify;
 	text-justify: inter-word;
 }
