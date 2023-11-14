@@ -1,6 +1,7 @@
 'use strict'
 import { useState, useEffect } from 'react'
 import { HiBars4 } from 'react-icons/hi2'
+import { MdGTranslate } from 'react-icons/md'
 import './Pokedex.css'
 
 const Pokedex = ({
@@ -22,6 +23,18 @@ const Pokedex = ({
 			return 0
 		}
 	)
+	const [
+		pokemonPokedexFlavorTextsTranslation,
+		setPokemonPokedexFlavorTextsTranslation,
+	] = useState(() => {
+		return true
+	})
+	const [
+		pokemonPokedexFlavorTextsTranslated,
+		setPokemonPokedexFlavorTextsTranslated,
+	] = useState(() => {
+		return
+	})
 
 	const TOTALBUTTONS = 10
 	const DIVSBUTTONS = []
@@ -96,6 +109,7 @@ const Pokedex = ({
 			}
 		}
 		getPokedexData()
+		setPokemonPokedexFlavorTextNr(() => 0)
 	}, [pokemonPokedexNr])
 
 	useEffect(() => {
@@ -113,11 +127,15 @@ const Pokedex = ({
 				) {
 					if (
 						!flavorTextsBuffer.includes(
-							formatFlavor(pokemonPokedexData.species.flavor_text_entries[i].flavor_text)
+							formatFlavor(
+								pokemonPokedexData.species.flavor_text_entries[i].flavor_text
+							)
 						)
 					) {
 						flavorTextsBuffer.push(
-							formatFlavor(pokemonPokedexData.species.flavor_text_entries[i].flavor_text)
+							formatFlavor(
+								pokemonPokedexData.species.flavor_text_entries[i].flavor_text
+							)
 						)
 					}
 				}
@@ -126,7 +144,48 @@ const Pokedex = ({
 		}
 	}, [pokemonPokedexData])
 
-	console.log(pokemonPokedexFlavorTexts)
+	useEffect(() => {
+		if (pokemonPokedexFlavorTexts.length > 0) {
+			setPokemonPokedexFlavorTextsTranslated([])
+			const translationBuffer = []
+			const translate = async () => {
+				for (let i = 0; i < pokemonPokedexFlavorTexts.length; i++) {
+					const string = pokemonPokedexFlavorTexts[i]
+					const stringLang = 'en'
+					const targetLang = 'pt-br'
+					const url =
+						'https://translate.googleapis.com/translate_a/single?client=gtx&sl=' +
+						stringLang +
+						'&tl=' +
+						targetLang +
+						'&dt=t&q=' +
+						string
+					try {
+						const response = await fetch(url)
+						if (response.ok) {
+							const data = await response.json()
+							let fullResponse = ''
+							for (let j = 0; j < data[0].length; j++) {
+								fullResponse = `${fullResponse}${data[0][j][0]}`
+							}
+							translationBuffer.push(fullResponse)
+						} else {
+							console.log('Error', response.statusText)
+						}
+					} catch (error) {
+						console.log('ERROR', error)
+					}
+				}
+				setPokemonPokedexFlavorTextsTranslated((prev) => [
+					...prev,
+					...translationBuffer,
+				])
+			}
+			translate()
+		}
+	}, [pokemonPokedexFlavorTexts])
+
+	console.log(pokemonPokedexFlavorTextsTranslated)
 
 	return (
 		<>
@@ -300,8 +359,23 @@ const Pokedex = ({
 							<div className='pokedex-right-side-mid-display-container'>
 								<div className='pokedex-right-side-mid-display'>
 									<div className='pokedex-right-side-mid-display-text'>
-										{pokemonPokedexFlavorTexts[pokemonPokedexFlavorTextNr]}
+										{pokemonPokedexFlavorTextsTranslation
+											? pokemonPokedexFlavorTexts[pokemonPokedexFlavorTextNr]
+											: pokemonPokedexFlavorTextsTranslated[
+													pokemonPokedexFlavorTextNr
+											  ]}
 									</div>
+								</div>
+								<div
+									className='pokedex-right-side-mid-display-flavor-translate'
+									title='Traduzir/Translate'
+									onClick={() =>
+										setPokemonPokedexFlavorTextsTranslation(
+											!pokemonPokedexFlavorTextsTranslation
+										)
+									}
+								>
+									<MdGTranslate />
 								</div>
 
 								<div className='pokedex-right-side-mid-display-flavor-total'>
