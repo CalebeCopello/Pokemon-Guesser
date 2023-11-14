@@ -17,6 +17,11 @@ const Pokedex = ({
 			return []
 		}
 	)
+	const [pokemonPokedexFlavorTextNr, setPokemonPokedexFlavorTextNr] = useState(
+		() => {
+			return 0
+		}
+	)
 
 	const TOTALBUTTONS = 10
 	const DIVSBUTTONS = []
@@ -36,14 +41,27 @@ const Pokedex = ({
 	}
 	fulfillStats(TOTALSTATS)
 
-	const geEnFlavor = (n) => {
-		// return n.replace(/\n|\u000c/g, ' ')
+	const formatFlavor = (n) => {
+		return n.replace(/\n|\u000c/g, ' ')
 	}
 
 	const addZeros = (n) => {
 		if (n) {
 			const nn = n.toString().padStart(4, '0')
 			return `#${nn}`
+		}
+	}
+
+	const handleFlavor = (n) => {
+		if (pokemonPokedexFlavorTextNr === 0 && n === -1) {
+			setPokemonPokedexFlavorTextNr((prev) => prev)
+		} else if (
+			pokemonPokedexFlavorTextNr === pokemonPokedexFlavorTexts.length - 1 &&
+			n === +1
+		) {
+			setPokemonPokedexFlavorTextNr((prev) => prev)
+		} else {
+			setPokemonPokedexFlavorTextNr((prev) => prev + n)
 		}
 	}
 
@@ -82,8 +100,8 @@ const Pokedex = ({
 
 	useEffect(() => {
 		if (pokemonPokedexData.species) {
-			let n = 0
 			setPokemonPokedexFlavorTexts([])
+			const flavorTextsBuffer = []
 			for (
 				let i = 0;
 				i < Object.keys(pokemonPokedexData.species.flavor_text_entries).length;
@@ -93,13 +111,18 @@ const Pokedex = ({
 					pokemonPokedexData.species.flavor_text_entries[i].language.name ==
 					'en'
 				) {
-					console.log(
-						pokemonPokedexData.species.flavor_text_entries[i].flavor_text, n
-					)
-					setPokemonPokedexFlavorTexts((prev) =>[...prev, pokemonPokedexData.species.flavor_text_entries[i].flavor_text])
-					n++
+					if (
+						!flavorTextsBuffer.includes(
+							formatFlavor(pokemonPokedexData.species.flavor_text_entries[i].flavor_text)
+						)
+					) {
+						flavorTextsBuffer.push(
+							formatFlavor(pokemonPokedexData.species.flavor_text_entries[i].flavor_text)
+						)
+					}
 				}
 			}
+			setPokemonPokedexFlavorTexts((prev) => [...prev, ...flavorTextsBuffer])
 		}
 	}, [pokemonPokedexData])
 
@@ -232,8 +255,14 @@ const Pokedex = ({
 							<div className='pokedex-left-side-bottom-dpad-mid'></div>
 							<div className='pokedex-left-side-bottom-dpad-xaxis-left'></div>
 							<div className='pokedex-left-side-bottom-dpad-xaxis-right'></div>
-							<div className='pokedex-left-side-bottom-dpad-yaxis-top'></div>
-							<div className='pokedex-left-side-bottom-dpad-yaxis-bot'></div>
+							<div
+								className='pokedex-left-side-bottom-dpad-yaxis-top'
+								onClick={() => handleFlavor(+1)}
+							></div>
+							<div
+								className='pokedex-left-side-bottom-dpad-yaxis-bot'
+								onClick={() => handleFlavor(-1)}
+							></div>
 							<div className='pokedex-left-side-bottom-dpad-mid-circle'></div>
 						</div>
 					</div>
@@ -268,8 +297,18 @@ const Pokedex = ({
 					</div>
 					<div className='pokedex-right-side-mid'>
 						<div className='pokedex-right-side-mid-container'>
-							<div className='pokedex-right-side-mid-display'>
-								{pokemonPokedexFlavorTexts.length}
+							<div className='pokedex-right-side-mid-display-container'>
+								<div className='pokedex-right-side-mid-display'>
+									<div className='pokedex-right-side-mid-display-text'>
+										{pokemonPokedexFlavorTexts[pokemonPokedexFlavorTextNr]}
+									</div>
+								</div>
+
+								<div className='pokedex-right-side-mid-display-flavor-total'>
+									{`[${pokemonPokedexFlavorTextNr + 1}/${
+										pokemonPokedexFlavorTexts.length
+									}]`}
+								</div>
 							</div>
 							<div className='pokedex-right-side-mid-buttons-container'>
 								{DIVSBUTTONS.map((i) => (
