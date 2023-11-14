@@ -3,7 +3,16 @@ import { useState, useEffect } from 'react'
 import { HiBars4 } from 'react-icons/hi2'
 import './Pokedex.css'
 
-const Pokedex = () => {
+const Pokedex = ({
+	pokemonPokedexNr,
+	setPokemonPokedexNr,
+	capitalize,
+	switchPokemonColors,
+}) => {
+	const [pokemonPokedexData, setPokemonPokedexData] = useState(() => {
+		return {}
+	})
+
 	const TOTALBUTTONS = 10
 	const DIVSBUTTONS = []
 	const fulfillButtons = (n) => {
@@ -12,6 +21,57 @@ const Pokedex = () => {
 		}
 	}
 	fulfillButtons(TOTALBUTTONS)
+
+	const TOTALSTATS = 5
+	const DIVSSTATS = []
+	const fulfillStats = (n) => {
+		for (let i = 0; i < n; i++) {
+			DIVSSTATS.push(i)
+		}
+	}
+	fulfillStats(TOTALSTATS)
+
+	const addZeros = (n) => {
+		if (n) {
+			const nn = n.toString().padStart(4, '0')
+			return `#${nn}`
+		}
+	}
+
+	useEffect(() => {
+		const getPokedexData = async () => {
+			try {
+				const responsePokemon = await fetch(
+					`https://pokeapi.co/api/v2/pokemon/${pokemonPokedexNr}`
+				)
+				if (responsePokemon.ok) {
+					const responsePokemonJson = await responsePokemon.json()
+
+					try {
+						const responsePokemonSpecies = await fetch(
+							`https://pokeapi.co/api/v2/pokemon-species/${pokemonPokedexNr}`
+						)
+						if (responsePokemonSpecies.ok) {
+							const responsePokemonSpeciesJson =
+								await responsePokemonSpecies.json()
+							setPokemonPokedexData((prev) => ({
+								...prev,
+								pokemon: responsePokemonJson,
+								species: responsePokemonSpeciesJson,
+							}))
+						}
+					} catch (error) {
+						console.log('responsePokemonSpecies: ', error)
+					}
+				}
+			} catch (error) {
+				console.log('responsePokemon: ', error)
+			}
+		}
+
+		getPokedexData()
+	}, [pokemonPokedexNr])
+
 	return (
 		<>
 			<div className='pokedex-container'>
@@ -55,7 +115,42 @@ const Pokedex = () => {
 								</div>
 							</div>
 							<div className='pokedex-left-side-mid-screen-display-container'>
-								<div className='pokedex-left-side-mid-screen-display'></div>
+								<div className='pokedex-left-side-mid-screen-display'>
+									<div
+										className='pokedex-left-side-mid-screen-display-img'
+										style={{
+											backgroundColor: switchPokemonColors(
+												pokemonPokedexData.species?.color.name
+											),
+										}}
+									>
+										{
+											<img
+												src={
+													pokemonPokedexData.pokemon?.sprites.other[
+														'official-artwork'
+													].front_default
+												}
+												alt={pokemonPokedexData.pokemon?.species.name && capitalize(pokemonPokedexData.pokemon?.species.name)}
+												title={pokemonPokedexData.pokemon?.species.name && capitalize(pokemonPokedexData.pokemon?.species.name)}
+											></img>
+										}
+									</div>
+									<div className='pokedex-left-side-mid-screen-display-info-container'>
+										<div className='pokedex-left-side-mid-screen-display-name'>
+											<div className='pokedex-left-side-mid-screen-display-name-text'>
+												{pokemonPokedexData.pokemon?.species.name}
+											</div>
+										</div>
+										<div className='pokedex-left-side-mid-screen-display-number'>
+											<div className='pokedex-left-side-mid-screen-display-number-text'>
+												{pokemonPokedexData.pokemon?.id
+													? addZeros(pokemonPokedexData.pokemon?.id)
+													: '#????'}
+											</div>
+										</div>
+									</div>
+								</div>
 							</div>
 							<div className='pokedex-left-side-mid-screen-bottom'>
 								<div className='pokedex-left-side-mid-screen-bottom-container'>
@@ -77,7 +172,9 @@ const Pokedex = () => {
 								<div className='pokedex-left-side-bottom-mid-buttons-top-rightbtn'></div>
 							</div>
 							<div className='pokedex-left-side-bottom-mid-buttons-bottom'>
-								<div className='pokedex-left-side-bottom-mid-buttons-bottom-btn'></div>
+								<div className='pokedex-left-side-bottom-mid-buttons-bottom-screen'>
+									
+								</div>
 							</div>
 						</div>
 						<div className='pokedex-left-side-bottom-dpad-container'>
@@ -150,8 +247,8 @@ const Pokedex = () => {
 								</div>
 							</div>
 							<div className='pokedex-right-side-bottom-bot-displays-container'>
-								<div className="pokedex-right-side-bottom-bot-display-left"></div>
-								<div className="pokedex-right-side-bottom-bot-display-right"></div>
+								<div className='pokedex-right-side-bottom-bot-display-left'></div>
+								<div className='pokedex-right-side-bottom-bot-display-right'></div>
 							</div>
 						</div>
 					</div>

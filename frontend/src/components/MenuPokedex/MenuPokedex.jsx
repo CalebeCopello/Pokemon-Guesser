@@ -17,6 +17,7 @@ const MenuPokedex = ({
 	capitalize,
 	showPokedex,
 	setShowPokedex,
+	setPokemonPokedexNr,
 }) => {
 	return (
 		<>
@@ -58,6 +59,12 @@ const MenuPokedex = ({
 										? capitalize(pokemonAnswers[i]?.species.name)
 										: 'Não definido'
 								}
+								onClick={() => {
+									if (showPokemonAnswers[i]) {
+										setShowPokedex(true)
+										setPokemonPokedexNr(pokemonAnswers[i].id)
+									}
+								}}
 							>
 								<div
 									className='guesser-menu-pokemons-answer-score'

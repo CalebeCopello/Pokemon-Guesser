@@ -33,6 +33,9 @@ function App() {
 	const [pokemonsData, setPokemonsData] = useState(() => {
 		return {}
 	})
+	const [pokemonPokedexNr, setPokemonPokedexNr] = useState(() => {
+		return 1
+	})
 	/*** Manipulating the data of the answers ***/
 	const [pokemonAnswers, setPokemonAnswers] = useState(() => {
 		return {}
@@ -98,6 +101,7 @@ function App() {
 		setScore([])
 		setPokemonAnswers({})
 		setShowPokemonAnswers([false])
+		setShowPokedex(false)
 	}
 
 	const tryAttempt = (i) => {
@@ -174,7 +178,6 @@ function App() {
 				counter > 0 && setInterval(() => setCounter(counter - 1), 1000)
 			return () => clearInterval(timer)
 		}
-		console.log(pokemonsData)
 	}, [counter, attempts, pokemonsData])
 
 	/*** Effect to set a wrong answer if timer is == 0 ***/
@@ -302,6 +305,7 @@ function App() {
 							capitalize={capitalize}
 							showPokedex={showPokedex}
 							setShowPokedex={setShowPokedex}
+							setPokemonPokedexNr={setPokemonPokedexNr}
 						/>
 					) : (
 						''
@@ -310,24 +314,31 @@ function App() {
 				<main>
 					<div className='show-menu-container'></div>
 					<section>
-					{showPokedex ? (<Pokedex />) : (
-						<Guesser
-							counter={counter}
-							DIVSATTEMPTS={DIVSATTEMPTS}
-							score={score}
-							pokemonsData={pokemonsData}
-							correctPokemonNr={correctPokemonNr}
-							pokemonsNr={pokemonsNr}
-							attempts={attempts}
-							tryAttempt={tryAttempt}
-							capitalize={capitalize}
-							replaceUrl={replaceUrl}
-							showMenuPokedex={showMenuPokedex}
-							setShowMenuPokedex={setShowMenuPokedex}
-							showMenuGen={showMenuGen}
-							setShowMenuGen={setShowMenuGen}
-						/>
-					) }
+						{showPokedex ? (
+							<Pokedex
+								pokemonPokedexNr={pokemonPokedexNr}
+								setPokemonPokedexNr={setPokemonPokedexNr}
+								capitalize={capitalize}
+								switchPokemonColors={switchPokemonColors}
+							/>
+						) : (
+							<Guesser
+								counter={counter}
+								DIVSATTEMPTS={DIVSATTEMPTS}
+								score={score}
+								pokemonsData={pokemonsData}
+								correctPokemonNr={correctPokemonNr}
+								pokemonsNr={pokemonsNr}
+								attempts={attempts}
+								tryAttempt={tryAttempt}
+								capitalize={capitalize}
+								replaceUrl={replaceUrl}
+								showMenuPokedex={showMenuPokedex}
+								setShowMenuPokedex={setShowMenuPokedex}
+								showMenuGen={showMenuGen}
+								setShowMenuGen={setShowMenuGen}
+							/>
+						)}
 					</section>
 				</main>
 				<aside>
