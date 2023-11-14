@@ -12,6 +12,11 @@ const Pokedex = ({
 	const [pokemonPokedexData, setPokemonPokedexData] = useState(() => {
 		return {}
 	})
+	const [pokemonPokedexFlavorTexts, setPokemonPokedexFlavorTexts] = useState(
+		() => {
+			return []
+		}
+	)
 
 	const TOTALBUTTONS = 10
 	const DIVSBUTTONS = []
@@ -30,6 +35,10 @@ const Pokedex = ({
 		}
 	}
 	fulfillStats(TOTALSTATS)
+
+	const geEnFlavor = (n) => {
+		// return n.replace(/\n|\u000c/g, ' ')
+	}
 
 	const addZeros = (n) => {
 		if (n) {
@@ -68,9 +77,33 @@ const Pokedex = ({
 				console.log('responsePokemon: ', error)
 			}
 		}
-
 		getPokedexData()
 	}, [pokemonPokedexNr])
+
+	useEffect(() => {
+		if (pokemonPokedexData.species) {
+			let n = 0
+			setPokemonPokedexFlavorTexts([])
+			for (
+				let i = 0;
+				i < Object.keys(pokemonPokedexData.species.flavor_text_entries).length;
+				i++
+			) {
+				if (
+					pokemonPokedexData.species.flavor_text_entries[i].language.name ==
+					'en'
+				) {
+					console.log(
+						pokemonPokedexData.species.flavor_text_entries[i].flavor_text, n
+					)
+					setPokemonPokedexFlavorTexts((prev) =>[...prev, pokemonPokedexData.species.flavor_text_entries[i].flavor_text])
+					n++
+				}
+			}
+		}
+	}, [pokemonPokedexData])
+
+	console.log(pokemonPokedexFlavorTexts)
 
 	return (
 		<>
@@ -131,8 +164,14 @@ const Pokedex = ({
 														'official-artwork'
 													].front_default
 												}
-												alt={pokemonPokedexData.pokemon?.species.name && capitalize(pokemonPokedexData.pokemon?.species.name)}
-												title={pokemonPokedexData.pokemon?.species.name && capitalize(pokemonPokedexData.pokemon?.species.name)}
+												alt={
+													pokemonPokedexData.pokemon?.species.name &&
+													capitalize(pokemonPokedexData.pokemon?.species.name)
+												}
+												title={
+													pokemonPokedexData.pokemon?.species.name &&
+													capitalize(pokemonPokedexData.pokemon?.species.name)
+												}
 											></img>
 										}
 									</div>
@@ -173,7 +212,19 @@ const Pokedex = ({
 							</div>
 							<div className='pokedex-left-side-bottom-mid-buttons-bottom'>
 								<div className='pokedex-left-side-bottom-mid-buttons-bottom-screen'>
-									
+									{DIVSSTATS.map((i) => (
+										<div
+											key={i}
+											className='pokedex-left-side-bottom-mid-buttons-bottom-screen-stats-container'
+										>
+											<div className='pokedex-left-side-bottom-mid-buttons-bottom-screen-stats-name'>
+												{pokemonPokedexData.pokemon?.stats[i].stat.name}:
+											</div>
+											<div className='pokedex-left-side-bottom-mid-buttons-bottom-screen-stats-value'>
+												{pokemonPokedexData.pokemon?.stats[i].base_stat}
+											</div>
+										</div>
+									))}
 								</div>
 							</div>
 						</div>
@@ -217,7 +268,9 @@ const Pokedex = ({
 					</div>
 					<div className='pokedex-right-side-mid'>
 						<div className='pokedex-right-side-mid-container'>
-							<div className='pokedex-right-side-mid-display'></div>
+							<div className='pokedex-right-side-mid-display'>
+								{pokemonPokedexFlavorTexts.length}
+							</div>
 							<div className='pokedex-right-side-mid-buttons-container'>
 								{DIVSBUTTONS.map((i) => (
 									<div
