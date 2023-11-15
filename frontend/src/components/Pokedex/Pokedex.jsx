@@ -33,7 +33,7 @@ const Pokedex = ({
 		pokemonPokedexFlavorTextsTranslated,
 		setPokemonPokedexFlavorTextsTranslated,
 	] = useState(() => {
-		return
+		return []
 	})
 
 	const TOTALBUTTONS = 10
@@ -75,6 +75,16 @@ const Pokedex = ({
 			setPokemonPokedexFlavorTextNr((prev) => prev)
 		} else {
 			setPokemonPokedexFlavorTextNr((prev) => prev + n)
+		}
+	}
+
+	const handlePokemonNr = (n) => {
+		if (pokemonPokedexNr === 1 && n === -1) {
+			setPokemonPokedexNr((prev) => prev)
+		} else if (pokemonPokedexNr === 1017 && n === +1) {
+			setPokemonPokedexNr((prev) => prev)
+		} else {
+			setPokemonPokedexNr((prev) => prev + n)
 		}
 	}
 
@@ -259,12 +269,12 @@ const Pokedex = ({
 									</div>
 									<div className='pokedex-left-side-mid-screen-display-info-container'>
 										<div className='pokedex-left-side-mid-screen-display-name'>
-											<div className='pokedex-left-side-mid-screen-display-name-text'>
+											<div className='pokedex-left-side-mid-screen-display-name-text' title={'Nome do Pokemon'}>
 												{pokemonPokedexData.pokemon?.species.name}
 											</div>
 										</div>
 										<div className='pokedex-left-side-mid-screen-display-number'>
-											<div className='pokedex-left-side-mid-screen-display-number-text'>
+											<div className='pokedex-left-side-mid-screen-display-number-text' title={'Número do Pokemon'}>
 												{pokemonPokedexData.pokemon?.id
 													? addZeros(pokemonPokedexData.pokemon?.id)
 													: '#????'}
@@ -298,6 +308,7 @@ const Pokedex = ({
 										<div
 											key={i}
 											className='pokedex-left-side-bottom-mid-buttons-bottom-screen-stats-container'
+											title={'Status Base do Pokemon'}
 										>
 											<div className='pokedex-left-side-bottom-mid-buttons-bottom-screen-stats-name'>
 												{pokemonPokedexData.pokemon?.stats[i].stat.name}:
@@ -312,13 +323,23 @@ const Pokedex = ({
 						</div>
 						<div className='pokedex-left-side-bottom-dpad-container'>
 							<div className='pokedex-left-side-bottom-dpad-mid'></div>
-							<div className='pokedex-left-side-bottom-dpad-xaxis-left'></div>
-							<div className='pokedex-left-side-bottom-dpad-xaxis-right'></div>
 							<div
+								title={'Próximo Pokemon'}
+								className='pokedex-left-side-bottom-dpad-xaxis-left'
+								onClick={() => handlePokemonNr(+1)}
+							></div>
+							<div
+								title={'Pokemon Anterior'}
+								className='pokedex-left-side-bottom-dpad-xaxis-right'
+								onClick={() => handlePokemonNr(-1)}
+							></div>
+							<div
+								title={'Próxima Entrada'}
 								className='pokedex-left-side-bottom-dpad-yaxis-top'
 								onClick={() => handleFlavor(+1)}
 							></div>
 							<div
+								title={'Entrada Anterior'}
 								className='pokedex-left-side-bottom-dpad-yaxis-bot'
 								onClick={() => handleFlavor(-1)}
 							></div>
@@ -357,13 +378,17 @@ const Pokedex = ({
 					<div className='pokedex-right-side-mid'>
 						<div className='pokedex-right-side-mid-container'>
 							<div className='pokedex-right-side-mid-display-container'>
-								<div className='pokedex-right-side-mid-display'>
+								<div className='pokedex-right-side-mid-display' title={'Entrada Pokedex'}>
 									<div className='pokedex-right-side-mid-display-text'>
 										{pokemonPokedexFlavorTextsTranslation
 											? pokemonPokedexFlavorTexts[pokemonPokedexFlavorTextNr]
 											: pokemonPokedexFlavorTextsTranslated[
 													pokemonPokedexFlavorTextNr
-											  ]}
+											  ]
+											? pokemonPokedexFlavorTextsTranslated[
+													pokemonPokedexFlavorTextNr
+											  ]
+											: '...'}
 									</div>
 								</div>
 								<div
@@ -378,8 +403,8 @@ const Pokedex = ({
 									<MdGTranslate />
 								</div>
 
-								<div className='pokedex-right-side-mid-display-flavor-total'>
-									{`[${pokemonPokedexFlavorTextNr + 1}/${
+								<div className='pokedex-right-side-mid-display-flavor-total' title={'Entrada Atual/Total de Entradas'}>
+									{`[${pokemonPokedexFlavorTexts.length > 0 ? pokemonPokedexFlavorTextNr + 1 : 0}/${
 										pokemonPokedexFlavorTexts.length
 									}]`}
 								</div>

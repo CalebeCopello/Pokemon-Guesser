@@ -194,7 +194,7 @@ function App() {
 			const randomPokemonsArray = []
 			while (randomPokemonsArray.length < 4) {
 				const rn = randomNumberGenerator(1, pokemonGen)
-				if (!randomPokemonsArray.includes(rn)) {
+				if (!randomPokemonsArray.includes(rn) && rn !== 1013) {
 					randomPokemonsArray.push(rn)
 				}
 			}

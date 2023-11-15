@@ -141,7 +141,7 @@ const MenuGeneration = ({ replaceUrl, setPokemonGen }) => {
 									color: 'var(--yellow1)',
 									backgroundColor: pokeGen >= i ? 'var(--bg0)' : '',
 								}}
-								title={`Escolher pokemons da ${i+1}º Geração`}
+								title={`Escolher pokemons até a ${i+1}º Geração`}
 							>
 								{toRoman(i + 1)}
 							</div>
