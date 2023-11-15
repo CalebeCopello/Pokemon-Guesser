@@ -29,7 +29,7 @@ const Pokedex = ({
 		pokemonPokedexFlavorTextsTranslation,
 		setPokemonPokedexFlavorTextsTranslation,
 	] = useState(() => {
-		return true
+		return false
 	})
 	const [
 		pokemonPokedexFlavorTextsTranslated,
@@ -117,6 +117,11 @@ const Pokedex = ({
 		const newPokemonSearchNr = Number(pokemonSearchNr) > 1017 ? 1017 : Number(pokemonSearchNr)
 		setPokemonSearchNr(() => String(newPokemonSearchNr));
 		setPokemonPokedexNr(() => newPokemonSearchNr)
+	}
+
+	const handleReset = () => {
+		setPokemonPokedexNr(1)
+		setPokemonSearchNr('1')
 	}
 
 	useEffect(() => {
@@ -472,7 +477,7 @@ const Pokedex = ({
 					</div>
 					<div className='pokedex-left-side-bottom'>
 						<div className='pokedex-left-side-bottom-confirm-button-container'>
-							<div className='pokedex-left-side-bottom-confirm-button'></div>
+							<div className='pokedex-left-side-bottom-confirm-button' title={'Resetar'} onClick={() => handleReset()}></div>
 						</div>
 						<div className='pokedex-left-side-bottom-mid-buttons-container'>
 							<div className='pokedex-left-side-bottom-mid-buttons-top'>
