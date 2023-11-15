@@ -35,6 +35,9 @@ const Pokedex = ({
 	] = useState(() => {
 		return []
 	})
+	const [pokemonDataExtra, setPokemonDataExtra] = useState(() => {
+		return {}
+	})
 
 	const TOTALBUTTONS = 10
 	const DIVSBUTTONS = []
@@ -195,7 +198,96 @@ const Pokedex = ({
 		}
 	}, [pokemonPokedexFlavorTexts])
 
-	console.log(pokemonPokedexFlavorTextsTranslated)
+	useEffect(() => {
+		setPokemonDataExtra({})
+		const dataBuffer = {}
+		const stringLang = 'en'
+		const targetLang = 'pt-br'
+		dataBuffer.weight = pokemonPokedexData.pokemon?.weight
+			? pokemonPokedexData.pokemon?.weight / 10
+			: '????'
+		dataBuffer.height = pokemonPokedexData.pokemon?.height
+			? pokemonPokedexData.pokemon?.height / 10
+			: '????'
+		dataBuffer.generation = pokemonPokedexData.species?.generation.name
+			? (pokemonPokedexData.species?.generation.name || '')
+					.replace('generation-', '')
+					.toUpperCase()
+			: '????'
+		dataBuffer.isBaby = pokemonPokedexData.species?.is_baby ? 'Sim' : 'Não'
+		dataBuffer.isLegendary = pokemonPokedexData.species?.is_legendary
+			? 'Sim'
+			: 'Não'
+		dataBuffer.isMythical = pokemonPokedexData.species?.is_mythical
+			? 'Sim'
+			: 'Não'
+		const fetchGenera = async () => {
+			if (pokemonPokedexData.species?.genera) {
+				const string = pokemonPokedexData.species?.genera[7].genus
+				console.log(string)
+				const url =
+					'https://translate.googleapis.com/translate_a/single?client=gtx&sl=' +
+					stringLang +
+					'&tl=' +
+					targetLang +
+					'&dt=t&q=' +
+					string
+				try {
+					const response = await fetch(url)
+					if (response.ok) {
+						const data = await response.json()
+						dataBuffer.genera = data[0][0][0]
+					} else {
+						console.log('Error', response.statusText)
+					}
+				} catch (error) {
+					console.log('Error', error)
+				}
+			} else {
+				dataBuffer.genera = '????'
+			}
+			setPokemonDataExtra((prev) => ({
+				...prev,
+				...dataBuffer,
+			}))
+		}
+		const fetchHabitat = async () => {
+			if (pokemonPokedexData.species?.genera) {
+				const string = pokemonPokedexData.species?.habitat.name
+				console.log(string)
+				const url =
+					'https://translate.googleapis.com/translate_a/single?client=gtx&sl=' +
+					stringLang +
+					'&tl=' +
+					targetLang +
+					'&dt=t&q=' +
+					string
+				try {
+					const response = await fetch(url)
+					if (response.ok) {
+						const data = await response.json()
+						dataBuffer.habitat = capitalize(data[0][0][0])
+					} else {
+						console.log('Error', response.statusText)
+					}
+				} catch (error) {
+					console.log('Error', error)
+				}
+			} else {
+				dataBuffer.habitat = '????'
+			}
+			setPokemonDataExtra((prev) => ({
+				...prev,
+				...dataBuffer,
+			}))
+		}
+		fetchGenera()
+		fetchHabitat()
+		setPokemonDataExtra((prev) => ({
+			...prev,
+			...dataBuffer,
+		}))
+	}, [pokemonPokedexData])
 
 	return (
 		<>
@@ -269,12 +361,18 @@ const Pokedex = ({
 									</div>
 									<div className='pokedex-left-side-mid-screen-display-info-container'>
 										<div className='pokedex-left-side-mid-screen-display-name'>
-											<div className='pokedex-left-side-mid-screen-display-name-text' title={'Nome do Pokemon'}>
+											<div
+												className='pokedex-left-side-mid-screen-display-name-text'
+												title={'Nome do Pokemon'}
+											>
 												{pokemonPokedexData.pokemon?.species.name}
 											</div>
 										</div>
 										<div className='pokedex-left-side-mid-screen-display-number'>
-											<div className='pokedex-left-side-mid-screen-display-number-text' title={'Número do Pokemon'}>
+											<div
+												className='pokedex-left-side-mid-screen-display-number-text'
+												title={'Número do Pokemon'}
+											>
 												{pokemonPokedexData.pokemon?.id
 													? addZeros(pokemonPokedexData.pokemon?.id)
 													: '#????'}
@@ -378,7 +476,10 @@ const Pokedex = ({
 					<div className='pokedex-right-side-mid'>
 						<div className='pokedex-right-side-mid-container'>
 							<div className='pokedex-right-side-mid-display-container'>
-								<div className='pokedex-right-side-mid-display' title={'Entrada Pokedex'}>
+								<div
+									className='pokedex-right-side-mid-display'
+									title={'Entrada Pokedex'}
+								>
 									<div className='pokedex-right-side-mid-display-text'>
 										{pokemonPokedexFlavorTextsTranslation
 											? pokemonPokedexFlavorTexts[pokemonPokedexFlavorTextNr]
@@ -403,10 +504,15 @@ const Pokedex = ({
 									<MdGTranslate />
 								</div>
 
-								<div className='pokedex-right-side-mid-display-flavor-total' title={'Entrada Atual/Total de Entradas'}>
-									{`[${pokemonPokedexFlavorTexts.length > 0 ? pokemonPokedexFlavorTextNr + 1 : 0}/${
-										pokemonPokedexFlavorTexts.length
-									}]`}
+								<div
+									className='pokedex-right-side-mid-display-flavor-total'
+									title={'Entrada Atual/Total de Entradas'}
+								>
+									{`[${
+										pokemonPokedexFlavorTexts.length > 0
+											? pokemonPokedexFlavorTextNr + 1
+											: 0
+									}/${pokemonPokedexFlavorTexts.length}]`}
 								</div>
 							</div>
 							<div className='pokedex-right-side-mid-buttons-container'>
@@ -439,16 +545,36 @@ const Pokedex = ({
 							</div>
 							<div className='pokedex-right-side-bottom-bot-displays-container'>
 								<div className='pokedex-right-side-bottom-bot-display-left'>
-									<div className="pokedex-right-side-bottom-bot-display-left-color" style={{backgroundColor: pokemonPokedexData.pokemon?.types[0]?.type.name ? `var(--${pokemonPokedexData.pokemon?.types[0].type.name})` : 'var(--bg1)' }}>
-										<div className="pokedex-right-side-bottom-bot-display-left-text">
-											{pokemonPokedexData.pokemon?.types[0].type.name ? pokemonPokedexData.pokemon?.types[0].type.name : ''}
+									<div
+										className='pokedex-right-side-bottom-bot-display-left-color'
+										style={{
+											backgroundColor: pokemonPokedexData.pokemon?.types[0]
+												?.type.name
+												? `var(--${pokemonPokedexData.pokemon?.types[0].type.name})`
+												: 'var(--bg1)',
+										}}
+									>
+										<div className='pokedex-right-side-bottom-bot-display-left-text'>
+											{pokemonPokedexData.pokemon?.types[0].type.name
+												? pokemonPokedexData.pokemon?.types[0].type.name
+												: ''}
 										</div>
 									</div>
 								</div>
 								<div className='pokedex-right-side-bottom-bot-display-right'>
-								<div className="pokedex-right-side-bottom-bot-display-right-color" style={{backgroundColor: pokemonPokedexData.pokemon?.types[1]?.type.name ? `var(--${pokemonPokedexData.pokemon?.types[1].type.name})` : 'var(--bg1)' }}>
-										<div className="pokedex-right-side-bottom-bot-display-right-text">
-											{pokemonPokedexData.pokemon?.types[1]?.type.name ? pokemonPokedexData.pokemon?.types[1].type.name : ''}
+									<div
+										className='pokedex-right-side-bottom-bot-display-right-color'
+										style={{
+											backgroundColor: pokemonPokedexData.pokemon?.types[1]
+												?.type.name
+												? `var(--${pokemonPokedexData.pokemon?.types[1].type.name})`
+												: 'var(--bg1)',
+										}}
+									>
+										<div className='pokedex-right-side-bottom-bot-display-right-text'>
+											{pokemonPokedexData.pokemon?.types[1]?.type.name
+												? pokemonPokedexData.pokemon?.types[1].type.name
+												: ''}
 										</div>
 									</div>
 								</div>
