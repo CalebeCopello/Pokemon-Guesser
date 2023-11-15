@@ -38,6 +38,9 @@ const Pokedex = ({
 	const [pokemonDataExtra, setPokemonDataExtra] = useState(() => {
 		return {}
 	})
+	const [showPokemonDisplayImg, setShowPokemonDisplayImg] = useState(() => {
+		return true
+	})
 
 	const TOTALBUTTONS = 10
 	const DIVSBUTTONS = []
@@ -204,10 +207,10 @@ const Pokedex = ({
 		const stringLang = 'en'
 		const targetLang = 'pt-br'
 		dataBuffer.weight = pokemonPokedexData.pokemon?.weight
-			? pokemonPokedexData.pokemon?.weight / 10
+			? `${pokemonPokedexData.pokemon?.weight / 10}Kg`
 			: '????'
 		dataBuffer.height = pokemonPokedexData.pokemon?.height
-			? pokemonPokedexData.pokemon?.height / 10
+			? `${pokemonPokedexData.pokemon?.height / 10}m`
 			: '????'
 		dataBuffer.generation = pokemonPokedexData.species?.generation.name
 			? (pokemonPokedexData.species?.generation.name || '')
@@ -224,7 +227,6 @@ const Pokedex = ({
 		const fetchGenera = async () => {
 			if (pokemonPokedexData.species?.genera) {
 				const string = pokemonPokedexData.species?.genera[7].genus
-				console.log(string)
 				const url =
 					'https://translate.googleapis.com/translate_a/single?client=gtx&sl=' +
 					stringLang +
@@ -252,9 +254,8 @@ const Pokedex = ({
 			}))
 		}
 		const fetchHabitat = async () => {
-			if (pokemonPokedexData.species?.genera) {
+			if (pokemonPokedexData.species.habitat && pokemonPokedexData.species.habitat !== null) {
 				const string = pokemonPokedexData.species?.habitat.name
-				console.log(string)
 				const url =
 					'https://translate.googleapis.com/translate_a/single?client=gtx&sl=' +
 					stringLang +
@@ -288,6 +289,7 @@ const Pokedex = ({
 			...dataBuffer,
 		}))
 	}, [pokemonPokedexData])
+	const DataExtraKeys = Object.keys(pokemonDataExtra).map((key) => key)
 
 	return (
 		<>
@@ -333,32 +335,57 @@ const Pokedex = ({
 							</div>
 							<div className='pokedex-left-side-mid-screen-display-container'>
 								<div className='pokedex-left-side-mid-screen-display'>
-									<div
-										className='pokedex-left-side-mid-screen-display-img'
-										style={{
-											backgroundColor: switchPokemonColors(
-												pokemonPokedexData.species?.color.name
-											),
-										}}
-									>
-										{
-											<img
-												src={
-													pokemonPokedexData.pokemon?.sprites.other[
-														'official-artwork'
-													].front_default
-												}
-												alt={
-													pokemonPokedexData.pokemon?.species.name &&
-													capitalize(pokemonPokedexData.pokemon?.species.name)
-												}
-												title={
-													pokemonPokedexData.pokemon?.species.name &&
-													capitalize(pokemonPokedexData.pokemon?.species.name)
-												}
-											></img>
-										}
-									</div>
+									{showPokemonDisplayImg ? (
+										<div
+											className='pokedex-left-side-mid-screen-display-img'
+											style={{
+												backgroundColor: switchPokemonColors(
+													pokemonPokedexData.species?.color.name
+												),
+											}}
+										>
+											{
+												<img
+													src={
+														pokemonPokedexData.pokemon?.sprites.other[
+															'official-artwork'
+														].front_default
+													}
+													alt={
+														pokemonPokedexData.pokemon?.species.name &&
+														capitalize(pokemonPokedexData.pokemon?.species.name)
+													}
+													title={
+														pokemonPokedexData.pokemon?.species.name &&
+														capitalize(pokemonPokedexData.pokemon?.species.name)
+													}
+												></img>
+											}
+										</div>
+									) : (
+										<div
+											className='pokedex-left-side-mid-screen-display-extra-data'
+											style={{
+												border: ` 2px solid ${switchPokemonColors(
+													pokemonPokedexData.species?.color.name
+												)}`,
+											}}
+										>
+											{DataExtraKeys.map((i) => (
+												<div
+													key={i}
+													className='pokedex-left-side-mid-screen-display-extra-data-container'
+												>
+													<div className='pokedex-left-side-mid-screen-display-extra-data-key'>
+														{`${i.replace('weight','Peso').replace('height', 'Altura').replace('generation', 'Geração').replace('isBaby', 'Bebê').replace('isLegendary', 'Lendário').replace('isMythical', 'Mítico').replace('genera', 'Generô')}:`}
+													</div>
+													<div className='pokedex-left-side-mid-screen-display-extra-data-value'>
+														{pokemonDataExtra[i]}
+													</div>
+												</div>
+											))}
+										</div>
+									)}
 									<div className='pokedex-left-side-mid-screen-display-info-container'>
 										<div className='pokedex-left-side-mid-screen-display-name'>
 											<div
@@ -383,7 +410,13 @@ const Pokedex = ({
 							</div>
 							<div className='pokedex-left-side-mid-screen-bottom'>
 								<div className='pokedex-left-side-mid-screen-bottom-container'>
-									<div className='pokedex-left-side-mid-screen-bottom-button'></div>
+									<div
+										className='pokedex-left-side-mid-screen-bottom-button'
+										title={'Mostrar Informações Extra/Mostrar Imagem'}
+										onClick={() =>
+											setShowPokemonDisplayImg(!showPokemonDisplayImg)
+										}
+									></div>
 									<div className='pokedex-left-side-mid-screen-bottom-speaker'>
 										<HiBars4 />
 									</div>
