@@ -2,6 +2,8 @@
 import { useState, useEffect } from 'react'
 import { HiBars4 } from 'react-icons/hi2'
 import { MdGTranslate } from 'react-icons/md'
+import { AiOutlineEnter } from 'react-icons/ai'
+import { IoBackspaceOutline } from 'react-icons/io5'
 import './Pokedex.css'
 
 const Pokedex = ({
@@ -40,6 +42,12 @@ const Pokedex = ({
 	})
 	const [showPokemonDisplayImg, setShowPokemonDisplayImg] = useState(() => {
 		return true
+	})
+	const [ pokemonSearch, setPokemonSearch] = useState(() => {
+		return false
+	})
+	const [ pokemonSearchNr, setPokemonSearchNr] = useState(() => {
+		return ''
 	})
 
 	const TOTALBUTTONS = 10
@@ -92,6 +100,24 @@ const Pokedex = ({
 		} else {
 			setPokemonPokedexNr((prev) => prev + n)
 		}
+	}
+
+	const handlePokemonSearchNr = (n) => {
+		if (pokemonSearchNr.length === 4) {
+			return
+		}
+		setPokemonSearchNr((prev) => `${prev}${n}`)
+	}
+	const handlePokemonSearch = () => {
+		if (!pokemonSearchNr) {
+			return
+		} else if(pokemonSearchNr > 1017) {
+			setPokemonSearchNr(() => 1017)
+		} else {
+			setPokemonSearchNr(() => pokemonSearchNr)
+		}
+		setPokemonPokedexNr(() => Number(pokemonSearchNr))
+		setPokemonSearchNr(() => '')
 	}
 
 	useEffect(() => {
@@ -225,7 +251,7 @@ const Pokedex = ({
 			? 'Sim'
 			: 'Não'
 		const fetchGenera = async () => {
-			if (pokemonPokedexData.species?.genera) {
+			if (pokemonPokedexData.species.genera && pokemonPokedexData.species.genera !== null) {
 				const string = pokemonPokedexData.species?.genera[7].genus
 				const url =
 					'https://translate.googleapis.com/translate_a/single?client=gtx&sl=' +
@@ -254,7 +280,10 @@ const Pokedex = ({
 			}))
 		}
 		const fetchHabitat = async () => {
-			if (pokemonPokedexData.species.habitat && pokemonPokedexData.species.habitat !== null) {
+			if (
+				pokemonPokedexData.species.habitat &&
+				pokemonPokedexData.species.habitat !== null
+			) {
 				const string = pokemonPokedexData.species?.habitat.name
 				const url =
 					'https://translate.googleapis.com/translate_a/single?client=gtx&sl=' +
@@ -290,6 +319,8 @@ const Pokedex = ({
 		}))
 	}, [pokemonPokedexData])
 	const DataExtraKeys = Object.keys(pokemonDataExtra).map((key) => key)
+
+	console.log(pokemonSearchNr)
 
 	return (
 		<>
@@ -377,7 +408,14 @@ const Pokedex = ({
 													className='pokedex-left-side-mid-screen-display-extra-data-container'
 												>
 													<div className='pokedex-left-side-mid-screen-display-extra-data-key'>
-														{`${i.replace('weight','Peso').replace('height', 'Altura').replace('generation', 'Geração').replace('isBaby', 'Bebê').replace('isLegendary', 'Lendário').replace('isMythical', 'Mítico').replace('genera', 'Generô')}:`}
+														{`${i
+															.replace('weight', 'Peso')
+															.replace('height', 'Altura')
+															.replace('generation', 'Geração')
+															.replace('isBaby', 'Bebê')
+															.replace('isLegendary', 'Lendário')
+															.replace('isMythical', 'Mítico')
+															.replace('genera', 'Generô')}:`}
 													</div>
 													<div className='pokedex-left-side-mid-screen-display-extra-data-value'>
 														{pokemonDataExtra[i]}
@@ -525,6 +563,10 @@ const Pokedex = ({
 											: '...'}
 									</div>
 								</div>
+								<div className="pokedex-right-side-mid-display-search-container">
+								{'Procurar'}
+								<div className="pokedex-right-side-mid-display-search-value">{`: ${pokemonSearchNr}`}</div>
+								</div>
 								<div
 									className='pokedex-right-side-mid-display-flavor-translate'
 									title='Traduzir/Translate'
@@ -536,7 +578,6 @@ const Pokedex = ({
 								>
 									<MdGTranslate />
 								</div>
-
 								<div
 									className='pokedex-right-side-mid-display-flavor-total'
 									title={'Entrada Atual/Total de Entradas'}
@@ -554,6 +595,7 @@ const Pokedex = ({
 										key={i}
 										className='pokedex-right-side-mid-buttons'
 										title={`Botão ${i}`}
+										onClick={() => handlePokemonSearchNr(i)}
 									>
 										<div className='pokedex-right-side-mid-buttons-text'>
 											{i}
@@ -570,8 +612,16 @@ const Pokedex = ({
 					<div className='pokedex-right-side-bottom'>
 						<div className='pokedex-right-side-bottom-container'>
 							<div className='pokedex-right-side-bottom-top-container'>
-								<div className='pokedex-right-side-bottom-top-button-left'></div>
-								<div className='pokedex-right-side-bottom-top-button-right'></div>
+								<div className='pokedex-right-side-bottom-top-button-left'>
+									<div className='pokedex-right-side-bottom-top-button-left-icon' onClick={() => handlePokemonSearch()}>
+										<AiOutlineEnter />
+									</div>
+								</div>
+								<div className='pokedex-right-side-bottom-top-button-right' onClick={() => setPokemonSearchNr(() => '')}>
+									<div className='pokedex-right-side-bottom-top-button-right-icon'>
+										<IoBackspaceOutline />
+									</div>
+								</div>
 								<div className='pokedex-right-side-bottom-top-yellow-light'>
 									<div className='pokedex-right-side-bottom-top-yellow-light-reflection'></div>
 								</div>
