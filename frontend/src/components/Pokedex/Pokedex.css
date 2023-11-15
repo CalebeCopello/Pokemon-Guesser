@@ -616,7 +616,21 @@
 }
 .pokedex-right-side-bottom-bot-display-left {
 	margin-left: 2.5rem;
+	display: flex;
+}
+.pokedex-right-side-bottom-bot-display-left-color, .pokedex-right-side-bottom-bot-display-right-color {
+	height: 85%;
+	width: 90%;
+	margin: auto;
+	border-radius: 0.3rem;
+	display: flex;
+}
+.pokedex-right-side-bottom-bot-display-left-text, .pokedex-right-side-bottom-bot-display-right-text {
+	margin: auto;
+	color: var(--fg0);
+	text-shadow: 0px 0px 4px var(--bg0);
 }
 .pokedex-right-side-bottom-bot-display-right {
 	margin-left: 4.5rem;
+	display: flex;
 }

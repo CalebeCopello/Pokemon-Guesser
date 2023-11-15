@@ -438,8 +438,20 @@ const Pokedex = ({
 								</div>
 							</div>
 							<div className='pokedex-right-side-bottom-bot-displays-container'>
-								<div className='pokedex-right-side-bottom-bot-display-left'></div>
-								<div className='pokedex-right-side-bottom-bot-display-right'></div>
+								<div className='pokedex-right-side-bottom-bot-display-left'>
+									<div className="pokedex-right-side-bottom-bot-display-left-color" style={{backgroundColor: pokemonPokedexData.pokemon?.types[0]?.type.name ? `var(--${pokemonPokedexData.pokemon?.types[0].type.name})` : 'var(--bg1)' }}>
+										<div className="pokedex-right-side-bottom-bot-display-left-text">
+											{pokemonPokedexData.pokemon?.types[0].type.name ? pokemonPokedexData.pokemon?.types[0].type.name : ''}
+										</div>
+									</div>
+								</div>
+								<div className='pokedex-right-side-bottom-bot-display-right'>
+								<div className="pokedex-right-side-bottom-bot-display-right-color" style={{backgroundColor: pokemonPokedexData.pokemon?.types[1]?.type.name ? `var(--${pokemonPokedexData.pokemon?.types[1].type.name})` : 'var(--bg1)' }}>
+										<div className="pokedex-right-side-bottom-bot-display-right-text">
+											{pokemonPokedexData.pokemon?.types[1]?.type.name ? pokemonPokedexData.pokemon?.types[1].type.name : ''}
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
