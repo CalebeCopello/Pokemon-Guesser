@@ -43,10 +43,10 @@ const Pokedex = ({
 	const [showPokemonDisplayImg, setShowPokemonDisplayImg] = useState(() => {
 		return true
 	})
-	const [ pokemonSearch, setPokemonSearch] = useState(() => {
+	const [pokemonSearch, setPokemonSearch] = useState(() => {
 		return false
 	})
-	const [ pokemonSearchNr, setPokemonSearchNr] = useState(() => {
+	const [pokemonSearchNr, setPokemonSearchNr] = useState(() => {
 		return ''
 	})
 
@@ -108,16 +108,15 @@ const Pokedex = ({
 		}
 		setPokemonSearchNr((prev) => `${prev}${n}`)
 	}
+
+	
 	const handlePokemonSearch = () => {
 		if (!pokemonSearchNr) {
 			return
-		} else if(pokemonSearchNr > 1017) {
-			setPokemonSearchNr(() => 1017)
-		} else {
-			setPokemonSearchNr(() => pokemonSearchNr)
 		}
-		setPokemonPokedexNr(() => Number(pokemonSearchNr))
-		setPokemonSearchNr(() => '')
+		const newPokemonSearchNr = Number(pokemonSearchNr) > 1017 ? 1017 : Number(pokemonSearchNr)
+		setPokemonSearchNr(() => String(newPokemonSearchNr));
+		setPokemonPokedexNr(() => newPokemonSearchNr)
 	}
 
 	useEffect(() => {
@@ -251,8 +250,17 @@ const Pokedex = ({
 			? 'Sim'
 			: 'Não'
 		const fetchGenera = async () => {
-			if (pokemonPokedexData.species.genera && pokemonPokedexData.species.genera !== null) {
-				const string = pokemonPokedexData.species?.genera[7].genus
+			if (
+				pokemonPokedexData.species.genera &&
+				pokemonPokedexData.species.genera !== null &&
+				pokemonPokedexData.species.genera !== undefined
+			) {
+				let string
+				for (let i = 0; i < pokemonPokedexData.species.genera.length; i++) {
+					if (pokemonPokedexData.species.genera[i].language.name === 'en') {
+						string = pokemonPokedexData.species.genera[i].genus
+					}
+				}
 				const url =
 					'https://translate.googleapis.com/translate_a/single?client=gtx&sl=' +
 					stringLang +
@@ -282,7 +290,8 @@ const Pokedex = ({
 		const fetchHabitat = async () => {
 			if (
 				pokemonPokedexData.species.habitat &&
-				pokemonPokedexData.species.habitat !== null
+				pokemonPokedexData.species.habitat !== null &&
+				pokemonPokedexData.species.habitat !== undefined
 			) {
 				const string = pokemonPokedexData.species?.habitat.name
 				const url =
@@ -318,9 +327,8 @@ const Pokedex = ({
 			...dataBuffer,
 		}))
 	}, [pokemonPokedexData])
-	const DataExtraKeys = Object.keys(pokemonDataExtra).map((key) => key)
 
-	console.log(pokemonSearchNr)
+	const DataExtraKeys = Object.keys(pokemonDataExtra).map((key) => key)
 
 	return (
 		<>
@@ -563,9 +571,9 @@ const Pokedex = ({
 											: '...'}
 									</div>
 								</div>
-								<div className="pokedex-right-side-mid-display-search-container">
-								{'Procurar'}
-								<div className="pokedex-right-side-mid-display-search-value">{`: ${pokemonSearchNr}`}</div>
+								<div className='pokedex-right-side-mid-display-search-container'>
+									{'Procurar'}
+									<div className='pokedex-right-side-mid-display-search-value'>{`: ${pokemonSearchNr}`}</div>
 								</div>
 								<div
 									className='pokedex-right-side-mid-display-flavor-translate'
@@ -613,11 +621,17 @@ const Pokedex = ({
 						<div className='pokedex-right-side-bottom-container'>
 							<div className='pokedex-right-side-bottom-top-container'>
 								<div className='pokedex-right-side-bottom-top-button-left'>
-									<div className='pokedex-right-side-bottom-top-button-left-icon' onClick={() => handlePokemonSearch()}>
+									<div
+										className='pokedex-right-side-bottom-top-button-left-icon'
+										onClick={() => handlePokemonSearch()}
+									>
 										<AiOutlineEnter />
 									</div>
 								</div>
-								<div className='pokedex-right-side-bottom-top-button-right' onClick={() => setPokemonSearchNr(() => '')}>
+								<div
+									className='pokedex-right-side-bottom-top-button-right'
+									onClick={() => setPokemonSearchNr(() => '')}
+								>
 									<div className='pokedex-right-side-bottom-top-button-right-icon'>
 										<IoBackspaceOutline />
 									</div>
