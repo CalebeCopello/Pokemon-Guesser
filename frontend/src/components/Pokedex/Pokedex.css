@@ -328,6 +328,7 @@
 	background-color: var(--bg2);
 	border: 4px solid var(--bg0);
 	box-shadow: var(--smallShadow);
+	cursor: pointer;
 }
 .pokedex-left-side-bottom-mid-buttons-top {
 	height: 25%;
@@ -616,6 +617,7 @@
 	margin-top: 0.5rem;
 	font-size: 3rem;
 	display: flex;
+	cursor: pointer;
 }
 .pokedex-right-side-bottom-top-button-left {
 	margin-left: 2.5rem;

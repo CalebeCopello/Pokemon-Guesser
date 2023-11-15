@@ -47,7 +47,7 @@ const Pokedex = ({
 		return false
 	})
 	const [pokemonSearchNr, setPokemonSearchNr] = useState(() => {
-		return ''
+		return '1'
 	})
 
 	const TOTALBUTTONS = 10
@@ -428,7 +428,7 @@ const Pokedex = ({
 															.replace('isBaby', 'Bebê')
 															.replace('isLegendary', 'Lendário')
 															.replace('isMythical', 'Mítico')
-															.replace('genera', 'Generô')}:`}
+															.replace('genera', 'Gênero')}:`}
 													</div>
 													<div className='pokedex-left-side-mid-screen-display-extra-data-value'>
 														{pokemonDataExtra[i]}
@@ -629,6 +629,7 @@ const Pokedex = ({
 									<div
 										className='pokedex-right-side-bottom-top-button-left-icon'
 										onClick={() => handlePokemonSearch()}
+										title={'Procurar'}
 									>
 										<AiOutlineEnter />
 									</div>
@@ -636,6 +637,7 @@ const Pokedex = ({
 								<div
 									className='pokedex-right-side-bottom-top-button-right'
 									onClick={() => setPokemonSearchNr(() => '')}
+									title={'Deletar'}
 								>
 									<div className='pokedex-right-side-bottom-top-button-right-icon'>
 										<IoBackspaceOutline />
