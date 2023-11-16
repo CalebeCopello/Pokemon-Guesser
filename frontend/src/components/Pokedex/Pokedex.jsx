@@ -125,6 +125,7 @@ const Pokedex = ({
 	}
 
 	useEffect(() => {
+		console.log('effect 1')
 		const getPokedexData = async () => {
 			try {
 				const responsePokemon = await fetch(
@@ -159,6 +160,7 @@ const Pokedex = ({
 	}, [pokemonPokedexNr])
 
 	useEffect(() => {
+		console.log('effect 2')
 		if (pokemonPokedexData.species) {
 			setPokemonPokedexFlavorTexts([])
 			const flavorTextsBuffer = []
@@ -191,10 +193,11 @@ const Pokedex = ({
 	}, [pokemonPokedexData])
 
 	useEffect(() => {
+		console.log('effect 3')
 		if (pokemonPokedexFlavorTexts.length > 0) {
-			setPokemonPokedexFlavorTextsTranslated([])
 			const translationBuffer = []
 			const translate = async () => {
+				setPokemonPokedexFlavorTextsTranslated([])
 				for (let i = 0; i < pokemonPokedexFlavorTexts.length; i++) {
 					const string = pokemonPokedexFlavorTexts[i]
 					const stringLang = 'en'
@@ -222,16 +225,18 @@ const Pokedex = ({
 						console.log('ERROR', error)
 					}
 				}
-				setPokemonPokedexFlavorTextsTranslated((prev) => [
-					...prev,
+				setPokemonPokedexFlavorTextsTranslated(() => [
 					...translationBuffer,
 				])
 			}
 			translate()
 		}
-	}, [pokemonPokedexFlavorTexts])
+		console.log(pokemonPokedexFlavorTexts)
+	}, [pokemonPokedexFlavorTexts, pokemonPokedexData])
+
 
 	useEffect(() => {
+		console.log('effect 4')
 		setPokemonDataExtra({})
 		const dataBuffer = {}
 		const stringLang = 'en'
@@ -504,7 +509,6 @@ const Pokedex = ({
 							</div>
 						</div>
 						<div className='pokedex-left-side-bottom-dpad-container'>
-							<div className='pokedex-left-side-bottom-dpad-mid'></div>
 							<div
 								title={'Próximo Pokemon'}
 								className='pokedex-left-side-bottom-dpad-xaxis-left'
@@ -525,6 +529,7 @@ const Pokedex = ({
 								className='pokedex-left-side-bottom-dpad-yaxis-bot'
 								onClick={() => handleFlavor(-1)}
 							></div>
+							<div className='pokedex-left-side-bottom-dpad-mid'></div>
 							<div className='pokedex-left-side-bottom-dpad-mid-circle'></div>
 						</div>
 					</div>
