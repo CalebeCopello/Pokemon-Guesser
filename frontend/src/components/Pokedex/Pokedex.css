@@ -614,6 +614,7 @@
 	margin: auto;
 	font-family: PokemonSolid;
 	font-size: 1.2rem;
+	user-select: none;
 }
 .pokedex-right-side-mid-bottom-container {
 	display: flex;
